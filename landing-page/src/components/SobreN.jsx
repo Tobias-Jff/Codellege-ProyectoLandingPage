@@ -15,6 +15,9 @@ import {
   Rocket,
   Target,
 } from "lucide-react";
+import React, { useEffect, useRef } from 'react';
+import { motion, animate } from 'framer-motion';
+import { Zap, Cpu, Orbit, ArrowUpRight, ShieldCheck, Milestone, Rocket, Target } from 'lucide-react';
 
 /* =========================================================================
    
