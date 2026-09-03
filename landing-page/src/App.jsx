@@ -2,6 +2,7 @@ import './App.css'
 import Noticias from './Noticias'
 import SobreN from './components/SobreN';
 import Header from './Header'
+import Ceo from './components/ceo';
 
 function App() {
   return (
@@ -13,6 +14,9 @@ function App() {
       {/*NOTICIAS*/}
       <Noticias/>
       <SobreN />
+
+      {/*CEO*/}
+      <Ceo/>
     </>
   )
 }
