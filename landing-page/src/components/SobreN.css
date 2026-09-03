@@ -1,0 +1,13 @@
+/* En tu archivo SobreN.css */
+.contenedor-imagen {
+  width: 1000%;
+  max-width: 800
+  px; /* Ajusta este valor al tamaño que quieras */
+  overflow: hidden;
+}
+
+.contenedor-imagen img {
+  width: 800%;
+  height: auto;
+  object-fit: cover;
+}
