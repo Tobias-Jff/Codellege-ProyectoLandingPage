@@ -1,7 +1,6 @@
 import { useEffect, useRef, useMemo, useState } from "react";
 import { motion, animate, AnimatePresence } from "framer-motion";
 
-
 import {
   ArrowUpRight,
   ShieldCheck,
@@ -15,29 +14,16 @@ import {
   Rocket,
   Target,
 } from "lucide-react";
-import React, { useEffect, useRef } from 'react';
-import { motion, animate } from 'framer-motion';
-import { Zap, Cpu, Orbit, ArrowUpRight, ShieldCheck, Milestone, Rocket, Target } from 'lucide-react';
 
-/* =========================================================================
-   
-   -------------------------------------------------------------------------
-   Base:    negro (#000) + zinc-950/900/800 para paneles y bordes
-   Texto:   blanco / zinc-400 / zinc-500
-   Acento:  ámbar-400 (#FBBF24) — se usa ÚNICAMENTE para estado "activo/en vivo"
-            y para el único CTA interactivo por tarjeta. No se usa como color
-            decorativo genérico.
-   Radio:   0 en paneles grandes (identidad "hardware/ops"), rounded-sm solo
-            en chips pequeños de icono.
-   ========================================================================= */
+
 
 
 const ASSETS = {
   
-  aboutHero: "/ima/mision.png",
+  aboutHero: "/ima/Lo.png",
   production: {
     tabs: {
-      mision: "/ima/mision.png",
+      mision: "/ima/Lo.png",
       equipo: "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
       infra: "https://images.unsplash.com/photo-1509395176047-4a66953fd231",
     },
@@ -182,7 +168,7 @@ export default function SobreNosotros({ newsArticles = defaultNewsArticles, asse
         titulo: "Arquitecturas de alta disponibilidad",
         descripcion: "Diseño de ecosistemas lógicos distribuidos con tolerancia a fallos extremos. Ingeniería redundante para el resguardo de datos globales.",
         icono: <Database className="w-4 h-4 text-zinc-500" aria-hidden="true" />,
-        imagen: assets.production.especificaciones.core,
+        imagen:"/ima/im.png",
       },
       {
         id: "cap-2",
@@ -190,7 +176,7 @@ export default function SobreNosotros({ newsArticles = defaultNewsArticles, asse
         titulo: "Pipelines de datos a hiperescala",
         descripcion: "Orquestación autónoma de flujos de trabajo críticos. Mitigamos el riesgo operativo eliminando la intervención manual en producción masiva.",
         icono: <Cpu className="w-4 h-4 text-zinc-500" aria-hidden="true" />,
-        imagen: assets.production.especificaciones.automation,
+        imagen: "/ima/Pin.png",
       },
       {
         id: "cap-3",
@@ -198,7 +184,7 @@ export default function SobreNosotros({ newsArticles = defaultNewsArticles, asse
         titulo: "Criptografía avanzada y SOC2",
         descripcion: "Aislamiento estricto de procesos en entornos hostiles, cifrado asimétrico en tránsito/reposo y protección bajo normativas internacionales.",
         icono: <ShieldCheck className="w-4 h-4 text-zinc-500" aria-hidden="true" />,
-        imagen: assets.production.especificaciones.security,
+        imagen: "/ima/SE.png",
       },
     ],
     [assets]
@@ -273,9 +259,10 @@ export default function SobreNosotros({ newsArticles = defaultNewsArticles, asse
               Perfil de misión — Sobre nosotros
             </div>
 
-            <h2 id="sobre-nosotros-title" className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter leading-[0.95] text-white">
-              Diseñamos la infraestructura del mañana.
-            </h2>
+           <h2 id="sobre-nosotros-title" className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-normal leading-tight text-white font-sans">
+             Diseñamos la infraestructura del mañana.
+             </h2>
+
 
             {/* Tabs selectors */}
             <div className="flex border-b border-zinc-800 font-mono text-xs tracking-wide">
@@ -530,6 +517,7 @@ export default function SobreNosotros({ newsArticles = defaultNewsArticles, asse
               "Somete tu ecosistema actual a nuestro diagnóstico de resiliencia y optimización perimetral"
             </p>
           </div>
+
           <a
             href="#iniciar-mision"
             className="inline-flex items-center gap-3 border border-white bg-white text-black hover:bg-transparent hover:text-white font-mono text-xs tracking-wide font-bold px-8 py-4 transition-colors duration-300 shrink-0 w-full sm:w-auto justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-4 focus-visible:ring-offset-black"

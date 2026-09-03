@@ -11,3 +11,8 @@
   height: auto;
   object-fit: cover;
 }
+
+.icono-espacial {
+  color: #ffaa00; /* El color dorado de tu botón "En curso" */
+  filter: drop-shadow(0 0 8px rgba(255, 170, 0, 0.5));
+}
