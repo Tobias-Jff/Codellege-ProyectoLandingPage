@@ -1,22 +1,24 @@
 import './App.css'
-import Noticias from './Noticias'
-import SobreN from './components/SobreN';
-import Header from './Header'
-import Ceo from './components/ceo';
+import Noticias from './components/Noticias'
+import Header from './components/Header'
+import SobreN from './components/SobreN'
+import Ceo from './components/Ceo'
+import Footer from './Footer'
 
 function App() {
   return (
     <>
       
       {/*HEADER*/}
-      <Header/>
+      <div id="inicio">
+        <Header/>
+      </div>
 
       {/*NOTICIAS*/}
       <Noticias/>
       <SobreN />
-
-      {/*CEO*/}
-      <Ceo/>
+      <Ceo />
+      <Footer />
     </>
   )
 }

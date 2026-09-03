@@ -1,17 +1,44 @@
 import { useState, useMemo, useEffect, useRef } from 'react'
-import './Noticias.css'
-import newsArticles from './data/newsData'
+import '../styles/Noticias.css'
+import newsArticles from '../data/newsData'
 
 function Noticias() {
-  const [selectedArticle, setSelectedArticle] = useState(newsArticles[0])
+  const [selectedArticle, setSelectedArticle] = useState(null)
   const [activeCategory, setActiveCategory] = useState('Todas')
   const [favorites, setFavorites] = useState([])
   const [showOnlyFavorites, setShowOnlyFavorites] = useState(false)
+  const detailRef = useRef(null)
 
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem('news_favorites') || '[]')
     setFavorites(saved)
   }, [])
+
+  useEffect(() => {
+    if (!selectedArticle || !detailRef.current) return
+
+    const detailSection = detailRef.current
+    const startPosition = window.scrollY
+    const targetPosition = Math.max(0, startPosition + detailSection.getBoundingClientRect().top - 140)
+    const distance = targetPosition - startPosition
+    const duration = 1400
+    let animationFrame
+    let startTime
+
+    const animateScroll = (currentTime) => {
+      if (!startTime) startTime = currentTime
+      const progress = Math.min((currentTime - startTime) / duration, 1)
+      const easedProgress = progress < 0.5
+        ? 4 * progress ** 3
+        : 1 - ((-2 * progress + 2) ** 3) / 2
+
+      window.scrollTo(0, startPosition + distance * easedProgress)
+      if (progress < 1) animationFrame = requestAnimationFrame(animateScroll)
+    }
+
+    animationFrame = requestAnimationFrame(animateScroll)
+    return () => cancelAnimationFrame(animationFrame)
+  }, [selectedArticle])
 
   const toggleFavorite = (e, articleId) => {
     e.stopPropagation()
@@ -40,10 +67,6 @@ function Noticias() {
 
   const handleSelectArticle = (article) => {
     setSelectedArticle(article)
-    const detailSection = document.getElementById('noticia-detalle')
-    if (detailSection) {
-      detailSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
   }
 
   /* Lógica para rastrear el movimiento del cursor sobre las tarjetas */
@@ -71,7 +94,7 @@ function Noticias() {
 
   return (
     <main className="noticias-page">
-      <section className="noticias-section" aria-labelledby="news-heading">
+      <section id="noticias" className="noticias-section" aria-labelledby="news-heading">
         <header className="noticias-header">
           <div className="noticias-header-title">
             <h2 id="news-heading">EN LAS NOTICIAS</h2>
@@ -107,7 +130,7 @@ function Noticias() {
         ) : (
           <div className="noticias-grid" role="list">
             {filteredArticles.map((article) => {
-              const isSelected = selectedArticle.id === article.id
+              const isSelected = selectedArticle && selectedArticle.id === article.id
               const isFav = favorites.includes(article.id)
 
               return (
@@ -149,8 +172,10 @@ function Noticias() {
         )}
       </section>
 
+      {selectedArticle && (
+        <>
       {/* Sección Destacada */}
-      <section className="noticia-feature" id="noticia-detalle" aria-live="polite">
+      <section ref={detailRef} className="noticia-feature" id="noticia-detalle" aria-live="polite">
         <div className="noticia-feature-copy">
           <p className="noticia-kicker">NOTICIA SELECCIONADA</p>
           <h3>{selectedArticle.title}</h3>
@@ -189,6 +214,8 @@ function Noticias() {
           )}
         </div>
       </article>
+        </>
+      )}
     </main>
   )
 }
