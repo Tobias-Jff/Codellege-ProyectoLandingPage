@@ -95,3 +95,23 @@ code {
   font-family: 'Google Sans', var(--sans);
   font-weight: 900;
 }
+
+.font-outfit {
+  font-family: 'Outfit', var(--sans);
+  font-weight: 900;
+}
+
+.font-raleway {
+  font-family: 'Raleway', var(--sans);
+  font-weight: 900;
+}
+
+.font-audiowide {
+  font-family: 'Audiowide', var(--sans);
+  font-weight: 900;
+}
+
+.font-syncopate {
+  font-family: 'Syncopate', var(--sans);
+  font-weight: 900;
+}

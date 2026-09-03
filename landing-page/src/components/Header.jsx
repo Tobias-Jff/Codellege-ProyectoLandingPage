@@ -118,7 +118,7 @@ function Header() {
                 <div className="absolute -z-10 h-[200%] inset-0 bg-gradient-to-b from-slate-950/100 to-slate-950/0"></div>
 
                 <nav
-                    className="relative h-[70px] w-full px-6 md:px-16 lg:px-24 xl:px-32 flex items-center justify-between bg-transparent"
+                    className="relative text-slate-400 h-[70px] w-full px-6 md:px-16 lg:px-24 xl:px-32 flex items-center justify-between bg-transparent"
                 >
 
                     <ul className="flex items-center gap-10">
@@ -126,7 +126,7 @@ function Header() {
                         <li>
                             <a
                                 href="#noticias"
-                                className="text-white text-sm uppercase tracking-wider hover:text-white/70 transition"
+                                className="text-sm uppercase tracking-wider transition"
                             >
                                 Home
                             </a>
@@ -135,7 +135,7 @@ function Header() {
                         <li>
                             <a
                                 href="#"
-                                className="text-white text-sm uppercase tracking-wider hover:text-white/70 transition"
+                                className="text-sm uppercase tracking-wider transition"
                             >
                                 Noticias
                             </a>
@@ -144,7 +144,7 @@ function Header() {
                         <li>
                             <a
                                 href="#"
-                                className="text-white text-sm uppercase tracking-wider hover:text-white/70 transition"
+                                className="text-sm uppercase tracking-wider transition"
                             >
                                 Nosotros
                             </a>
@@ -161,7 +161,7 @@ function Header() {
                         <li>
                             <a
                                 href="#"
-                                className="text-white text-sm uppercase tracking-wider hover:text-white/70 transition"
+                                className="text-sm uppercase tracking-wider transition"
                             >
                                 Líder
                             </a>
@@ -171,7 +171,7 @@ function Header() {
 
                             <button
                                 onClick={() => setUpcomingOpen(true)}
-                                className="text-white text-sm uppercase tracking-wider hover:text-white/70 transition"
+                                className="text-sm uppercase tracking-wider transition"
                             >
                                 Upcoming
                             </button>
@@ -181,7 +181,7 @@ function Header() {
                         <li>
                             <a
                                 href="#"
-                                className="text-white text-sm uppercase tracking-wider hover:text-white/70 transition"
+                                className="text-sm uppercase tracking-wider transition"
                             >
                                 Contact
                             </a>
