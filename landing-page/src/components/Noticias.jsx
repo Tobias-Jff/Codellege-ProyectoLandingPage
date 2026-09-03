@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, useRef } from 'react'
-import './Noticias.css'
-import newsArticles from './data/newsData'
+import '../styles/Noticias.css'
+import newsArticles from '../data/newsData'
 
 function Noticias() {
   const [selectedArticle, setSelectedArticle] = useState(newsArticles[0])
@@ -71,7 +71,7 @@ function Noticias() {
 
   return (
     <main className="noticias-page">
-      <section className="noticias-section" aria-labelledby="news-heading">
+      <section id="noticias" className="noticias-section" aria-labelledby="news-heading">
         <header className="noticias-header">
           <div className="noticias-header-title">
             <h2 id="news-heading">EN LAS NOTICIAS</h2>

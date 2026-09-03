@@ -1,7 +1,7 @@
 import './App.css'
-import Noticias from './Noticias'
+import Noticias from './components/Noticias'
 import SobreN from './components/SobreN';
-import Header from './Header'
+import Header from './components/Header'
 
 function App() {
   return (
