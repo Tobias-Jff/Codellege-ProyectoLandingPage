@@ -59,12 +59,12 @@
    HEADER Y CONTROLES
    ========================================================================== */
 .noticias-header {
-  margin-bottom: 35px;
+  margin-bottom: 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 14px;
 }
 
 .noticias-header-title h2 {
@@ -73,6 +73,7 @@
   letter-spacing: 0.05em;
   margin: 0;
   text-transform: uppercase;
+  text-align: left;
 }
 
 .noticias-categories {
@@ -83,10 +84,10 @@
 
 .category-btn {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid transparent;
   color: rgba(255, 255, 255, 0.7);
   padding: 8px 16px;
-  border-radius: 4px;
+  border-radius: 9px;
   cursor: pointer;
   font-size: 0.85rem;
   transition: all 0.2s ease;
@@ -94,7 +95,6 @@
 
 .category-btn:hover {
   color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.6);
 }
 
 .category-btn.active {
@@ -105,7 +105,7 @@
 }
 
 .fav-filter-btn {
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: transparent;
 }
 
 .fav-filter-btn.active {
@@ -120,7 +120,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 24px;
-  margin-bottom: 50px;
+  margin-bottom: 0;
 }
 
 .noticia-card {
@@ -230,6 +230,18 @@
   margin-bottom: 20px;
   align-items: center;
   scroll-margin-top: 140px;
+  animation: noticia-detail-reveal 0.55s ease both;
+}
+
+@keyframes noticia-detail-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .noticia-kicker {
