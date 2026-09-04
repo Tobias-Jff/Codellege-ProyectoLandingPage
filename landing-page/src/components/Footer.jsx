@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import '../styles/Footer.css'
+import logo from '../assets/logo/logo-w.png'
 
 const infoPanels = {
   privacidad: {
@@ -56,11 +57,11 @@ function Footer() {
   }
 
   return (
-    <footer id="footer"className="site-footer">
+    <footer id="footer"className="site-footer font-dm-sans">
       <div className="footer-main">
         <div className="footer-brand">
-          <span className="footer-mark">EGCO</span>
-          <p>Transformamos ideas complejas en sistemas digitales<br />de alto impacto para negocios y marcas que quieren<br />liderar la próxima era tecnológica.</p>
+          <img src={logo} alt="EGCO logo" className="h-[28px] mb-2" />
+          <p>El futuro esta pasando.</p>
         </div>
 
         <div className="footer-column">

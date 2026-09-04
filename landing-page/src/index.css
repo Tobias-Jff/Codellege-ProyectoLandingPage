@@ -129,3 +129,23 @@ code {
   font-family: 'Syncopate', var(--sans);
   font-weight: 900;
 }
+
+.font-google-sans-flex {
+  font-family: 'Google Sans Flex', var(--sans);
+}
+
+.font-kanit {
+  font-family: 'Kanit', var(--sans);
+}
+
+.font-inter {
+  font-family: 'Inter', var(--sans);
+}
+
+.font-goldman {
+  font-family: 'Goldman', var(--sans);
+}
+
+.font-dm-sans {
+  font-family: 'DM Sans', var(--sans);
+}
