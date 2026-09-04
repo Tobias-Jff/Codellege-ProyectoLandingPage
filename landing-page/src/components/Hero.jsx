@@ -37,6 +37,7 @@ function Hero() {
   const contentProgress = Math.min(Math.max((scrollProgress - 0.08) / 0.58, 0), 1)
   const contentOffset = 112 - contentProgress * 112
   const overlayOpacity = Math.min(contentProgress * 1.4, 1)
+  const openingOpacity = 1 - Math.min(scrollProgress * 12, 1)
 
   return (
     <section ref={heroRef} id="inicio" aria-labelledby="hero-heading" className="relative h-[320svh] bg-black text-white">
@@ -55,7 +56,17 @@ function Hero() {
         />
 
         <div
-          className="absolute inset-0 z-10 flex w-full items-center px-6 sm:px-10 lg:px-16 xl:px-24"
+          aria-hidden="true"
+          className="absolute inset-0 z-10 flex items-center justify-start px-6 text-left transition-opacity duration-300 sm:px-10 lg:px-16 xl:px-24"
+          style={{ opacity: openingOpacity }}
+        >
+          <p className="">
+            Future is coming.
+          </p>
+        </div>
+
+        <div
+          className="absolute inset-0 z-20 flex w-full items-center px-6 sm:px-10 lg:px-16 xl:px-24"
           style={{
             opacity: Math.min(contentProgress * 1.8, 1),
             transform: `translateY(${contentOffset}%)`,
@@ -77,7 +88,7 @@ function Hero() {
             </p>
 
             <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-              <a href="#sobre-nosotros" className="group inline-flex items-center gap-3 border border-white/35 px-5 py-3 text-sm font-medium text-white transition-colors hover:border-cyan-200 hover:text-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-200">
+              <a href="#aboutUs" className="group inline-flex items-center gap-3 border border-white/35 px-5 py-3 text-sm font-medium text-white transition-colors hover:border-cyan-200 hover:text-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-200">
                 EXPLORE
                 <ArrowRight size={17} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </a>

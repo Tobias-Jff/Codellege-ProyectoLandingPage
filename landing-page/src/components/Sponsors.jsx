@@ -2,30 +2,117 @@ function Sponsors() {
 
     const sponsors = [
         {
-            name: "NEXUS",
+            name: "Accenture",
+            logo: "/ima/accenture.svg",
+            className: "h-7 md:h-8",
         },
         {
-            name: "VERTEX",
+            name: "Google",
+            logo: "/ima/google.svg",
+            className: "h-7 md:h-8",
         },
         {
-            name: "ORBIT",
+            name: "Intel",
+            logo: "/ima/intel.svg",
+            className: "h-10 md:h-14",
         },
         {
-            name: "AETHER",
+            name: "Meta",
+            logo: "/ima/meta.svg",
+            className: "h-8 md:h-9",
         },
         {
-            name: "QUANTUM",
+            name: "Nasa",
+            logo: "/ima/nasa.svg",
+            className: "h-10 md:h-14",
         },
         {
-            name: "NOVA",
+            name: "Tesla",
+            logo: "/ima/tesla.svg",
+            className: "h-9 md:h-11",
         },
     ];
 
 
-    return (
-        <section className="w-full bg-black py-10 overflow-hidden">
+    // Renderizamos una copia de los sponsors
+    const SponsorGroup = ({ copy }) => (
 
-            {/* Título */}
+        <div
+            className="
+                flex
+                shrink-0
+                items-center
+            "
+        >
+
+            {sponsors.map((sponsor, index) => (
+
+                <div
+                    key={`${copy}-${index}`}
+                    className="
+                        flex
+                        shrink-0
+
+                        w-[220px]
+                        md:w-[280px]
+
+                        h-[70px]
+                        md:h-[80px]
+
+                        items-center
+                        justify-center
+                    "
+                >
+
+                    <img
+                        src={sponsor.logo}
+                        alt={`Logo de ${sponsor.name}`}
+
+                        className={`
+                            ${sponsor.className}
+
+                            w-auto
+                            max-w-[170px]
+                            md:max-w-[210px]
+
+                            object-contain
+
+                            brightness-0
+                            invert
+
+                            opacity-50
+
+                            transition
+                            duration-300
+
+                            hover:opacity-100
+                        `}
+                    />
+
+                </div>
+
+            ))}
+
+        </div>
+
+    );
+
+
+    return (
+        <section
+            className="
+                w-full
+                overflow-hidden
+
+                bg-black
+
+                py-10
+            "
+        >
+
+            {/* =====================================
+                TÍTULO
+            ===================================== */}
 
             <div className="mb-8 text-center">
 
@@ -43,18 +130,26 @@ function Sponsors() {
             </div>
 
 
-            {/* Marquee */}
+            {/* =====================================
+                MARQUEE
+            ===================================== */}
 
             <div className="relative w-full">
 
-                {/* Fade izquierda */}
+
+                {/* =================================
+                    FADE IZQUIERDO
+                ================================= */}
 
                 <div
                     className="
+                        pointer-events-none
+
                         absolute
                         left-0
                         top-0
                         z-10
+
                         h-full
                         w-24
                         md:w-40
@@ -62,20 +157,23 @@ function Sponsors() {
                         bg-gradient-to-r
                         from-black
                         to-transparent
-
-                        pointer-events-none
                     "
                 />
 
 
-                {/* Fade derecha */}
+                {/* =================================
+                    FADE DERECHO
+                ================================= */}
 
                 <div
                     className="
+                        pointer-events-none
+
                         absolute
                         right-0
                         top-0
                         z-10
+
                         h-full
                         w-24
                         md:w-40
@@ -83,13 +181,13 @@ function Sponsors() {
                         bg-gradient-to-l
                         from-black
                         to-transparent
-
-                        pointer-events-none
                     "
                 />
 
 
-                {/* Contenedor que se mueve */}
+                {/* =================================
+                    TRACK
+                ================================= */}
 
                 <div
                     className="
@@ -104,100 +202,12 @@ function Sponsors() {
 
                     {/* Primera copia */}
 
-                    <div className="flex items-center">
-
-                        {sponsors.map((sponsor, index) => (
-
-                            <div
-                                key={`first-${index}`}
-                                className="
-                                    flex
-                                    items-center
-                                    justify-center
-
-                                    px-12
-                                    md:px-20
-
-                                    shrink-0
-                                "
-                            >
-
-                                <span
-                                    className="
-                                        text-xl
-                                        md:text-2xl
-
-                                        font-semibold
-
-                                        tracking-[0.2em]
-
-                                        text-white/50
-
-                                        whitespace-nowrap
-
-                                        transition
-                                        duration-300
-
-                                        hover:text-white
-                                    "
-                                >
-                                    {sponsor.name}
-                                </span>
-
-                            </div>
-
-                        ))}
-
-                    </div>
+                    <SponsorGroup copy="first" />
 
 
                     {/* Segunda copia */}
 
-                    <div className="flex items-center">
-
-                        {sponsors.map((sponsor, index) => (
-
-                            <div
-                                key={`second-${index}`}
-                                className="
-                                    flex
-                                    items-center
-                                    justify-center
-
-                                    px-12
-                                    md:px-20
-
-                                    shrink-0
-                                "
-                            >
-
-                                <span
-                                    className="
-                                        text-xl
-                                        md:text-2xl
-
-                                        font-semibold
-
-                                        tracking-[0.2em]
-
-                                        text-white/50
-
-                                        whitespace-nowrap
-
-                                        transition
-                                        duration-300
-
-                                        hover:text-white
-                                    "
-                                >
-                                    {sponsor.name}
-                                </span>
-
-                            </div>
-
-                        ))}
-
-                    </div>
+                    <SponsorGroup copy="second" />
 
                 </div>
 
