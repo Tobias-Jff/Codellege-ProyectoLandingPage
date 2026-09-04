@@ -101,14 +101,23 @@ function Sponsors() {
     return (
         <section
             className="
+                relative
+                z-10
+                -mt-20
                 w-full
                 overflow-hidden
 
                 bg-black
 
-                py-10
+                pb-10
+                pt-20
             "
         >
+
+            <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-transparent to-black"
+            />
 
             {/* =====================================
                 TÍTULO

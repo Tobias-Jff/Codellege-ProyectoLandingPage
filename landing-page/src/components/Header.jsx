@@ -206,44 +206,17 @@ function Header() {
                         ×
                     </button>
 
-                    <div>
+                <div>
+               
 
-                        <div className="flex items-center gap-3">
-
-                            <span
-                                className="w-2 h-2 rounded-full bg-white animate-pulse"
-                            />
-
-                            <p
-                                className="text-xs uppercase tracking-[0.4em] text-white/50"
-                            >
-                                Transmission
-                            </p>
-
-                        </div>
-
-                        <p
-                            className="mt-3 text-xs uppercase tracking-[0.3em] text-white/30"
-                        >
-                            System / 001
-                        </p>
-
-                    </div>
+                </div>
 
                     <h2
                         className="mt-12 text-5xl md:text-7xl font-bold tracking-tight leading-[0.95]"
                     >
-                        Something
-                        <br />
-                        is coming.
+                        Be prepared.
                     </h2>
 
-                    <p
-                        className="mt-8 max-w-md text-sm md:text-base leading-relaxed text-white/50"
-                    >
-                        A new chapter is about to begin.
-                        Stay tuned for the announcement.
-                    </p>
 
                     <div
                         className="w-full h-px bg-white/10 my-10"
@@ -320,24 +293,6 @@ function Header() {
                         >
                             SEPTEMBER 18, 2026
                         </p>
-
-                    </div>
-
-                    <div
-                        className="absolute bottom-8 left-10 md:left-16 right-10 md:right-16 flex justify-between items-center"
-                    >
-
-                        <span
-                            className="text-[9px] uppercase tracking-[0.3em] text-white/20"
-                        >
-                            Transmission Ready
-                        </span>
-
-                        <span
-                            className="text-[9px] uppercase tracking-[0.3em] text-white/20"
-                        >
-                            001
-                        </span>
 
                     </div>
 

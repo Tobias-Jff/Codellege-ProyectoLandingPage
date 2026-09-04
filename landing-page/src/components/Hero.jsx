@@ -57,7 +57,12 @@ function Hero() {
 
         <div
           aria-hidden="true"
-          className="absolute inset-0 z-10 flex items-center justify-start px-6 text-left transition-opacity duration-300 sm:px-10 lg:px-16 xl:px-24"
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-56 bg-linear-to-b from-transparent via-black/55 to-black sm:h-72"
+        />
+
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 z-20 flex items-center justify-start px-6 text-left transition-opacity duration-300 sm:px-10 lg:px-16 xl:px-24"
           style={{ opacity: openingOpacity }}
         >
           <p className="">
@@ -66,7 +71,7 @@ function Hero() {
         </div>
 
         <div
-          className="absolute inset-0 z-20 flex w-full items-center px-6 sm:px-10 lg:px-16 xl:px-24"
+          className="absolute inset-0 z-30 flex w-full items-center px-6 sm:px-10 lg:px-16 xl:px-24"
           style={{
             opacity: Math.min(contentProgress * 1.8, 1),
             transform: `translateY(${contentOffset}%)`,
