@@ -23,10 +23,12 @@ function Ceo() {
                     <hr className="border-gray-700 mb-4"></hr>
                     
                     <p className="text-gray-400 text-sm mb-32 font-extralight leading-relaxed max-w-xl">
-                        El hombre detrás de la visión y la estrategia de nuestra empresa, Leonardo 
-                        es un líder apasionado y comprometido con la innovación y el crecimiento. 
+                        El hombre detrás de la visión y la estrategia de nuestra empresa, Leonardo,
+                        dueño y creador de esta fundación, es un líder apasionado y comprometido con la innovación y el crecimiento. 
                         Con una trayectoria impresionante en el mundo empresarial, ha guiado a nuestro 
                         equipo hacia el éxito con su enfoque estratégico y su capacidad para inspirar a otros.
+                        Desde la infancia se interesó por querer mejorar el mundo y cambiarlo de la forma en que lo conocemos, 
+                        siempre aneló poder hacer algo por la humanidad. Lo logró.
                     </p>
 
                     <div className="border-l-2 border-gray-500 pl-4 py-2 ml-8">

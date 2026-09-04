@@ -2,7 +2,6 @@
   width: 100%;
   box-sizing: border-box;
   padding: 42px clamp(40px, 7vw, 96px) 18px;
-  background: #050817;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.7);
   text-align: left;
@@ -37,7 +36,7 @@
   display: flex;
   min-width: 110px;
   flex-direction: column;
-  gap: 8px;
+  gap: 2px;
   font-size: 0.67rem;
 }
 

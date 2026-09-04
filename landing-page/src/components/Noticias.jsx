@@ -96,26 +96,9 @@ function Noticias() {
     <main className="noticias-page">
       <section id="noticias" className="noticias-section" aria-labelledby="news-heading">
         <header className="noticias-header">
-          <div className="noticias-header-title">
-            <h2 id="news-heading">EN LAS NOTICIAS</h2>
+          <div className="noticias-header-title mb-2">
+            <h2 id="news-heading font-google-dm-sans">EN LAS NOTICIAS</h2>
           </div>
-          
-          <nav className="noticias-categories" aria-label="Categorías de noticias">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                type="button"
-                className={`category-btn ${activeCategory === cat && !showOnlyFavorites ? 'active' : ''}`}
-                onClick={() => {
-                  setActiveCategory(cat)
-                  setShowOnlyFavorites(false)
-                }}
-              >
-                {cat}
-              </button>
-            ))}
-            
-          </nav>
         </header>
 
         {filteredArticles.length === 0 ? (
@@ -146,6 +129,8 @@ function Noticias() {
                   <div className="noticia-title-link">
                     <h3>{article.title}</h3>
                   </div>
+
+                  <hr className="mb-4 border-white/50" />
 
                   <div className="noticia-image-wrap">
                     <img src={article.image} alt={article.title} loading="lazy" />
