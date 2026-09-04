@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useMemo, useState } from "react";
+import { motion, animate, AnimatePresence } from "framer-motion";
+
+
 import {
   ArrowUpRight,
   ShieldCheck,

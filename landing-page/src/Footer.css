@@ -1,0 +1,141 @@
+.site-footer {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 42px clamp(40px, 7vw, 96px) 18px;
+  background: #050817;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  text-align: left;
+}
+
+.footer-main {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 48px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-mark {
+  color: #ffffff;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.footer-brand p {
+  margin: 10px 0 0;
+  color: rgba(255, 255, 255, 0.46);
+  font-size: 0.68rem;
+  line-height: 1.5;
+}
+
+.footer-column {
+  display: flex;
+  min-width: 110px;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.67rem;
+}
+
+.footer-column-title {
+  margin-bottom: 3px;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+}
+
+.footer-column a,
+.footer-nav-button,
+.footer-socials a {
+  color: rgba(255, 255, 255, 0.48);
+  text-decoration: none;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.footer-column a:hover,
+.footer-socials a:hover {
+  color: #ffffff;
+}
+
+.footer-nav-button {
+  width: fit-content;
+  padding: 2px 0;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.footer-nav-button:hover {
+  color: #ffffff;
+}
+
+.footer-nav-button.is-active {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  font-weight: 600;
+}
+
+.info-panels {
+  width: 100%;
+  margin: 20px auto 0;
+}
+
+.info-panel {
+  padding: 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.info-panel h5 {
+  margin: 0 0 8px;
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+.info-panel p {
+  max-width: 720px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+.footer-bottom {
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.32);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 14px;
+}
+
+@media (max-width: 640px) {
+  .footer-main,
+  .footer-bottom {
+    flex-direction: column;
+  }
+
+  .footer-main {
+    gap: 24px;
+  }
+
+  .footer-bottom {
+    gap: 12px;
+  }
+}

@@ -37,6 +37,20 @@
   }
 }
 
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #9ca3af;
@@ -93,5 +107,25 @@ code {
 
 .font-google-sans {
   font-family: 'Google Sans', var(--sans);
+  font-weight: 900;
+}
+
+.font-outfit {
+  font-family: 'Outfit', var(--sans);
+  font-weight: 900;
+}
+
+.font-raleway {
+  font-family: 'Raleway', var(--sans);
+  font-weight: 900;
+}
+
+.font-audiowide {
+  font-family: 'Audiowide', var(--sans);
+  font-weight: 900;
+}
+
+.font-syncopate {
+  font-family: 'Syncopate', var(--sans);
   font-weight: 900;
 }
