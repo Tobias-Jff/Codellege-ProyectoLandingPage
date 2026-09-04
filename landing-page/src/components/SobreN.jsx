@@ -26,6 +26,8 @@ import {
 const ASSETS = {
   hero: "/ima/Lo.png",
 
+  earth: "/vid/earth.mp4",
+
   capabilities: {
     infrastructure: "/ima/im.png",
     automation: "/ima/Pin.png",
@@ -314,153 +316,59 @@ export default function SobreNosotros() {
           "
         />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-28 sm:py-36">
-          {/* =====================================================
-              01 — HERO
-          ===================================================== */}
+        {/* =====================================================
+    EARTH — OPERACIÓN
+===================================================== */}
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={stagger}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20 items-center"
-          >
-            {/* LEFT */}
-            <motion.div variants={fadeUp} className="lg:col-span-7">
-              <div className="flex items-center gap-3 mb-7">
-                <span className="flex items-center justify-center w-8 h-8 border border-zinc-800 bg-zinc-950">
-                  <Target className="w-4 h-4 text-zinc-400" aria-hidden="true" />
-                </span>
+        <section className="relative w-full h-[115vh] h-[min-h-[600px]] overflow-hidden bg-black">
 
-                <span className="font-mono text-[10px] sm:text-xs tracking-[0.25em] text-zinc-500">
-                  EGCO / SOBRE NOSOTROS
-                </span>
-              </div>
+          {/* VIDEO */}
 
-              <h1
-                id="sobre-nosotros-title"
-                className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.7rem] font-black tracking-[-0.055em] leading-[0.9] max-w-5xl"
-              >
-                No construimos
-                <br />
-                <span className="text-zinc-500">software.</span>
-                <br />
-                Construimos
-                <br />
-                continuidad.
-              </h1>
+          <video
+            className="absolute inset-0 w-full h-full object-contain"
+            src={ASSETS.earth}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+          />
 
-              <div className="mt-10 max-w-2xl">
-                <p className="text-lg sm:text-xl text-zinc-300 leading-relaxed font-light">
-                  Diseñamos la infraestructura tecnológica que permite mantener operaciones críticas funcionando cuando un fallo no es una opción.
-                </p>
-              </div>
+          {/* CONTENIDO */}
 
-              <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3">
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full" />
-                  <span className="font-mono text-[10px] tracking-wider text-zinc-500">RESILIENCIA</span>
-                </div>
+          <div className="relative z-10 h-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex items-end justify-end pb-16 sm:pb-20 lg:pb-24">
 
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full" />
-                  <span className="font-mono text-[10px] tracking-wider text-zinc-500">AUTOMATIZACIÓN</span>
-                </div>
+            <div className="w-full lg:w-1/2 xl:w-[45%]">
 
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full" />
-                  <span className="font-mono text-[10px] tracking-wider text-zinc-500">SEGURIDAD</span>
-                </div>
-              </div>
-            </motion.div>
+              {/* TÍTULO */}
 
-            {/* RIGHT / HERO IMAGE */}
-            {/* Interactiva: click / teclado togglean la luminosidad persistente */}
-            <motion.div variants={fadeUp} className="lg:col-span-5">
-              <div
-                role="button"
-                tabIndex={0}
-                aria-pressed={heroSelected}
-                onClick={() => setHeroSelected((s) => !s)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setHeroSelected((s) => !s);
-                  }
-                }}
-                className={`relative aspect-[4/5] border border-zinc-800 bg-zinc-950 overflow-hidden group focus:outline-none ${heroSelected ? "ring-2 ring-amber-400/20" : ""}`}
-                aria-label="Imagen principal de EGCO (activar/desactivar iluminación)"
-              >
-                <img
-                  src={ASSETS.hero}
-                  alt="Diagrama de arquitectura tecnológica de EGCO — infraestructuras y nodos redundantes"
-                  width={1200}
-                  height={1500}
-                  fetchPriority="high"
-                  className={`absolute inset-0 w-full h-full object-cover grayscale brightness-[0.45] contrast-125 transition-all duration-700 ${heroSelected ? "scale-105 brightness-90 contrast-[1.15]" : "group-hover:scale-105 group-hover:brightness-[0.6]"}`}
-                  loading="eager"
-                  decoding="async"
-                />
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black tracking-[-0.055em] leading-[0.95] text-white">
 
-                {/* degradado sobre la imagen para legibilidad */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                Future is happening
 
-                {/* HALO ÁMBAR: aparece en hover/focus o si heroSelected === true */}
-                <div
-                  aria-hidden="true"
-                  className={`absolute inset-0 pointer-events-none rounded-sm transition-opacity duration-500 ${heroSelected ? "opacity-100" : "opacity-0 group-hover:opacity-100 group-focus-within:opacity-100"}`}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-t from-amber-400/10 via-amber-400/06 to-transparent" />
-                  <div
-                    className="absolute inset-0 rounded-sm"
-                    style={{
-                      boxShadow: "0 30px 80px rgba(251,191,36,0.12), 0 8px 30px rgba(0,0,0,0.6)",
-                      mixBlendMode: "screen",
-                      pointerEvents: "none",
-                    }}
-                  />
-                </div>
-
-                <div className="absolute top-5 left-5 right-5 flex justify-between items-start">
-                  <span className="font-mono text-[9px] tracking-[0.2em] text-zinc-400 border border-zinc-700 bg-black/60 px-3 py-2">
-                    EGCO / CORE
-                  </span>
-
-                  <span className="flex items-center gap-2 font-mono text-[9px] tracking-wider text-zinc-400">
-                    <span className="w-1.5 h-1.5 bg-white rounded-full" />
-                    SYSTEM DESIGN
-                  </span>
-                </div>
-
-                <div className="absolute bottom-6 left-6 right-6">
-                  <p className="font-mono text-[10px] text-zinc-500 tracking-widest mb-2">PRINCIPIO FUNDAMENTAL</p>
-                  <p className="text-xl sm:text-2xl font-semibold tracking-tight">Diseñar para continuar.</p>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* =====================================================
-              02 — POSITIONING
-          ===================================================== */}
-
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeUp} className="mt-32 sm:mt-40 grid grid-cols-1 lg:grid-cols-12 gap-10 border-t border-zinc-900 pt-10">
-            <div className="lg:col-span-3">
-             
-            </div>
-
-            <div className="lg:col-span-9">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[-0.04em] leading-tight max-w-4xl">
-                Cuando la tecnología sostiene una operación crítica,
-                <span className="text-zinc-600"> la continuidad deja de ser una característica.</span>
               </h2>
 
-              <p className="mt-8 max-w-3xl text-zinc-400 text-base sm:text-lg leading-relaxed font-light">
-                EGCO nace desde una idea sencilla: los sistemas importantes no pueden diseñarse únicamente pensando en el funcionamiento normal. También deben considerar el fallo, la interrupción, la recuperación y la evolución de la operación.
-              </p>
+
             </div>
-          </motion.div>
+
+          </div>
+
+
+          {/* INDICADOR INFERIOR */}
+
+          <div className="absolute bottom-6 left-6 sm:left-10 lg:left-16 z-10">
+
+            <span className="font-mono text-[9px] tracking-[0.25em] text-white/30">
+              01 / EARTH SYSTEM
+            </span>
+
+          </div>
+
+        </section>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-28 sm:py-36">
+
+
 
           {/* =====================================================
               03 — PRINCIPLES
