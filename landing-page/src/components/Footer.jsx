@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './Footer.css'
+import '../styles/Footer.css'
 
 const infoPanels = {
   privacidad: {
@@ -56,7 +56,7 @@ function Footer() {
   }
 
   return (
-    <footer className="site-footer">
+    <footer id="footer"className="site-footer">
       <div className="footer-main">
         <div className="footer-brand">
           <span className="footer-mark">EGCO</span>

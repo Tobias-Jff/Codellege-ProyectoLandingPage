@@ -258,7 +258,7 @@ export default function SobreNosotros() {
     <>
       {/* Skip link visible on focus (keyboard users / AT) */}
       <a
-        href="#sobre-nosotros"
+        href="#"
         className="sr-only focus:left-4 focus:top-4 focus:z-50 focus:absolute focus:bg-black focus:text-white focus:px-4 focus:py-2"
       >
         Saltar al contenido
@@ -270,7 +270,7 @@ export default function SobreNosotros() {
       </div>
 
       <section
-        id="sobre-nosotros"
+        id="aboutUs"
         aria-labelledby="sobre-nosotros-title"
         className="
           relative

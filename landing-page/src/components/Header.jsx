@@ -125,7 +125,7 @@ function Header() {
 
                         <li>
                             <a
-                                href="#noticias"
+                                href="#inicio"
                                 className="text-sm uppercase tracking-wider transition"
                             >
                                 Home
@@ -134,16 +134,16 @@ function Header() {
 
                         <li>
                             <a
-                                href="#"
+                                href="#noticias"
                                 className="text-sm uppercase tracking-wider transition"
                             >
-                                Noticias
+                                News
                             </a>
                         </li>
 
                         <li>
                             <a
-                                href="#"
+                                href="#aboutUs"
                                 className="text-sm uppercase tracking-wider transition"
                             >
                                 Nosotros
@@ -160,10 +160,10 @@ function Header() {
 
                         <li>
                             <a
-                                href="#"
+                                href="#ceo"
                                 className="text-sm uppercase tracking-wider transition"
                             >
-                                Líder
+                                CEO
                             </a>
                         </li>
 
@@ -180,7 +180,7 @@ function Header() {
 
                         <li>
                             <a
-                                href="#"
+                                href="#footer"
                                 className="text-sm uppercase tracking-wider transition"
                             >
                                 Contact

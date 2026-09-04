@@ -114,14 +114,7 @@ function Noticias() {
                 {cat}
               </button>
             ))}
-
-            <button
-              type="button"
-              className={`category-btn fav-filter-btn ${showOnlyFavorites ? 'active' : ''}`}
-              onClick={() => setShowOnlyFavorites(!showOnlyFavorites)}
-            >
-              Guardadas
-            </button>
+            
           </nav>
         </header>
 
@@ -148,14 +141,6 @@ function Noticias() {
                     <span className="noticia-date">{article.date}</span>
                     <span className="noticia-category">{article.category}</span>
 
-                    <button
-                      type="button"
-                      className={`fav-star-btn ${isFav ? 'is-fav' : ''}`}
-                      onClick={(e) => toggleFavorite(e, article.id)}
-                      title={isFav ? "Quitar de guardadas" : "Guardar noticia"}
-                    >
-                      {isFav ? '★' : '☆'}
-                    </button>
                   </div>
 
                   <div className="noticia-title-link">
@@ -172,50 +157,10 @@ function Noticias() {
         )}
       </section>
 
-      {selectedArticle && (
         <>
-      {/* Sección Destacada */}
-      <section ref={detailRef} className="noticia-feature" id="noticia-detalle" aria-live="polite">
-        <div className="noticia-feature-copy">
-          <p className="noticia-kicker">NOTICIA SELECCIONADA</p>
-          <h3>{selectedArticle.title}</h3>
-          <p className="noticia-summary-lead">{selectedArticle.summary}</p>
-          
-          <div className="noticia-feature-meta">
-            <span>Publicado: {selectedArticle.date}</span>
-            <span>Categoría: {selectedArticle.category}</span>
-          </div>
-        </div>
-
-        <div className="noticia-feature-visual">
-          <img src={selectedArticle.image} alt={selectedArticle.title} />
-        </div>
-      </section>
-
-      {/* Lectura detallada */}
-      <article className="noticia-detail">
-        <div className="noticia-detail__content">
-          {selectedArticle.details.paragraphs.map((paragraph, idx) => (
-            <p key={idx}>{paragraph}</p>
-          ))}
-
-          {selectedArticle.details.quote && (
-            <blockquote className="noticia-quote">
-              "{selectedArticle.details.quote}"
-            </blockquote>
-          )}
-
-          {selectedArticle.details.keyPoints && (
-            <ul className="noticia-bullet-list">
-              {selectedArticle.details.keyPoints.map((point, idx) => (
-                <li key={idx}>{point}</li>
-              ))}
-            </ul>
-          )}
-        </div>
-      </article>
+     
         </>
-      )}
+
     </main>
   )
 }
