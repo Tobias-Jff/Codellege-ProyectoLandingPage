@@ -136,7 +136,7 @@ function Header() {
                         </li>
 
                         <li>
-                            <a href="#inicio" className="group text-xs uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition">
+                            <a href="#noticias" className="group text-xs uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition">
                                 <span className="relative inline-block after:content-[''] after:absolute after:bg-white/70 after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
                                     News
                                 </span>
@@ -144,7 +144,7 @@ function Header() {
                         </li>
 
                         <li>
-                            <a href="#inicio" className="group text-xs uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition">
+                            <a href="#aboutUs" className="group text-xs uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition">
                                 <span className="relative inline-block after:content-[''] after:absolute after:bg-white/70 after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
                                     Who we are
                                 </span>
@@ -163,7 +163,7 @@ function Header() {
                         </li>
 
                         <li>
-                            <a href="#inicio" className="group text-xs uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition">
+                            <a href="#footer" className="group text-xs uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition">
                                 <span className="relative inline-block after:content-[''] after:absolute after:bg-white/70 after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
                                     Contact
                                 </span>

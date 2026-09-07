@@ -6,6 +6,7 @@ import SobreN from './components/SobreN'
 import Ceo from './components/ceo.jsx'
 import Footer from './components/Footer'
 import Sponsors from './components/Sponsors'
+import Mapa  from './components/mapa.jsx'
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
       <Sponsors/>
 
       <SobreN />
+
+      <Mapa />
       
       <Noticias/>
 
