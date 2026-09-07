@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { Map, MapControls, MapMarker, MarkerContent } from "@/components/ui/map";
 
@@ -89,10 +90,59 @@ const OFFICE_MARKERS = [
 ];
 
 function Mapa() {
+  const mapRef = useRef(null);
   const [selectedContinent, setSelectedContinent] = useState(null);
+  const [panelPosition, setPanelPosition] = useState({ x: 0, y: 0 });
 
-  const handleOfficeClick = (continentKey) => {
-    setSelectedContinent(CONTINENTS[continentKey]);
+  const updatePanelPosition = (marker) => {
+    if (!mapRef.current || !marker) return;
+
+    const mapContainer = mapRef.current.getContainer();
+    const width = mapContainer.clientWidth;
+    const height = mapContainer.clientHeight;
+    const { x, y } = mapRef.current.project([marker.lng, marker.lat]);
+    const panelWidth = 340;
+    const panelHeight = 360;
+    const gap = 18;
+
+    const prefersLeft = x > width - panelWidth - 60;
+    const nextLeft = prefersLeft
+      ? x - panelWidth - gap
+      : x + gap;
+    const nextTop = Math.min(Math.max(y - panelHeight / 2, 18), height - panelHeight - 18);
+
+    setPanelPosition({
+      x: Math.min(Math.max(nextLeft, 12), width - panelWidth - 12),
+      y: Math.min(Math.max(nextTop, 12), height - panelHeight - 12),
+    });
+  };
+
+  useEffect(() => {
+    if (!selectedContinent?.marker || !mapRef.current) return;
+
+    updatePanelPosition(selectedContinent.marker);
+
+    const map = mapRef.current;
+    const handleMapChange = () => updatePanelPosition(selectedContinent.marker);
+
+    map.on("move", handleMapChange);
+    map.on("zoom", handleMapChange);
+    map.on("pitch", handleMapChange);
+    map.on("rotate", handleMapChange);
+
+    return () => {
+      map.off("move", handleMapChange);
+      map.off("zoom", handleMapChange);
+      map.off("pitch", handleMapChange);
+      map.off("rotate", handleMapChange);
+    };
+  }, [selectedContinent]);
+
+  const handleOfficeClick = (continentKey, longitude, latitude) => {
+    setSelectedContinent({
+      ...CONTINENTS[continentKey],
+      marker: { lng: longitude, lat: latitude },
+    });
   };
 
   return (
@@ -101,14 +151,14 @@ function Mapa() {
         <h2 className="font-syncopate mb-3.5 text-[clamp(2rem,4vw,4.5rem)] font-black uppercase leading-[0.98] tracking-[-0.055em] text-white">Global Presence</h2>
       </div>
       <div className="relative z-10 mx-auto h-[min(580px,62vw)] min-h-[420px] max-w-[1400px] overflow-hidden border border-[#9dd8d6]/[0.34] bg-transparent max-[640px]:h-[620px] max-[640px]:min-h-0">
-        <Map center={[10, 25]} zoom={1.5} projection="globe">
+        <Map ref={mapRef} center={[10, 25]} zoom={1.5} projection="globe">
           <MapControls showCompass position="bottom-right" />
           {OFFICE_MARKERS.map(([continentKey, city, latitude, longitude]) => (
             <MapMarker
               key={city}
               longitude={longitude}
               latitude={latitude}
-              onClick={() => handleOfficeClick(continentKey)}
+              onClick={() => handleOfficeClick(continentKey, longitude, latitude)}
             >
               <MarkerContent>
                 <span
@@ -120,31 +170,51 @@ function Mapa() {
           ))}
         </Map>
 
-        {selectedContinent && (
-          <aside className="absolute right-6 top-6 w-[min(340px,calc(100%-48px))] border border-[#9dd8d6]/50 bg-black/95 p-6 shadow-[0_18px_50px_rgba(0,0,0,0.28)] animate-in fade-in-0 slide-in-from-bottom-2 duration-200 max-[640px]:left-4 max-[640px]:right-4 max-[640px]:top-4 max-[640px]:w-auto" aria-live="polite">
-            <button
-              className="absolute right-4 top-4 cursor-pointer border-0 bg-transparent text-white/70 transition-colors hover:text-white"
-              type="button"
-              aria-label="Cerrar oficinas"
-              onClick={() => setSelectedContinent(null)}
+        <AnimatePresence mode="wait">
+          {selectedContinent && (
+            <motion.aside
+              key={selectedContinent.marker.lng + selectedContinent.marker.lat}
+              initial={{ opacity: 0, y: 18, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.98 }}
+              transition={{ duration: 0.24, ease: "easeOut" }}
+              className="pointer-events-auto absolute z-20 w-[min(340px,calc(100%-48px))] border border-[#9dd8d6]/50 bg-black/95 p-6 shadow-[0_18px_50px_rgba(0,0,0,0.28)] max-[640px]:w-auto"
+              style={{
+                left: `${panelPosition.x}px`,
+                top: `${panelPosition.y}px`,
+              }}
+              aria-live="polite"
             >
-              <X size={16} aria-hidden="true" />
-            </button>
-            <p className="mb-3 font-zalando-sans-semi-expanded text-[0.72rem] uppercase tracking-[0.16em] text-[#9dd8d6]">{selectedContinent.eyebrow}</p>
-            <h3 className="mb-[22px] font-zalando-sans-expanded font-bold text-[2.25rem] tracking-[-0.06em] text-white">{selectedContinent.name}</h3>
-            <div className="grid gap-4">
-              {selectedContinent.offices.map(([city, country, focus], index) => (
-                <div className="grid grid-cols-[28px_1fr] items-start gap-2.5 border-t border-white/[0.18] pt-3.5" key={city}>
-                  <span className="text-[0.72rem] font-zalando-sans-expanded tracking-[0.1em] text-[#9dd8d6]">0{index + 1}</span>
-                  <div>
-                    <strong className="mb-1 font-zalando-sans-semi-expanded block text-base text-white">{city}</strong>
-                    <span className="block font-zalando-sans-semi-expanded text-[0.78rem] leading-[1.45] text-white/[0.62]">{country} · {focus}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </aside>
-        )}
+              <button
+                className="absolute right-4 top-4 cursor-pointer border-0 bg-transparent text-white/70 transition-colors hover:text-white"
+                type="button"
+                aria-label="Cerrar oficinas"
+                onClick={() => setSelectedContinent(null)}
+              >
+                <X size={16} aria-hidden="true" />
+              </button>
+              <p className="mb-3 font-zalando-sans-semi-expanded text-[0.72rem] uppercase tracking-[0.16em] text-[#9dd8d6]">{selectedContinent.eyebrow}</p>
+              <h3 className="mb-[22px] font-zalando-sans-expanded font-bold text-[2.25rem] tracking-[-0.06em] text-white">{selectedContinent.name}</h3>
+              <div className="grid gap-4">
+                {selectedContinent.offices.map(([city, country, focus], index) => (
+                  <motion.div
+                    key={city}
+                    initial={{ opacity: 0, x: 12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.06, duration: 0.2 }}
+                    className="grid grid-cols-[28px_1fr] items-start gap-2.5 border-t border-white/[0.18] pt-3.5"
+                  >
+                    <span className="text-[0.72rem] font-zalando-sans-expanded tracking-[0.1em] text-[#9dd8d6]">0{index + 1}</span>
+                    <div>
+                      <strong className="mb-1 font-zalando-sans-semi-expanded block text-base text-white">{city}</strong>
+                      <span className="block font-zalando-sans-semi-expanded text-[0.78rem] leading-[1.45] text-white/[0.62]">{country} · {focus}</span>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.aside>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
