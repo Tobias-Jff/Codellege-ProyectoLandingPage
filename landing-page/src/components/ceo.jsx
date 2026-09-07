@@ -17,7 +17,7 @@ function Ceo() {
                     */}
                     
                     <h2 className="font-zalando-sans-expanded font-bold text-2xl md:text-4xl text-white mb-4 tracking-tight">
-                        Conoce a nuestro CEO
+                        Meet Our CEO and Founder
                     </h2>
 
                     <hr className="border-gray-700 mb-4"></hr>

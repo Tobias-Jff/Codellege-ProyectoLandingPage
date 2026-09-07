@@ -4,19 +4,19 @@ import logo from '../assets/logo/logo-w.png'
 
 const infoPanels = {
   privacidad: {
-    label: 'Privacidad',
-    title: 'Política de privacidad',
-    description: 'Protegemos la información que compartes con EGCO y la utilizamos únicamente para ofrecerte nuestros servicios y mejorar tu experiencia.',
+    label: 'Privacity',
+    title: 'Privacy Policy',
+    description: 'We protect the information you share with EGCO and use it only to provide you with our services and improve your experience.',
   },
   terminos: {
-    label: 'Términos',
-    title: 'Términos de uso',
-    description: 'El contenido de este sitio es informativo. Al utilizarlo, aceptas hacerlo de forma responsable y respetando las condiciones de nuestros servicios.',
+    label: 'Terms of use',
+    title: 'Terms of use',
+    description: 'The content of this site is for informational purposes only. By using it, you agree to do so responsibly and in accordance with the terms and conditions of our services.',
   },
   cookies: {
     label: 'Cookies',
-    title: 'Política de cookies',
-    description: 'Utilizamos cookies esenciales para que el sitio funcione correctamente y para comprender cómo se utiliza nuestra página.',
+    title: 'Cookies Policy',
+    description: 'We use essential cookies to ensure the site functions correctly and to understand how our page is used.',
   },
 }
 
@@ -61,22 +61,21 @@ function Footer() {
       <div className="footer-main">
         <div className="footer-brand">
           <img src={logo} alt="EGCO logo" className="h-[28px] mb-2" />
-          <p>El futuro esta pasando.</p>
+          <p>Future is happening.</p>
         </div>
 
         <div className="footer-column">
           <span className="footer-column-title">EXPLORAR</span>
-          <a href="#inicio" onClick={(event) => handleSmoothScroll(event, 'inicio')}>Inicio</a>
-          <a href="#noticias">Servicio</a>
-          <a href="#noticias">Portafolio</a>
+          <a href="#inicio" onClick={(event) => handleSmoothScroll(event, 'inicio')}>Home</a>
+          <a href="#noticias">News</a>
         </div>
 
         <div className="footer-column">
-          <span className="footer-column-title">EMPRESA</span>
-          <a href="#sobre-nosotros" onClick={(event) => handleSmoothScroll(event, 'sobre-nosotros')}>Sobre nosotros</a>
+          <span className="footer-column-title">COMPANY</span>
+          <a href="#sobre-nosotros" onClick={(event) => handleSmoothScroll(event, 'aboutUs')}>About Us</a>
         </div>
 
-        <nav className="footer-column footer-legal" aria-label="Información legal">
+        <nav className="footer-column footer-legal" aria-label="Legal Information">
           <span className="footer-column-title">LEGAL</span>
           {Object.entries(infoPanels).map(([key, panel]) => (
             <button
@@ -102,7 +101,7 @@ function Footer() {
       )}
 
       <div className="footer-bottom">
-        <span>© 2026 EGCO. Todos los derechos reservados.</span>
+        <span>© 2026 EGCO. All rights reserved.</span>
         <div className="footer-socials">
           <a href="#linkedin">LinkedIn</a>
           <a href="#instagram">Instagram</a>

@@ -5,63 +5,63 @@ import { Map, MapControls, MapMarker, MarkerContent } from "@/components/ui/map"
 const CONTINENTS = {
   africa: {
     name: "Africa",
-    eyebrow: "Presencia regional",
+    eyebrow: "Regional presence",
     offices: [
-      ["Lagos", "Nigeria", "Estrategia y alianzas"],
-      ["Nairobi", "Kenia", "Innovacion social"],
-      ["Ciudad del Cabo", "Sudafrica", "Operaciones"],
+      ["Lagos", "Nigeria", "Marketing and communications"],
+      ["Nairobi", "Kenia", "Innovation and partnerships"],
+      ["Ciudad del Cabo", "Sudafrica", "Operations"],
     ],
   },
   asia: {
     name: "Asia",
-    eyebrow: "Presencia regional",
+    eyebrow: "Regional presence",
     offices: [
-      ["Singapur", "Singapur", "Tecnologia y desarrollo"],
-      ["Tokio", "Japon", "Investigacion"],
-      ["Nueva Delhi", "India", "Comunidad y crecimiento"],
+      ["Singapur", "Singapur", "Technology and innovation"],
+      ["Tokio", "Japon", "Research"],
+      ["Nueva Delhi", "India", "Community and growth"],
     ],
   },
   europe: {
-    name: "Europa",
-    eyebrow: "Presencia regional",
+    name: "Europe",
+    eyebrow: "Regional presence",
     offices: [
-      ["Madrid", "Espana", "Direccion regional"],
-      ["Berlin", "Alemania", "Innovacion"],
-      ["Londres", "Reino Unido", "Relaciones globales"],
+      ["Madrid", "Espana", "Regional operations"],
+      ["Berlin", "Alemania", "Innovation"],
+      ["Londres", "Reino Unido", "Global relations"],
     ],
   },
   northAmerica: {
-    name: "Norteamerica",
-    eyebrow: "Presencia regional",
+    name: "North America",
+    eyebrow: "Regional presence",
     offices: [
-      ["Nueva York", "Estados Unidos", "Finanzas y alianzas"],
-      ["Toronto", "Canada", "Investigacion"],
-      ["Ciudad de Mexico", "Mexico", "Impacto regional"],
+      ["Nueva York", "Estados Unidos", "Finance"],
+      ["Toronto", "Canada", "Research"],
+      ["Ciudad de Mexico", "Mexico", "Regional impact"],
     ],
   },
   southAmerica: {
-    name: "Sudamerica",
-    eyebrow: "Presencia regional",
+    name: "South America",
+    eyebrow: "Regional presence",
     offices: [
-      ["Sao Paulo", "Brasil", "Operaciones"],
-      ["Bogota", "Colombia", "Comunidad"],
-      ["Buenos Aires", "Argentina", "Cultura y proyectos"],
+      ["Sao Paulo", "Brasil", "Operations"],
+      ["Bogota", "Colombia", "Community and partnerships"],
+      ["Buenos Aires", "Argentina", "Culture"],
     ],
   },
   oceania: {
     name: "Oceania",
-    eyebrow: "Presencia regional",
+    eyebrow: "Regional presence",
     offices: [
-      ["Sydney", "Australia", "Tecnologia"],
-      ["Melbourne", "Australia", "Diseno de servicios"],
-      ["Auckland", "Nueva Zelanda", "Alianzas"],
+      ["Sydney", "Australia", "Technology"],
+      ["Melbourne", "Australia", "Service Design"],
+      ["Auckland", "New Zealand", "Alliances"],
     ],
   },
   antarctica: {
-    name: "Antartida",
-    eyebrow: "Presencia regional",
+    name: "Antarctica",
+    eyebrow: "Regional presence",
     offices: [
-      ["Estacion Aurora", "Antartida", "Investigacion climatica"],
+      ["Aurora Station", "Antarctica", "Exploration and research"],
     ],
   },
 };
@@ -85,7 +85,7 @@ const OFFICE_MARKERS = [
   ["oceania", "Sydney", -33.87, 151.21],
   ["oceania", "Melbourne", -37.81, 144.96],
   ["oceania", "Auckland", -36.85, 174.76],
-  ["antarctica", "Estacion Aurora", -78.16, 166.67],
+  ["antarctica", "Aurora Station", -78.16, 166.67],
 ];
 
 function Mapa() {
