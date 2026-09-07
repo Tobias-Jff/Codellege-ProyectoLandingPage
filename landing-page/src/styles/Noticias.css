@@ -129,6 +129,12 @@
   letter-spacing: 0.05em;
 }
 
+.noticia-language {
+  color: #9dd8d6;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .fav-star-btn {
   background: transparent;
   border: none;

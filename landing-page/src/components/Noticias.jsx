@@ -123,6 +123,9 @@ function Noticias() {
                   <div className="noticia-meta">
                     <span className="noticia-date font-zalando-sans-expanded">{article.date}</span>
                     <span className="noticia-category font-zalando-sans-expanded">{article.category}</span>
+                    <span className="noticia-language font-zalando-sans-expanded" aria-label={`Edicion ${article.language || 'ES'}`}>
+                      {article.language || 'ES'}
+                    </span>
 
                   </div>
 

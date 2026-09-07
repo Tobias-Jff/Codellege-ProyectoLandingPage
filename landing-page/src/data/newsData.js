@@ -1,81 +1,85 @@
 const newsArticles = [
   {
     id: 1,
-    title: "Chips Cuánticos de Silicio: Revolución en el Entrenamiento de IA",
-    summary: "Nuevas arquitecturas de procesamiento cuántico reducen el tiempo de entrenamiento de modelos masivos de meses a solo unas cuantas horas.",
+    language: "EN",
+    title: "Silicon Quantum Chips: A Revolution in AI Training",
+    summary: "New quantum processing architectures reduce the training time for massive models from months to just a few hours.",
     category: "IA",
     date: "24/08/2026",
     image: "data:image/webp;base64,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",
     details: {
       paragraphs: [
-        "La integración de qubits de espín en obleas de silicio tradicional ha logrado un hito histórico en la industria del cómputo de alto rendimiento. Hasta ahora, el entrenamiento de redes neuronales con billones de parámetros requería centros de datos completos consumiendo megavatios durante meses. Con esta arquitectura cuántica híbrida, los cálculos matriciales complejos se resuelven en paralelo a velocidad casi instantánea.",
-        "El mayor avance radica en el control magnético a escala nanométrica, lo que permite estabilizar los qubits a temperaturas mucho más accesibles que los sistemas criogénicos tradicionales. Esto abre la puerta a que medianas empresas e instituciones de investigación puedan entrenar sus propios modelos avanzados sin depender exclusivamente de los gigantes tecnológicos."
+        "The integration of spin qubits into conventional silicon wafers marks a historic milestone for high-performance computing. Until now, training neural networks with trillions of parameters required entire data centers running at megawatt scale for months. With this hybrid quantum architecture, complex matrix calculations can be solved in parallel at near-instant speed.",
+        "The key breakthrough is nanoscale magnetic control, which stabilizes qubits at far more accessible temperatures than traditional cryogenic systems. This could allow research institutions and mid-sized companies to train advanced models without relying exclusively on the largest technology providers."
       ],
-      quote: "No estamos ante una mejora incremental del 10%; estamos presenciando un salto exponencial en capacidad de cómputo que transformará la investigación científica.",
+      quote: "This is not a ten percent improvement; it is an exponential leap in computing capacity that will transform scientific research.",
       keyPoints: [
-        "Aceleración de procesos de aprendizaje profundo hasta 1,000 veces más rápida.",
-        "Reducción del consumo energético en centros de datos en más del 80%.",
-        "Compatibilidad directa con las líneas de fabricación de semiconductores actuales."
+        "Deep learning processes up to 1,000 times faster.",
+        "More than 80% lower energy consumption in data centers.",
+        "Direct compatibility with current semiconductor manufacturing lines."
       ]
     }
   },
   {
     id: 2,
-    title: "Microrobots Autónomos para Reparación de Tuberías Subterráneas",
-    summary: "Enjambres de microrobots inspirados en hormigas reparan infraestructuras urbanas sin necesidad de excavar o interrumpir servicios.",
+    language: "FR",
+    title: "Micro-robots autonomes pour reparer les canalisations souterraines",
+    summary: "Des essaims de micro-robots inspires des fourmis repareront les infrastructures urbaines sans excavation ni interruption des services.",
     category: "ROBOTICA",
     date: "18/07/2026",
     image: "https://th.bing.com/th/id/OIP.5CL5antTkDGG0V7TqkRGOQHaEJ?w=283&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
     details: {
       paragraphs: [
-        "Las grandes metrópolis pierden diariamente millones de litros de agua por fugas imperceptibles en sus tuberías subterráneas. Para solucionar esto, se han desplegado unidades robóticas de menos de dos centímetros equipadas con sensores ultrasónicos y dispensadores de resina polimérica de curado rápido.",
-        "Los dispositivos navegan por los conductos y se comunican entre sí mediante radiofrecuencia de bajo alcance. Cuando una unidad detecta una grieta o corrosión, emite una señal y el enjambre se reúne en el punto crítico para aplicar el sellador en cuestión de minutos sin interrumpir el suministro público."
+        "Les grandes metropoles perdent chaque jour des millions de litres d'eau a cause de fuites invisibles dans leurs canalisations souterraines. Pour y remedier, des unites robotiques de moins de deux centimetres utilisent des capteurs ultrasoniques et des distributeurs de resine a durcissement rapide.",
+        "Les appareils se deplacent dans les conduites et communiquent par radiofrequence a courte portee. Lorsqu'une unite detecte une fissure ou de la corrosion, elle alerte l'essaim, qui se rassemble sur la zone critique et applique le produit d'etancheite en quelques minutes, sans interrompre le service public."
       ],
-      quote: "El mantenimiento urbano pasa de ser destructivo y costoso a ser preventivo, silencioso e invisible para los ciudadanos.",
+      quote: "Urban maintenance becomes preventive, quiet and invisible to citizens instead of destructive and costly.",
       keyPoints: [
-        "Eliminación total de excavaciones para reparaciones menores de fontanería y gas.",
-        "Autonomía de batería de 48 horas con recarga continua mediante el flujo hidráulico.",
-        "Uso de resinas de sellado ecológicas no tóxicas aptas para agua potable."
+        "No excavation for minor plumbing and gas repairs.",
+        "Forty-eight hours of battery autonomy with continuous recharging from water flow.",
+        "Non-toxic, eco-friendly sealing resins suitable for drinking water."
       ]
     }
   },
   {
     id: 3,
-    title: "IA Neuro-Simbólica: Uniendo la Lógica Estricta y el Aprendizaje Profundo",
-    summary: "La convergencia entre redes neuronales y sistemas de lógica matemática elimina las alucinaciones en diagnósticos médicos y análisis de código.",
+    language: "DE",
+    title: "Neuro-symbolische KI: Wenn strenge Logik auf Deep Learning trifft",
+    summary: "Die Verbindung neuronaler Netze mit mathematischen Logiksystemen reduziert Halluzinationen in medizinischen Diagnosen und Codeanalysen.",
     category: "IA",
     date: "02/06/2026",
     image: "https://www.lineaedp.it/files/2026/05/Innovaway_AI-neuro-simbolica.jpg",
     details: {
       paragraphs: [
-        "El principal obstáculo para la adopción masiva de la IA en sectores críticos ha sido la falta de razonamiento determinista. La aproximación neuro-simbólica resuelve este dilema combinando el aprendizaje estadístico de los transformadores con motores de inferencia lógica formal.",
-        "En la práctica, la red neuronal analiza patrones masivos y propone respuestas, mientras que el módulo simbólico actúa como un verificador estricto que valida si la propuesta cumple con las leyes físicas, matemáticas o lógicas antes de mostrar el resultado final."
+        "Das grosste Hindernis fur den breiten Einsatz von KI in kritischen Bereichen ist bisher das fehlende deterministische Schlussfolgern. Der neuro-symbolische Ansatz verbindet das statistische Lernen von Transformern mit formalen logischen Inferenzmaschinen.",
+        "In der Praxis analysiert das neuronale Netz grosse Datenmengen und erstellt Vorschlage. Das symbolische Modul arbeitet als strenger Verifizierer und pruft, ob die Antwort physikalischen, mathematischen oder logischen Regeln entspricht, bevor sie angezeigt wird."
       ],
-      quote: "Hemos pasado de modelos que solo predicen la palabra más probable a sistemas que comprenden y verifican las reglas del mundo real.",
+      quote: "Wir entwickeln uns von Modellen, die nur das wahrscheinlichste Wort vorhersagen, zu Systemen, die Regeln der realen Welt verstehen und prufen.",
       keyPoints: [
-        "Eliminación total de alucinaciones e invención de datos en procesos críticos.",
-        "Explicabilidad transparente paso a paso de cada decisión tomada por el sistema.",
-        "Reducción masiva de la cantidad de datos e información requerida para el entrenamiento."
+        "Weniger Halluzinationen und erfundene Daten in kritischen Prozessen.",
+        "Transparente, schrittweise Erklarung jeder Systementscheidung.",
+        "Deutlich weniger Daten fur das Training fortschrittlicher Modelle."
       ]
     }
   },
   {
     id: 4,
-    title: "Procesadores Neuromórficos de Grafeno: Cómputo a la Velocidad del Cerebro",
-    summary: "Nuevos circuitos integrados basados en estructuras de carbono imitan las sinapsis biológicas para lograr eficiencia energética extrema.",
+    language: "PT",
+    title: "Processadores neuromorficos de grafeno: computacao a velocidade do cerebro",
+    summary: "Novos circuitos integrados baseados em estruturas de carbono imitam sinapses biologicas para alcancar uma eficiencia energetica extrema.",
     category: "COMPUTO",
     date: "19/05/2026",
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
     details: {
       paragraphs: [
-        "Los chips tradicionales basados en la arquitectura Von Neumann sufren el clásico cuello de botella entre la memoria y la unidad de procesamiento. Los nuevos procesadores neuromórficos fabricados con mallas de grafeno procesan y almacenan datos exactamente en el mismo punto físico, imitando el comportamiento de las neuronas biológicas.",
-        "Esta arquitectura permite ejecutar algoritmos de procesamiento de imagen y voz en tiempo real con una millonésima parte de la energía requerida por un procesador convencional, abriendo la puerta a dispositivos móviles verdaderamente autónomos."
+        "Os chips tradicionais baseados na arquitetura Von Neumann sofrem com o classico gargalo entre a memoria e a unidade de processamento. Os novos processadores neuromorficos fabricados com redes de grafeno processam e armazenam dados no mesmo ponto fisico, imitando o comportamento dos neuronios biologicos.",
+        "Essa arquitetura executa algoritmos de imagem e voz em tempo real usando uma fracao minima da energia de um processador convencional, abrindo caminho para dispositivos moveis realmente autonomos."
       ],
-      quote: "Estamos replicando la eficiencia del cerebro humano, que realiza cálculos sumamente complejos consumiendo menos energía que una pequeña bombilla.",
+      quote: "Estamos replicando a eficiencia do cerebro humano, que realiza calculos complexos consumindo menos energia do que uma pequena lampada.",
       keyPoints: [
-        "Consumo eléctrico reducido hasta en un 99% en tareas de inferencia continua.",
-        "Procesamiento analógico en memoria de ultra baja latencia.",
-        "Resistencia térmica extrema que no requiere sistemas complejos de refrigeración."
+        "Consumo de energia ate 99% menor em tarefas de inferencia continua.",
+        "Processamento analogico em memoria com latencia ultrabaixa.",
+        "Alta resistencia termica sem sistemas complexos de refrigeracao."
       ]
     }
   },
