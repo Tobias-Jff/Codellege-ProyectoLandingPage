@@ -105,12 +105,12 @@ function Hero() {
               We design the future from the <span className="font-zalando-sans-semiexpanded text-cyan-200">PRESENT.</span>
             </h1>
 
-            <p className="mt-4 max-w-xl text-left text-md font-zalando-sans leading-7 text-slate-200/80">
+            <p className="mt-4 font-medium max-w-xl text-left text-md font-zalando-sans-semi-expanded leading-7 text-slate-200/80">
               Strategic technology to turn complex ideas into systems that think, learn, and advance with you.
             </p>
 
             <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-              <a href="#aboutUs" className="group inline-flex items-center gap-3 border border-white/35 px-5 py-3 text-sm font-medium text-white transition-colors hover:border-cyan-200 hover:text-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-200">
+              <a href="#aboutUs" className="group font-zalando-sans-semi-expanded font-bold inline-flex items-center gap-3 border border-white/35 px-5 py-3 text-sm text-white transition-colors hover:border-cyan-200 hover:text-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-200">
                 EXPLORE
                 <ArrowRight size={17} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </a>

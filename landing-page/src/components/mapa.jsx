@@ -121,7 +121,7 @@ function Mapa() {
         </Map>
 
         {selectedContinent && (
-          <aside className="absolute right-6 top-6 w-[min(340px,calc(100%-48px))] border border-[#9dd8d6]/50 bg-[#081622]/95 p-6 shadow-[0_18px_50px_rgba(0,0,0,0.28)] animate-in fade-in-0 slide-in-from-bottom-2 duration-200 max-[640px]:left-4 max-[640px]:right-4 max-[640px]:top-4 max-[640px]:w-auto" aria-live="polite">
+          <aside className="absolute right-6 top-6 w-[min(340px,calc(100%-48px))] border border-[#9dd8d6]/50 bg-black/95 p-6 shadow-[0_18px_50px_rgba(0,0,0,0.28)] animate-in fade-in-0 slide-in-from-bottom-2 duration-200 max-[640px]:left-4 max-[640px]:right-4 max-[640px]:top-4 max-[640px]:w-auto" aria-live="polite">
             <button
               className="absolute right-4 top-4 cursor-pointer border-0 bg-transparent text-white/70 transition-colors hover:text-white"
               type="button"
@@ -130,15 +130,15 @@ function Mapa() {
             >
               <X size={16} aria-hidden="true" />
             </button>
-            <p className="mb-3 text-[0.72rem] uppercase tracking-[0.16em] text-[#9dd8d6]">{selectedContinent.eyebrow}</p>
-            <h3 className="mb-[22px] text-[2.25rem] tracking-[-0.06em] text-white">{selectedContinent.name}</h3>
+            <p className="mb-3 font-zalando-sans-semi-expanded text-[0.72rem] uppercase tracking-[0.16em] text-[#9dd8d6]">{selectedContinent.eyebrow}</p>
+            <h3 className="mb-[22px] font-zalando-sans-expanded font-bold text-[2.25rem] tracking-[-0.06em] text-white">{selectedContinent.name}</h3>
             <div className="grid gap-4">
               {selectedContinent.offices.map(([city, country, focus], index) => (
                 <div className="grid grid-cols-[28px_1fr] items-start gap-2.5 border-t border-white/[0.18] pt-3.5" key={city}>
-                  <span className="text-[0.72rem] tracking-[0.1em] text-[#9dd8d6]">0{index + 1}</span>
+                  <span className="text-[0.72rem] font-zalando-sans-expanded tracking-[0.1em] text-[#9dd8d6]">0{index + 1}</span>
                   <div>
-                    <strong className="mb-1 block text-base text-white">{city}</strong>
-                    <span className="block text-[0.78rem] leading-[1.45] text-white/[0.62]">{country} · {focus}</span>
+                    <strong className="mb-1 font-zalando-sans-semi-expanded block text-base text-white">{city}</strong>
+                    <span className="block font-zalando-sans-semi-expanded text-[0.78rem] leading-[1.45] text-white/[0.62]">{country} · {focus}</span>
                   </div>
                 </div>
               ))}

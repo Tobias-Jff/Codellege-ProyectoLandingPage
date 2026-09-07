@@ -123,12 +123,12 @@ function Header() {
                 </a>
 
                 <nav
-                    className="relative font-audiowide font-black text-slate-300 h-[70px] w-[64rem] px-6 md:px-16 lg:px-24 xl:px-32 flex items-center justify-between bg-transparent"
+                    className="relative font-audiowide font-black text-slate-300 h-[70px] w-[64rem] px-12 flex items-center justify-between bg-transparent"
                 >
 
-                    <ul className="flex items-center gap-6">
+                    <ul className="flex items-center gap-4">
                         <li>
-                            <a href="#inicio" className="group text-xs uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition duration-300">
+                            <a href="#inicio" className="group text-[12px] uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition duration-300">
                                 <span className="relative inline-block after:content-[''] after:absolute after:bg-white/70 after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
                                     Home
                                 </span>
@@ -136,7 +136,7 @@ function Header() {
                         </li>
 
                         <li>
-                            <a href="#noticias" className="group text-xs uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition">
+                            <a href="#noticias" className="group text-[12px] uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition">
                                 <span className="relative inline-block after:content-[''] after:absolute after:bg-white/70 after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
                                     News
                                 </span>
@@ -144,7 +144,7 @@ function Header() {
                         </li>
 
                         <li>
-                            <a href="#aboutUs" className="group text-xs uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition">
+                            <a href="#aboutUs" className="group text-[12px] uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition">
                                 <span className="relative inline-block after:content-[''] after:absolute after:bg-white/70 after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
                                     Who we are
                                 </span>
@@ -154,7 +154,7 @@ function Header() {
                         <li>
                             <button
                                 onClick={() => setUpcomingOpen(true)}
-                                className="group text-xs uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition cursor-pointer"
+                                className="group text-[12px] uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition cursor-pointer"
                             >
                                 <span className="relative inline-block after:content-[''] after:absolute after:bg-white/70 after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
                                     Upcoming
@@ -163,7 +163,7 @@ function Header() {
                         </li>
 
                         <li>
-                            <a href="#footer" className="group text-xs uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition">
+                            <a href="#footer" className="group text-[12px] uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition">
                                 <span className="relative inline-block after:content-[''] after:absolute after:bg-white/70 after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
                                     Contact
                                 </span>
