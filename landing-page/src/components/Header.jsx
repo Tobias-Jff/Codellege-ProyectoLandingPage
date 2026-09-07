@@ -112,18 +112,18 @@ function Header() {
         <>
 
             <header
-                className={`fixed flex flex-col top-0 left-0 w-full z-50 items-center transition-opacity duration-500 ease-in-out ${ visible ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none" }`}
+                className={`fixed flex px-8 top-0 left-0 w-full z-50 items-center transition-opacity duration-500 ease-in-out ${ visible ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none" }`}
             >
 
-                <div className="absolute -z-10 h-[180%] inset-0 bg-gradient-to-b from-black/75 to-black/0">
+                <div className="absolute -z-10 h-[183px] inset-0 bg-gradient-to-b from-black/75 via-black/55 to-black/0">
                 </div>
 
-                <a href="#" className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <img src={icon} alt="Icon" className="h-[28px]" />
+                <a href="#" className="relative">
+                    <img src={icon} alt="Icon" className="h-[28px] aspect-[1/1.112]" />
                 </a>
 
                 <nav
-                    className="relative font-audiowide font-normal text-slate-300 h-[70px] w-[64rem] px-6 md:px-16 lg:px-24 xl:px-32 flex items-center justify-between bg-transparent"
+                    className="relative font-audiowide font-black text-slate-300 h-[70px] w-[64rem] px-6 md:px-16 lg:px-24 xl:px-32 flex items-center justify-between bg-transparent"
                 >
 
                     <ul className="flex items-center gap-6">
@@ -146,17 +146,7 @@ function Header() {
                         <li>
                             <a href="#inicio" className="group text-xs uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition">
                                 <span className="relative inline-block after:content-[''] after:absolute after:bg-white/70 after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
-                                    Nosotros
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-
-                    <ul className="flex items-center gap-6">
-                        <li>
-                            <a href="#inicio" className="group text-xs uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition">
-                                <span className="relative inline-block after:content-[''] after:absolute after:bg-white/70 after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
-                                    CEO
+                                    Who we are
                                 </span>
                             </a>
                         </li>
@@ -212,7 +202,7 @@ function Header() {
                 </div>
 
                     <h2
-                        className="mt-12 text-5xl md:text-7xl font-bold tracking-tight leading-[0.95]"
+                        className="font-zalando-sans-expanded text-start mt-12 text-5xl md:text-7xl font-bold tracking-tight leading-[0.95]"
                     >
                         Be prepared.
                     </h2>
@@ -225,13 +215,13 @@ function Header() {
                     <div>
 
                         <p
-                            className="text-xs uppercase tracking-[0.3em] text-white/40"
+                            className="font-zalando-sans-semi-expanded text-xs uppercase tracking-[0.3em] text-white/40"
                         >
                             Countdown
                         </p>
 
                         <div
-                            className="mt-5 flex justify-center items-baseline gap-2 font-mono"
+                            className="font-zalando-sans-semi-expanded mt-5 flex justify-center items-baseline gap-2 font-mono"
                         >
 
                             <span className="text-4xl md:text-5xl">
@@ -265,7 +255,7 @@ function Header() {
                         </div>
 
                         <div
-                            className="mt-2 flex justify-center gap-12 text-[9px] uppercase tracking-[0.25em] text-white/30"
+                            className="font-zalando-sans-semi-expanded mt-2 flex justify-center gap-12 text-[9px] uppercase tracking-[0.25em] text-white/30"
                         >
 
                             <span>Days</span>
@@ -283,13 +273,13 @@ function Header() {
                     <div className="mt-12">
 
                         <p
-                            className="text-xs uppercase tracking-[0.3em] text-white/30"
+                            className="font-zalando-sans-semi-expanded text-xs uppercase tracking-[0.3em] text-white/30"
                         >
                             Announcement
                         </p>
 
                         <p
-                            className="mt-3 text-sm tracking-wider text-white/70"
+                            className="font-zalando-sans-semi-expanded mt-3 text-sm tracking-wider text-white/70"
                         >
                             SEPTEMBER 18, 2026
                         </p>

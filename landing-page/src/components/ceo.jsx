@@ -2,8 +2,8 @@ import "../components/ceo.css";
 
 function Ceo() {
     return (
-        <section id="ceo" className="relative w-full py-18 bg-gray-950 overflow-hidden flex justify-center items-center">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-900/20 blur-[120px] rounded-full pointer-events-none"></div>
+        <section id="ceo" className="relative w-full py-18 bg-black overflow-hidden flex justify-center items-center">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gray-900/20 blur-[120px] rounded-full pointer-events-none"></div>
 
             <div className="relative z-10 w-full max-w-6xl mx-auto px-6 flex flex-col-reverse md:flex-row items-center gap-12 md:gap-20">
                 
@@ -16,24 +16,23 @@ function Ceo() {
                     </div>
                     */}
                     
-                    <h2 className="text-2xl md:text-4xl font-extralight text-white mb-4 tracking-tight">
+                    <h2 className="font-zalando-sans-expanded font-bold text-2xl md:text-4xl text-white mb-4 tracking-tight">
                         Conoce a nuestro CEO
                     </h2>
 
                     <hr className="border-gray-700 mb-4"></hr>
                     
-                    <p className="text-gray-400 text-sm mb-32 font-extralight leading-relaxed max-w-xl">
-                        El hombre detrás de la visión y la estrategia de nuestra empresa, Leonardo,
-                        dueño y creador de esta fundación, es un líder apasionado y comprometido con la innovación y el crecimiento. 
-                        Con una trayectoria impresionante en el mundo empresarial, ha guiado a nuestro 
-                        equipo hacia el éxito con su enfoque estratégico y su capacidad para inspirar a otros.
-                        Desde la infancia se interesó por querer mejorar el mundo y cambiarlo de la forma en que lo conocemos, 
-                        siempre aneló poder hacer algo por la humanidad. Lo logró.
+                    <p className="font-zalando-sans text-gray-400 text-sm mb-32 font-extralight leading-relaxed max-w-xl">
+                        The man behind our company’s vision and strategy, Leonardo, the owner and founder of this organization, 
+                        is a passionate and dedicated leader committed to innovation and growth. With an impressive career in the 
+                        business world, he has guided our team toward success through his strategic approach and his ability to 
+                        inspire others. From an early age, he was driven by the desire to improve the world and change it as we 
+                        know it. He always dreamed of doing something meaningful for humanity. And he did.
                     </p>
 
                     <div className="border-l-2 border-gray-500 pl-4 py-2 ml-8">
-                        <h3 className="text-2xl font-bold text-gray-100 tracking-wide">Leonardo Da' Preston</h3>
-                        <p className="text-gray-400 font-medium font-mono text-sm uppercase tracking-wider">CEO & FOUNDER</p>
+                        <h3 className="font-zalando-sans-expanded text-2xl font-bold text-gray-100 tracking-wide">Leonardo Da' Preston</h3>
+                        <p className="text-gray-400 font-medium font-zalando-sans-semi-expanded text-sm uppercase tracking-wider">CEO & FOUNDER</p>
                         {/* <p className="text-gray-400/60 font-medium text-xs mt-1 tracking-wider">Ingeniero de software, </p> */}
                     </div>
                 </div>
@@ -45,7 +44,7 @@ function Ceo() {
                     <img 
                         src="https://images.unsplash.com/photo-1597859682726-d5010f58e240?q=80&w=1469&auto=format&fit=crop" 
                         alt="Leonardo Da' Preston, CEO" 
-                        className="relative w-full h-125 object-cover object-center rounded-sm border border-gray-800 shadow-2xl transition-all duration-500 group-hover:scale-[1.02] grayscale group-hover:grayscale-0" 
+                        className="relative w-full h-125 object-cover object-center rounded-sm border border-gray-800 shadow-2xl transition-all duration-500 grayscale group-hover:grayscale-0" 
                     />
                 </div>
                 

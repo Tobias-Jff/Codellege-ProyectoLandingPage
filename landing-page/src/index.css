@@ -105,47 +105,22 @@ code {
   background: var(--code-bg);
 }
 
-.font-google-sans {
-  font-family: 'Google Sans', var(--sans);
-  font-weight: 900;
-}
-
-.font-outfit {
-  font-family: 'Outfit', var(--sans);
-  font-weight: 900;
-}
-
-.font-raleway {
-  font-family: 'Raleway', var(--sans);
-  font-weight: 900;
-}
-
 .font-audiowide {
   font-family: 'Audiowide', var(--sans);
-  font-weight: 900;
 }
 
 .font-syncopate {
   font-family: 'Syncopate', var(--sans);
-  font-weight: 900;
 }
 
-.font-google-sans-flex {
-  font-family: 'Google Sans Flex', var(--sans);
+.font-zalando-sans-expanded {
+  font-family: 'Zalando Sans Expanded', var(--sans);
 }
 
-.font-kanit {
-  font-family: 'Kanit', var(--sans);
+.font-zalando-sans-semi-expanded {
+  font-family: 'Zalando Sans SemiExpanded', var(--sans);
 }
 
-.font-inter {
-  font-family: 'Inter', var(--sans);
-}
-
-.font-goldman {
-  font-family: 'Goldman', var(--sans);
-}
-
-.font-dm-sans {
-  font-family: 'DM Sans', var(--sans);
+.font-zalando-sans {
+  font-family: 'Zalando Sans', var(--sans);
 }

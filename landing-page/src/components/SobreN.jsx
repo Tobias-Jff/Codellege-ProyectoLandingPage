@@ -260,13 +260,13 @@ export default function SobreNosotros() {
 
           <div className="relative z-10 h-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex items-end justify-end pb-16 sm:pb-20 lg:pb-24">
 
-            <div className="w-full lg:w-1/2 xl:w-[45%]">
+            <div className="w-5/8 mb-16">
 
               {/* TÍTULO */}
 
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black tracking-[-0.055em] leading-[0.95] text-white">
+              <h2 className="text-6xl font-syncopate font-black tracking-[-0.055em] leading-[0.95] text-white">
 
-                Future is happening
+                WE IMAGINE THE GREATEST
 
               </h2>
 
@@ -310,7 +310,7 @@ export default function SobreNosotros() {
               {/* CONTENT */}
               <div className="lg:col-span-7 order-1 lg:order-2">
                 
-                <h2 id="mision-title" className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-black tracking-[-0.04em] leading-tight">
+                <h2 id="mision-title" className="font-zalando-sans-expanded text-start mt-4 text-3xl sm:text-4xl lg:text-5xl font-black tracking-[-0.04em] leading-tight">
                   We push technology beyond what is possible.
                 </h2>
 
@@ -324,15 +324,15 @@ export default function SobreNosotros() {
                         {active && <motion.span layoutId="active-tab" className="absolute bottom-0 left-0 right-0 h-px bg-white" />}
                       </button>
                     );
-                  })}
+                  })} 
                 </div>
 
                 <div id={`panel-${tabActiva}`} role="tabpanel" className="relative min-h-[270px] pt-9">
                   <AnimatePresence mode="wait">
                     <motion.div key={tabActiva} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
                       <span className="font-mono text-[10px] tracking-[0.2em] text-zinc-600">{tabActual.eyebrow}</span>
-                      <h3 className="mt-3 text-2xl sm:text-3xl font-bold tracking-tight max-w-2xl">{tabActual.title}</h3>
-                      <p className="mt-5 text-zinc-400 text-sm sm:text-base leading-relaxed max-w-2xl">{tabActual.description}</p>
+                      <h3 className="text-start font-zalando-sans-expanded mt-3 text-2xl sm:text-3xl font-bold tracking-tight max-w-2xl">{tabActual.title}</h3>
+                      <p className="text-start font-zalando-sans mt-5 text-zinc-400 text-sm sm:text-base leading-relaxed max-w-2xl">{tabActual.description}</p>
                     </motion.div>
                   </AnimatePresence>
                 </div>
@@ -367,9 +367,9 @@ export default function SobreNosotros() {
 
               <div className="lg:col-span-8 p-8 sm:p-10 lg:p-14">
 
-                <p className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-[-0.035em] leading-tight">We don´t develop technology just because we can.</p>
+                <p className="text-start font-zalando-sans-expanded text-2xl sm:text-3xl lg:text-4xl font-bold tracking-[-0.035em] leading-tight">We don´t develop technology just because we can.</p>
                 
-                <p className="mt-7 text-zinc-400 leading-relaxed max-w-2xl">Every breakthrough has a purpose. At EGCO, we pursue technology that can solve real problems, expand human potential, and create a better future for everyone.</p>
+                <p className="text-start font-zalando-sans mt-7 text-zinc-400 leading-relaxed max-w-2xl">Every breakthrough has a purpose. At EGCO, we pursue technology that can solve real problems, expand human potential, and create a better future for everyone.</p>
 
               </div>
 
