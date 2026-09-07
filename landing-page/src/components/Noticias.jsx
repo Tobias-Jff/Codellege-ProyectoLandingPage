@@ -96,13 +96,13 @@ function Noticias() {
     <main className="noticias-page">
       <section id="noticias" className="noticias-section" aria-labelledby="news-heading">
         <header className="noticias-header">
-          <div className="noticias-header-title mb-2">
-            <h2 id="news-heading font-google-dm-sans">EN LAS NOTICIAS</h2>
+          <div className="noticias-header-title mb-2 font-zalando-sans-expanded font-bold">
+            <h2 id="news-heading">NEWS</h2>
           </div>
         </header>
 
         {filteredArticles.length === 0 ? (
-          <p className="no-results">No hay noticias disponibles en esta categoría.</p>
+          <p className="no-results">There is no news available in this category.</p>
         ) : (
           <div className="noticias-grid" role="list">
             {filteredArticles.map((article) => {
@@ -121,12 +121,12 @@ function Noticias() {
                   <div className="noticia-card-glow" />
                   
                   <div className="noticia-meta">
-                    <span className="noticia-date">{article.date}</span>
-                    <span className="noticia-category">{article.category}</span>
+                    <span className="noticia-date font-zalando-sans-expanded">{article.date}</span>
+                    <span className="noticia-category font-zalando-sans-expanded">{article.category}</span>
 
                   </div>
 
-                  <div className="noticia-title-link">
+                  <div className="noticia-title-link font-zalando-sans-semi-expanded font-bold">
                     <h3>{article.title}</h3>
                   </div>
 

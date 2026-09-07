@@ -22,10 +22,9 @@ function App() {
 
       <SobreN />
       
-      <Ceo />
-      
-      {/*NOTICIAS*/}
       <Noticias/>
+
+      <Ceo />
 
       <Footer />
 
