@@ -8,35 +8,35 @@ const CONTINENTS = {
     eyebrow: "Regional presence",
     offices: [
       ["Lagos", "Nigeria", "Marketing and communications"],
-      ["Nairobi", "Kenia", "Innovation and partnerships"],
-      ["Ciudad del Cabo", "Sudafrica", "Operations"],
+      ["Nairobi", "Kenya", "Innovation and partnerships"],
+      ["Cape Town", "South Africa", "Operations"],
     ],
   },
   asia: {
     name: "Asia",
     eyebrow: "Regional presence",
     offices: [
-      ["Singapur", "Singapur", "Technology and innovation"],
-      ["Tokio", "Japon", "Research"],
-      ["Nueva Delhi", "India", "Community and growth"],
+      ["Singapur", "Singapore", "Technology and innovation"],
+      ["Tokio", "Japan", "Research"],
+      ["Bangalore", "India", "Community and growth"],
     ],
   },
   europe: {
     name: "Europe",
     eyebrow: "Regional presence",
     offices: [
-      ["Madrid", "Espana", "Regional operations"],
-      ["Berlin", "Alemania", "Innovation"],
-      ["Londres", "Reino Unido", "Global relations"],
+      ["Madrid", "Spain", "Regional operations"],
+      ["Berlin", "Germany", "Innovation"],
+      ["Londres", "United Kingdom", "Global relations"],
     ],
   },
   northAmerica: {
     name: "North America",
     eyebrow: "Regional presence",
     offices: [
-      ["Nueva York", "Estados Unidos", "Finance"],
+      ["New York", "United States", "Finance"],
       ["Toronto", "Canada", "Research"],
-      ["Ciudad de Mexico", "Mexico", "Regional impact"],
+      ["Mexico City", "Mexico", "Regional impact"],
     ],
   },
   southAmerica: {
