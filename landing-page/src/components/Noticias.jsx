@@ -1,154 +1,122 @@
-import { useState, useMemo, useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import '../styles/Noticias.css'
 import newsArticles from '../data/newsData'
 
 function Noticias() {
-  const [selectedArticle, setSelectedArticle] = useState(null)
-  const [activeCategory, setActiveCategory] = useState('Todas')
-  const [favorites, setFavorites] = useState([])
-  const [showOnlyFavorites, setShowOnlyFavorites] = useState(false)
-  const detailRef = useRef(null)
+  const [currentIndex, setCurrentIndex] = useState(newsArticles.length)
+  const [flippedCards, setFlippedCards] = useState([])
+  const [visibleCards, setVisibleCards] = useState(3)
+  const [isTransitioning, setIsTransitioning] = useState(true)
+  const carouselArticles = [...newsArticles, ...newsArticles, ...newsArticles]
 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem('news_favorites') || '[]')
-    setFavorites(saved)
+    const updateVisibleCards = () => {
+      const nextVisibleCards = window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3
+      setVisibleCards(nextVisibleCards)
+      setIsTransitioning(false)
+      setCurrentIndex(newsArticles.length)
+      requestAnimationFrame(() => setIsTransitioning(true))
+    }
+
+    updateVisibleCards()
+    window.addEventListener('resize', updateVisibleCards)
+    return () => window.removeEventListener('resize', updateVisibleCards)
   }, [])
 
   useEffect(() => {
-    if (!selectedArticle || !detailRef.current) return
+    if (flippedCards.length > 0) return undefined
 
-    const detailSection = detailRef.current
-    const startPosition = window.scrollY
-    const targetPosition = Math.max(0, startPosition + detailSection.getBoundingClientRect().top - 140)
-    const distance = targetPosition - startPosition
-    const duration = 1400
-    let animationFrame
-    let startTime
+    const autoplay = window.setInterval(() => {
+      setCurrentIndex((current) => current + 1)
+    }, 4000)
 
-    const animateScroll = (currentTime) => {
-      if (!startTime) startTime = currentTime
-      const progress = Math.min((currentTime - startTime) / duration, 1)
-      const easedProgress = progress < 0.5
-        ? 4 * progress ** 3
-        : 1 - ((-2 * progress + 2) ** 3) / 2
+    return () => window.clearInterval(autoplay)
+  }, [visibleCards, flippedCards.length])
 
-      window.scrollTo(0, startPosition + distance * easedProgress)
-      if (progress < 1) animationFrame = requestAnimationFrame(animateScroll)
-    }
-
-    animationFrame = requestAnimationFrame(animateScroll)
-    return () => cancelAnimationFrame(animationFrame)
-  }, [selectedArticle])
-
-  const toggleFavorite = (e, articleId) => {
-    e.stopPropagation()
-    let updated
-    if (favorites.includes(articleId)) {
-      updated = favorites.filter((id) => id !== articleId)
-    } else {
-      updated = [...favorites, articleId]
-    }
-    setFavorites(updated)
-    localStorage.setItem('news_favorites', JSON.stringify(updated))
+  const toggleCard = (articleId) => {
+    setFlippedCards((current) => current.includes(articleId)
+      ? current.filter((id) => id !== articleId)
+      : [...current, articleId])
   }
 
-  const categories = useMemo(() => {
-    const unique = Array.from(new Set(newsArticles.map((item) => item.category)))
-    return ['Todas', ...unique]
-  }, [])
-
-  const filteredArticles = useMemo(() => {
-    return newsArticles.filter((article) => {
-      const matchesCategory = activeCategory === 'Todas' || article.category === activeCategory
-      const matchesFav = showOnlyFavorites ? favorites.includes(article.id) : true
-      return matchesCategory && matchesFav
-    })
-  }, [activeCategory, showOnlyFavorites, favorites])
-
-  const handleSelectArticle = (article) => {
-    setSelectedArticle(article)
+  const goToPrevious = () => {
+    setCurrentIndex((current) => current - 1)
+  }
+  const goToNext = () => {
+    setCurrentIndex((current) => current + 1)
   }
 
-  /* Lógica para rastrear el movimiento del cursor sobre las tarjetas */
-  const handleMouseMove = (e) => {
-    const card = e.currentTarget
-    const rect = card.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
+  const handleTrackTransitionEnd = () => {
+    if (currentIndex < newsArticles.length * 2) return
 
-    const centerX = rect.width / 2
-    const centerY = rect.height / 2
-
-    const rotateX = ((y - centerY) / centerY) * -10
-    const rotateY = ((x - centerX) / centerX) * 10
-
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`
-    card.style.setProperty('--mouse-x', `${x}px`)
-    card.style.setProperty('--mouse-y', `${y}px`)
+    setIsTransitioning(false)
+    setCurrentIndex(newsArticles.length)
+    requestAnimationFrame(() => setIsTransitioning(true))
   }
 
-  const handleMouseLeave = (e) => {
-    const card = e.currentTarget
-    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)'
-  }
-
+  // Tailwind: layout, spacing, colors, responsive classes and card structure.
   return (
-    <main className="noticias-page">
+    <main className="noticias-page mx-auto w-full max-w-6xl px-5 py-20 text-white">
       <section id="noticias" className="noticias-section" aria-labelledby="news-heading">
-        <header className="noticias-header">
-          <div className="noticias-header-title mb-2 font-zalando-sans-expanded font-bold">
+        <header className="noticias-header mb-8 border-b border-white/15 pb-5">
+          <div className="noticias-header-title font-zalando-sans-expanded font-bold">
             <h2 id="news-heading">NEWS</h2>
           </div>
         </header>
 
-        {filteredArticles.length === 0 ? (
-          <p className="no-results">There is no news available in this category.</p>
-        ) : (
-          <div className="noticias-grid" role="list">
-            {filteredArticles.map((article) => {
-              const isSelected = selectedArticle && selectedArticle.id === article.id
-              const isFav = favorites.includes(article.id)
+        <div className="noticias-carousel-wrap relative" role="region" aria-label="News carousel">
+          <button type="button" onClick={goToPrevious} aria-label="Previous news" className="noticias-carousel-control isolate absolute left-1 top-1/2 z-10 -translate-y-1/2 rounded-full border-0 bg-transparent text-2xl leading-none before:blur-2xl transition"><span className="relative z-10">&#8249;</span></button>
+          <div className="noticias-carousel min-w-0 overflow-hidden">
+          <div className="noticias-track flex" onTransitionEnd={handleTrackTransitionEnd} style={{ '--visible-cards': visibleCards, transition: isTransitioning ? undefined : 'none', transform: `translateX(-${currentIndex * (100 / visibleCards)}%)` }}>
+            {carouselArticles.map((article, articleIndex) => {
+              const isFlipped = flippedCards.includes(article.id)
 
               return (
-                <article 
-                  key={article.id} 
-                  className={`noticia-card ${isSelected ? 'is-selected' : ''}`}
-                  role="listitem"
-                  onClick={() => handleSelectArticle(article)}
-                  onMouseMove={handleMouseMove}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <div className="noticia-card-glow" />
-                  
-                  <div className="noticia-meta">
-                    <span className="noticia-date font-zalando-sans-expanded">{article.date}</span>
-                    <span className="noticia-category font-zalando-sans-expanded">{article.category}</span>
-                    <span className="noticia-language font-zalando-sans-expanded" aria-label={`Edicion ${article.language || 'ES'}`}>
-                      {article.language || 'ES'}
-                    </span>
-
-                  </div>
-
-                  <div className="noticia-title-link font-zalando-sans-semi-expanded font-bold">
-                    <h3>{article.title}</h3>
-                  </div>
-
-                  <hr className="mb-4 border-white/50" />
-
-                  <div className="noticia-image-wrap">
-                    <img src={article.image} alt={article.title} loading="lazy" />
+                <article key={`${article.id}-${articleIndex}`} className="noticia-slide shrink-0 px-1" role="listitem">
+                  <div className={`noticia-card ${isFlipped ? 'is-flipped' : ''}`} onClick={() => toggleCard(article.id)}>
+                    <div className="noticia-card-inner">
+                      <div className="noticia-card-face flex flex-col rounded-lg border border-white/15 bg-white/[0.06] p-5 text-left shadow-2xl">
+                        <div className="flex items-center justify-between gap-3 text-xs text-white/60">
+                          <span className="font-zalando-sans-expanded">{article.date}</span>
+                          <span className="font-zalando-sans-expanded uppercase tracking-wider">{article.category}</span>
+                          <span className="font-zalando-sans-expanded text-teal-200">{article.language || 'ES'}</span>
+                        </div>
+                        <h3 className="mt-5 font-zalando-sans-semi-expanded text-xl font-bold leading-tight">{article.title}</h3>
+                        <hr className="my-4 border-white/20" />
+                        <div className="h-48 overflow-hidden rounded bg-black/20">
+                          <img className="h-full w-full object-cover" src={article.image} alt={article.title} loading="lazy" />
+                        </div>
+                        <button type="button" onClick={(event) => { event.stopPropagation(); toggleCard(article.id) }} className="mt-4 self-start text-xs uppercase tracking-[0.18em] text-teal-200 transition hover:text-white">Read story +</button>
+                      </div>
+                      <div className="noticia-card-face noticia-card-back flex flex-col rounded-lg bg-white p-6 text-left text-slate-950">
+                        <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">{article.category} / {article.date}</span>
+                        <h3 className="mt-3 text-xl font-bold leading-tight">{article.title}</h3>
+                        <p className="mt-4 text-sm leading-relaxed text-slate-700">{article.summary}</p>
+                        <ul className="mt-4 space-y-2 text-sm text-slate-700">
+                          {(article.details?.keyPoints || []).slice(0, 3).map((point) => <li key={point} className="border-l-2 border-teal-500 pl-3">{point}</li>)}
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 </article>
               )
             })}
           </div>
-        )}
+          </div>
+          <button type="button" onClick={goToNext} aria-label="Next news" className="noticias-carousel-control isolate absolute right-1 top-1/2 z-10 -translate-y-1/2 rounded-full border-0 bg-transparent text-2xl leading-none before:blur-2xl transition"><span className="relative z-10">&#8250;</span></button>
+        </div>
+        <div className="noticias-indicators mt-5 flex justify-center gap-2" aria-label="News position">
+          {newsArticles.map((article, articleIndex) => (
+            <button
+              key={article.id}
+              type="button"
+              onClick={() => setCurrentIndex(newsArticles.length + articleIndex)}
+              aria-label={`Go to news ${articleIndex + 1}`}
+              className={`noticias-indicator h-2 w-2 rounded-full transition-all ${articleIndex === ((currentIndex - newsArticles.length) % newsArticles.length + newsArticles.length) % newsArticles.length ? 'is-active' : ''}`}
+            />
+          ))}
+        </div>
       </section>
-
-        <>
-     
-        </>
-
     </main>
   )
 }

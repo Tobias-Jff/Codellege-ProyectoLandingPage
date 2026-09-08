@@ -22,9 +22,9 @@ const newsArticles = [
   },
   {
     id: 2,
-    language: "FR",
-    title: "Micro-robots autonomes pour reparer les canalisations souterraines",
-    summary: "Des essaims de micro-robots inspires des fourmis repareront les infrastructures urbaines sans excavation ni interruption des services.",
+    language: "EN",
+    title: "Autonomous Micro-Robots to Repair Underground Pipelines",
+    summary: "Ant-inspired swarms of micro-robots will repair urban infrastructure without excavation or service interruptions.",
     category: "ROBOTICA",
     date: "18/07/2026",
     image: "https://th.bing.com/th/id/OIP.5CL5antTkDGG0V7TqkRGOQHaEJ?w=283&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
@@ -43,9 +43,9 @@ const newsArticles = [
   },
   {
     id: 3,
-    language: "DE",
-    title: "Neuro-symbolische KI: Wenn strenge Logik auf Deep Learning trifft",
-    summary: "Die Verbindung neuronaler Netze mit mathematischen Logiksystemen reduziert Halluzinationen in medizinischen Diagnosen und Codeanalysen.",
+    language: "EN",
+    title: "Neuro-Symbolic AI: When Strict Logic Meets Deep Learning",
+    summary: "Combining neural networks with mathematical logic systems reduces hallucinations in medical diagnoses and code analysis.",
     category: "IA",
     date: "02/06/2026",
     image: "https://www.lineaedp.it/files/2026/05/Innovaway_AI-neuro-simbolica.jpg",
@@ -56,17 +56,17 @@ const newsArticles = [
       ],
       quote: "Wir entwickeln uns von Modellen, die nur das wahrscheinlichste Wort vorhersagen, zu Systemen, die Regeln der realen Welt verstehen und prufen.",
       keyPoints: [
-        "Weniger Halluzinationen und erfundene Daten in kritischen Prozessen.",
-        "Transparente, schrittweise Erklarung jeder Systementscheidung.",
-        "Deutlich weniger Daten fur das Training fortschrittlicher Modelle."
+        "Fewer hallucinations and fabricated data in critical processes.",
+        "Transparent, step-by-step explanations for every system decision.",
+        "Significantly less data required to train advanced models."
       ]
     }
   },
   {
     id: 4,
-    language: "PT",
-    title: "Processadores neuromorficos de grafeno: computacao a velocidade do cerebro",
-    summary: "Novos circuitos integrados baseados em estruturas de carbono imitam sinapses biologicas para alcancar uma eficiencia energetica extrema.",
+    language: "EN",
+    title: "Graphene Neuromorphic Processors: Computing at Brain Speed",
+    summary: "New carbon-based integrated circuits imitate biological synapses to achieve extreme energy efficiency.",
     category: "COMPUTO",
     date: "19/05/2026",
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
@@ -77,16 +77,17 @@ const newsArticles = [
       ],
       quote: "Estamos replicando a eficiencia do cerebro humano, que realiza calculos complexos consumindo menos energia do que uma pequena lampada.",
       keyPoints: [
-        "Consumo de energia ate 99% menor em tarefas de inferencia continua.",
-        "Processamento analogico em memoria com latencia ultrabaixa.",
-        "Alta resistencia termica sem sistemas complexos de refrigeracao."
+        "Up to 99% lower energy consumption during continuous inference tasks.",
+        "In-memory analog processing with ultra-low latency.",
+        "High thermal resistance without complex cooling systems."
       ]
     }
   },
   {
     id: 5,
-    title: "Bio-Impresoras 3D de Órganos y Tejidos Funcionales a Escala Nanométrica",
-    summary: "Avances en biotintas inteligentes permiten la creación de redes vasculares complejas para el trasplante sintético de tejidos humanos.",
+    language: "EN",
+    title: "3D Bioprinters for Organs and Functional Tissues at Nanoscale",
+    summary: "Advances in smart bio-inks enable complex vascular networks for the synthetic transplantation of human tissue.",
     category: "BIOTECNOLOGIA",
     date: "04/05/2026",
     image: "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&w=800&q=80",
@@ -97,16 +98,17 @@ const newsArticles = [
       ],
       quote: "Nos acercamos al día en que las listas de espera para donantes de órganos sean un concepto del pasado gracias a la ingeniería de tejidos.",
       keyPoints: [
-        "Generación de redes vasculares microscópicas viables con precisión quirúrgica.",
-        "Uso de células madre del propio paciente para evitar cualquier tipo de rechazo inmunológico.",
-        "Aceleración de pruebas de laboratorios farmacéuticos sin necesidad de experimentación animal."
+        "Generation of viable microscopic vascular networks with surgical precision.",
+        "Use of the patient's own stem cells to prevent immune rejection.",
+        "Faster pharmaceutical laboratory testing without animal experimentation."
       ]
     }
   },
   {
     id: 6,
-    title: "Drones Aéreos con Navegación Óptica Local y Helices Toroidales Silenciosas",
-    summary: "Flotas de logística autónoma integran visión computacional sin GPS y diseño aerodinámico para operar en entornos urbanos densos.",
+    language: "EN",
+    title: "Aerial Drones with Local Optical Navigation and Silent Toroidal Propellers",
+    summary: "Autonomous logistics fleets combine GPS-free computer vision and aerodynamic design to operate in dense urban environments.",
     category: "ROBOTICA",
     date: "22/04/2026",
     image: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&w=800&q=80",
@@ -117,16 +119,17 @@ const newsArticles = [
       ],
       quote: "Logramos que la logística urbana automatizada opere en completo silencio y con máxima seguridad en cualquier punto de la ciudad.",
       keyPoints: [
-        "Reducción de contaminación acústica a menos de 35 decibelios.",
-        "Navegación precisa e inmune a inhibidores de señal o pérdida de satélites.",
-        "Sistemas de seguridad pasiva con paracaídas balístico y aterrizaje autónomo de emergencia."
+        "Reduced noise pollution to less than 35 decibels.",
+        "Precise navigation immune to signal jammers and satellite loss.",
+        "Passive safety systems with ballistic parachutes and autonomous emergency landing."
       ]
     }
   },
   {
     id: 7,
-    title: "Interfases Cerebro-Computadora Optogénicas sin Cirugía Invasiva",
-    summary: "Nanopartículas fotosensibles administradas de forma intravenosa permiten controlar prótesis y dispositivos con el pensamiento.",
+    language: "EN",
+    title: "Non-Invasive Optogenetic Brain-Computer Interfaces",
+    summary: "Intravenously delivered photosensitive nanoparticles allow users to control prosthetics and devices with their thoughts.",
     category: "BIOTECNOLOGIA",
     date: "11/03/2026",
     image: "https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=800&q=80",
@@ -137,16 +140,17 @@ const newsArticles = [
       ],
       quote: "Hemos eliminado la necesidad del bisturí para conectar el sistema nervioso directamente con el mundo digital.",
       keyPoints: [
-        "Procedimiento totalmente no invasivo administrado por infusión médica ligera.",
-        "Ancho de banda de transmisión de datos 10 veces superior a las mallas de electrodos físicas.",
-        "Degradación natural no tóxica y eliminación del organismo tras finalizar su uso."
+        "A fully non-invasive procedure delivered through a light medical infusion.",
+        "Data transmission bandwidth ten times higher than physical electrode meshes.",
+        "Non-toxic natural degradation and elimination from the body after use."
       ]
     }
   },
   {
     id: 8,
-    title: "Sistemas de Ciberseguridad IA en Inmune-Cómputo Autónomo",
-    summary: "Algoritmos inspirados en el sistema inmunitario biológico detectan y neutralizan ciberataques desconocidos en milisegundos.",
+    language: "EN",
+    title: "AI Cybersecurity Systems for Autonomous Immune Computing",
+    summary: "Algorithms inspired by the biological immune system detect and neutralize unknown cyberattacks in milliseconds.",
     category: "IA",
     date: "28/02/2026",
     image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80",
@@ -157,16 +161,17 @@ const newsArticles = [
       ],
       quote: "Las redes informáticas ahora responden ante las infecciones cibernéticas exactamente como un organismo vivo que se defiende de un patógeno.",
       keyPoints: [
-        "Detección y contención instantánea de malware no documentado previamente.",
-        "Reconfiguración automática de reglas de firewall en tiempo real.",
-        "Cero tiempo de inactividad durante la neutralización de la amenaza."
+        "Instant detection and containment of previously undocumented malware.",
+        "Automatic real-time reconfiguration of firewall rules.",
+        "Zero downtime while neutralizing the threat."
       ]
     }
   },
   {
     id: 9,
-    title: "Almacenamiento de Datos en ADN Sintético de Ultra Alta Densidad",
-    summary: "Técnicas de codificación molecular permiten guardar petabytes de información digital en un solo gramo de material genético.",
+    language: "EN",
+    title: "Data Storage in Ultra-High-Density Synthetic DNA",
+    summary: "Molecular encoding techniques can store petabytes of digital information in a single gram of genetic material.",
     category: "COMPUTO",
     date: "15/02/2026",
     image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80",
@@ -177,16 +182,17 @@ const newsArticles = [
       ],
       quote: "Toda la información contenida en la internet global podría guardarse dentro de una caja de zapatos utilizando almacenamiento genético.",
       keyPoints: [
-        "Capacidad de almacenar hasta 215 petabytes de información en un solo gramo de ADN.",
-        "Durabilidad extrema garantizada por siglos sin riesgo de degradación magnética.",
-        "Eliminación del consumo eléctrico continuo para la preservación de servidores."
+        "Capacity to store up to 215 petabytes of information in one gram of DNA.",
+        "Extreme durability guaranteed for centuries without magnetic degradation.",
+        "Elimination of continuous electricity use for server preservation."
       ]
     }
   },
   {
     id: 10,
-    title: "Exoesqueletos Biónicos Autónomos con Aprendizaje por Refuerzo",
-    summary: "Sistemas robóticos vestibles adaptan su asistencia motora en tiempo real al estilo de caminata único de cada usuario.",
+    language: "EN",
+    title: "Autonomous Bionic Exoskeletons with Reinforcement Learning",
+    summary: "Wearable robotic systems adapt their motor assistance in real time to each user's unique walking style.",
     category: "ROBOTICA",
     date: "27/01/2026",
     image: "data:image/webp;base64,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",
@@ -197,16 +203,17 @@ const newsArticles = [
       ],
       quote: "No se siente como llevar puesta una máquina; se siente como si tus propias piernas tuvieran una super fuerza natural.",
       keyPoints: [
-        "Reducción drástica de la fatiga muscular en operarios industriales y rehabilitación médica.",
-        "Ajuste automático a terrenos irregulares, escaleras y rampas pronunciadas.",
-        "Estructura ligera de fibra de carbono de menos de tres kilogramos de peso."
+        "Drastic reduction of muscle fatigue for industrial workers and medical rehabilitation.",
+        "Automatic adjustment to uneven ground, stairs, and steep ramps.",
+        "Lightweight carbon-fiber structure weighing less than three kilograms."
       ]
     }
   },
   {
     id: 11,
-    title: "Edición Genética de Precisión mediante CRISPR de Quinta Generación",
-    summary: "Nuevas enzimas de corte genético permiten corregir mutaciones moleculares específicas sin alterar el resto del genoma.",
+    language: "EN",
+    title: "Precision Gene Editing with Fifth-Generation CRISPR",
+    summary: "New gene-editing enzymes can correct specific molecular mutations without altering the rest of the genome.",
     category: "BIOTECNOLOGIA",
     date: "10/01/2026",
     image: "data:image/webp;base64,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",
@@ -217,16 +224,17 @@ const newsArticles = [
       ],
       quote: "Hemos pasado de cortar y pegar tramos completos de ADN a corregir letras tipográficas individuales dentro del código de la vida.",
       keyPoints: [
-        "Cero margen de cortes involuntarios o mutaciones fuera de objetivo.",
-        "Capacidad de reprogramación celular directa en tejidos vivos dentro del paciente.",
-        "Simplificación radical de los procesos de desarrollo en laboratorios biológicos."
+        "No unintended cuts or off-target mutations.",
+        "Direct cell reprogramming in living tissue inside the patient.",
+        "Radically simplified development processes in biological laboratories."
       ]
     }
   },
   {
     id: 12,
-    title: "Cómputo Fotonico Integrado: Procesamiento de Datos a la Velocidad de la Luz",
-    summary: "Nuevos procesadores reemplazan los electrones por fotones de luz para eliminar por completo el calentamiento por resistencia en los chips.",
+    language: "EN",
+    title: "Integrated Photonic Computing: Data Processing at the Speed of Light",
+    summary: "New processors replace electrons with photons to eliminate resistive heating in chips.",
     category: "COMPUTO",
     date: "03/01/2026",
     image: "https://th.bing.com/th/id/OIP.Qn_JTjF3YsywV-FckJEwKwHaFx?w=262&h=181&c=7&r=0&o=7&pid=1.7&rm=3",
@@ -237,9 +245,9 @@ const newsArticles = [
       ],
       quote: "La velocidad de los fotones es el límite físico del universo, y ahora es la velocidad a la que procesamos información.",
       keyPoints: [
-        "Frecuencia de procesamiento en rango de Terahertz sin generación de calor.",
-        "Ancho de banda masivo mediante la transmisión simultánea de múltiples colores de luz.",
-        "Eliminación total de los ventiladores y sistemas criogénicos de refrigeración."
+        "Terahertz-range processing without heat generation.",
+        "Massive bandwidth through the simultaneous transmission of multiple colors of light.",
+        "Complete elimination of fans and cryogenic cooling systems."
       ]
     }
   }
