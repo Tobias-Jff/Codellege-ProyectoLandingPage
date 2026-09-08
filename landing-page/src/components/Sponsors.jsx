@@ -130,7 +130,7 @@ function Sponsors() {
                         text-xs
                         uppercase
                         tracking-[0.35em]
-                        text-white/40
+                        text-white/40 font-dm-sans
                     "
                 >
                     Trusted by

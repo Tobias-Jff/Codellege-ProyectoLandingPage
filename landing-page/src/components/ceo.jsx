@@ -31,7 +31,7 @@ function Ceo() {
                     </p>
 
                     <div className="border-l-2 border-gray-500 pl-4 py-2 ml-8">
-                        <h3 className="font-zalando-sans-expanded text-2xl font-bold text-gray-100 tracking-wide">Leonardo Da' Preston</h3>
+                        <h3 className="font-zalando-sans-expanded text-2xl font-bold text-gray-100 tracking-wide">Leonardo Di' Preston</h3>
                         <p className="text-gray-400 font-medium font-zalando-sans-semi-expanded text-sm uppercase tracking-wider">CEO & FOUNDER</p>
                         {/* <p className="text-gray-400/60 font-medium text-xs mt-1 tracking-wider">Ingeniero de software, </p> */}
                     </div>

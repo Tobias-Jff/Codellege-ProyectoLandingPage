@@ -124,3 +124,7 @@ code {
 .font-zalando-sans {
   font-family: 'Zalando Sans', var(--sans);
 }
+
+.font-dm-sans {
+  font-family: 'DM Sans', var(--sans);
+}

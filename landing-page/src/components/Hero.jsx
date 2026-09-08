@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowDownRight, ArrowUpRight, ArrowRight, Orbit } from 'lucide-react'
-import heroImage from '../assets/hero.jpg'
-import heroMask from '../assets/hero-mask.png'
+import heroImage from '../assets/hero_sat.jpg'
+import heroMask from '../assets/hero-mask_sat.png'
 import logo from '../assets/logo/logo-w.png'
 import '../components/Hero.css'
 
@@ -94,27 +94,29 @@ function Hero() {
           }}
         >
           <div className="relative w-full max-w-[1160px] pl-8 py-8">
-            <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/50 w-full h-full -z-10 blur-2xl"></div>
+            <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/30 blur-2xl w-full h-full -z-10"></div>
             <div className="max-w-4xl">
-            <div className="mb-6 flex items-center gap-3 text-xs font-zalando-sans font-medium uppercase tracking-[0.28em] text-white">
+            {/*
+            <div className="mb-6 flex items-center gap-3 text-xs font-dm-sans font-medium uppercase tracking-[0.28em] text-white">
               <Orbit size={16} strokeWidth={1.5} aria-hidden="true" />
               <span>EVOLUTION</span>
-            </div>
+            </div>*/}
 
-            <h1 id="hero-heading" className="font-zalando-sans-expanded max-w-6xl text-left text-7xl font-black leading-[0.94] tracking-[-0.06em] text-white">
+            <h1 id="hero-heading" className="font-zalando-sans-expanded uppercase max-w-6xl text-left text-7xl font-black leading-[0.94] tracking-[-0.06em] text-white">
               We design the future from the <span className="font-zalando-sans-semiexpanded text-cyan-200">PRESENT.</span>
             </h1>
 
-            <p className="mt-4 font-medium max-w-xl text-left text-md font-zalando-sans-semi-expanded leading-7 text-slate-200/80">
+            <p className="mt-4 font-light max-w-xl text-left text-md font-dm-sans leading-7 text-slate-200/80">
               Strategic technology to turn complex ideas into systems that think, learn, and advance with you.
             </p>
 
+            {/*
             <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-              <a href="#aboutUs" className="group font-zalando-sans-semi-expanded font-bold inline-flex items-center gap-3 border border-white/35 px-5 py-3 text-sm text-white transition-colors hover:border-cyan-200 hover:text-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-200">
+              <a href="#aboutUs" className="group font-dm-sans-semi-expanded font-bold inline-flex items-center gap-3 border border-white/35 rounded-sm px-5 py-3 text-sm text-white transition-colors hover:border-cyan-200 hover:text-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-200">
                 EXPLORE
                 <ArrowRight size={17} aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </a>
-            </div>
+            </div>*/}
           </div>
         </div>
       </div>
