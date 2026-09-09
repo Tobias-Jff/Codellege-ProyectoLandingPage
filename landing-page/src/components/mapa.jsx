@@ -1,70 +1,28 @@
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, cubicBezier, motion } from "framer-motion";
 import { X } from "lucide-react";
-import { Map, MapControls, MapMarker, MarkerContent } from "@/components/ui/map";
+import { Map, MapMarker, MarkerContent, useMap } from "@/components/ui/map";
+import headerLogo from "../assets/logo/icon-w.png";
+import { officeDetails } from "../data/officeDetails";
+import officePhotos from "../data/officePhotos.json";
+
+const INITIAL_VIEW = { center: [15, -25], //longitude, latitude
+  zoom: 0.2, // mas zoom = mas cerca
+  bearing: 0, pitch: 0 };
+
+// Match the restrained reveals used in SobreN; the camera eases in and out.
+const PANEL_EASE = [0.16, 1, 0.3, 1];
+const CAMERA_EASE = cubicBezier(0.45, 0, 0.2, 1);
+const CAMERA_DURATION = 2200;
 
 const CONTINENTS = {
-  africa: {
-    name: "Africa",
-    eyebrow: "Regional presence",
-    offices: [
-      ["Lagos", "Nigeria", "Marketing and communications"],
-      ["Nairobi", "Kenya", "Innovation and partnerships"],
-      ["Cape Town", "South Africa", "Operations"],
-    ],
-  },
-  asia: {
-    name: "Asia",
-    eyebrow: "Regional presence",
-    offices: [
-      ["Singapur", "Singapore", "Technology and innovation"],
-      ["Tokio", "Japan", "Research"],
-      ["Bangalore", "India", "Community and growth"],
-    ],
-  },
-  europe: {
-    name: "Europe",
-    eyebrow: "Regional presence",
-    offices: [
-      ["Madrid", "Spain", "Regional operations"],
-      ["Berlin", "Germany", "Innovation"],
-      ["Londres", "United Kingdom", "Global relations"],
-    ],
-  },
-  northAmerica: {
-    name: "North America",
-    eyebrow: "Regional presence",
-    offices: [
-      ["New York", "United States", "Finance"],
-      ["Toronto", "Canada", "Research"],
-      ["Mexico City", "Mexico", "Regional impact"],
-    ],
-  },
-  southAmerica: {
-    name: "South America",
-    eyebrow: "Regional presence",
-    offices: [
-      ["Sao Paulo", "Brasil", "Operations"],
-      ["Bogota", "Colombia", "Community and partnerships"],
-      ["Buenos Aires", "Argentina", "Culture"],
-    ],
-  },
-  oceania: {
-    name: "Oceania",
-    eyebrow: "Regional presence",
-    offices: [
-      ["Sydney", "Australia", "Technology"],
-      ["Melbourne", "Australia", "Service Design"],
-      ["Auckland", "New Zealand", "Alliances"],
-    ],
-  },
-  antarctica: {
-    name: "Antarctica",
-    eyebrow: "Regional presence",
-    offices: [
-      ["Aurora Station", "Antarctica", "Exploration and research"],
-    ],
-  },
+  africa: { name: "Africa" },
+  asia: { name: "Asia" },
+  europe: { name: "Europe" },
+  northAmerica: { name: "North America" },
+  southAmerica: { name: "South America" },
+  oceania: { name: "Oceania" },
+  antarctica: { name: "Antarctica" },
 };
 
 const OFFICE_MARKERS = [
@@ -86,135 +44,223 @@ const OFFICE_MARKERS = [
   ["oceania", "Sydney", -33.87, 151.21],
   ["oceania", "Melbourne", -37.81, 144.96],
   ["oceania", "Auckland", -36.85, 174.76],
-  ["antarctica", "Aurora Station", -78.16, 166.67],
+  ["antarctica", "Aurora Station", -70.16, 125.67],
 ];
+
+function LockMapInteraction() {
+  const { map } = useMap();
+
+  useEffect(() => {
+    if (!map) return;
+
+    // Also lock an existing instance retained by Fast Refresh.
+    map.scrollZoom.disable();
+    map.boxZoom.disable();
+    map.dragRotate.disable();
+    map.dragPan.disable();
+    map.keyboard.disable();
+    map.doubleClickZoom.disable();
+    map.touchZoomRotate.disable();
+    map.touchPitch.disable();
+  }, [map]);
+
+  return null;
+}
 
 function Mapa() {
   const mapRef = useRef(null);
   const [selectedContinent, setSelectedContinent] = useState(null);
-  const [panelPosition, setPanelPosition] = useState({ x: 0, y: 0 });
-
-  const updatePanelPosition = (marker) => {
-    if (!mapRef.current || !marker) return;
-
-    const mapContainer = mapRef.current.getContainer();
-    const width = mapContainer.clientWidth;
-    const height = mapContainer.clientHeight;
-    const { x, y } = mapRef.current.project([marker.lng, marker.lat]);
-    const panelWidth = 340;
-    const panelHeight = 360;
-    const gap = 18;
-
-    const prefersLeft = x > width - panelWidth - 60;
-    const nextLeft = prefersLeft
-      ? x - panelWidth - gap
-      : x + gap;
-    const nextTop = Math.min(Math.max(y - panelHeight / 2, 18), height - panelHeight - 18);
-
-    setPanelPosition({
-      x: Math.min(Math.max(nextLeft, 12), width - panelWidth - 12),
-      y: Math.min(Math.max(nextTop, 12), height - panelHeight - 12),
-    });
+  const mapContainerRef = useRef(null);
+  // Enable the requested transitions locally, with an explicit motion control.
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const contentVariants = {
+    hidden: { opacity: 0, y: reduceMotion ? 0 : 18 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: reduceMotion ? 0 : 0.5, ease: PANEL_EASE },
+    },
   };
 
   useEffect(() => {
-    if (!selectedContinent?.marker || !mapRef.current) return;
+    const container = mapContainerRef.current;
+    if (!container) return;
 
-    updatePanelPosition(selectedContinent.marker);
+    // Keep the canvas and markers aligned when the container resizes.
+    const observer = new ResizeObserver(() => mapRef.current?.resize());
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
 
-    const map = mapRef.current;
-    const handleMapChange = () => updatePanelPosition(selectedContinent.marker);
+  const handleOfficeClick = (continentKey, city, longitude, latitude) => {
+    const office = officeDetails[city];
+    setSelectedContinent({ ...CONTINENTS[continentKey], ...office, image: officePhotos[office.photo], key: city, city, center: [longitude, latitude] });
+    mapRef.current?.stop();
+    mapRef.current?.flyTo({
+      center: [longitude, latitude],
+      zoom: 5,
+      duration: reduceMotion ? 0 : CAMERA_DURATION,
+      easing: CAMERA_EASE,
+      essential: !reduceMotion,
+    });
+  };
 
-    map.on("move", handleMapChange);
-    map.on("zoom", handleMapChange);
-    map.on("pitch", handleMapChange);
-    map.on("rotate", handleMapChange);
-
-    return () => {
-      map.off("move", handleMapChange);
-      map.off("zoom", handleMapChange);
-      map.off("pitch", handleMapChange);
-      map.off("rotate", handleMapChange);
-    };
-  }, [selectedContinent]);
-
-  const handleOfficeClick = (continentKey, longitude, latitude) => {
-    setSelectedContinent({
-      ...CONTINENTS[continentKey],
-      marker: { lng: longitude, lat: latitude },
+  const handleClose = () => {
+    setSelectedContinent(null);
+    mapRef.current?.stop();
+    mapRef.current?.flyTo({
+      ...INITIAL_VIEW,
+      duration: reduceMotion ? 0 : CAMERA_DURATION,
+      easing: CAMERA_EASE,
+      essential: !reduceMotion,
     });
   };
 
   return (
-    <section className="relative overflow-hidden bg-black px-8 pb-24 pt-[88px] text-slate-100 before:pointer-events-none before:absolute before:inset-0 before:content-[''] before:bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] before:bg-[size:5rem_5rem] before:opacity-[0.035] max-[640px]:px-[18px] max-[640px]:pb-16 max-[640px]:pt-[58px]">
+    <section className="relative overflow-hidden bg-black px-8 pb-24 pt-[88px] text-slate-100 before:pointer-events-none before:absolute before:inset-0 before:content-[''] before:bg-[before:opacity-[0.035] max-[640px]:px-[18px] max-[640px]:pb-16 max-[640px]:pt-[58px]">
       <div className="relative z-10 mx-auto mb-7 max-w-[1400px]">
-        <h2 className="font-syncopate mb-3.5 text-[clamp(2rem,4vw,4.5rem)] font-black uppercase leading-[0.98] tracking-[-0.055em] text-white">Global Presence</h2>
+        <h2 className="font-syncopate mb-3.5 text-[clamp(2rem,4vw,4.5rem)] font-black uppercase leading-[0.98] tracking-[-0.055em] text-white">Global Presence</h2> 
+
       </div>
-      <div className="relative z-10 mx-auto h-[min(580px,62vw)] min-h-[420px] max-w-[1400px] overflow-hidden border border-[#9dd8d6]/[0.34] bg-transparent max-[640px]:h-[620px] max-[640px]:min-h-0">
-        <Map ref={mapRef} center={[10, 25]} zoom={1.5} projection="globe">
-          <MapControls showCompass position="bottom-right" />
+      <div style={{ gridTemplateColumns: "min(340px, 65%) minmax(0, 1fr)" }} className="relative z-10 mx-auto grid h-[min(600px,65vw)] min-h-[420px] max-w-[1400px] overflow-hidden border border-[#9dd8d6]/[0.34] bg-transparent max-[640px]:h-[620px] max-[640px]:min-h-0">
+
+        <div className="relative min-w-0 overflow-hidden border-r border-[#9dd8d6]/50 bg-black/95">
+        <AnimatePresence initial={false}>
+          {selectedContinent && (
+            <motion.div
+              key={selectedContinent.key}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: reduceMotion ? 0 : 0.65, ease: PANEL_EASE }}
+              className="pointer-events-none absolute inset-0"
+            >
+              <motion.img
+                src={selectedContinent.image?.image}
+                alt={`Vista de ${selectedContinent.country}`}
+                initial={{ scale: reduceMotion ? 1 : 1.08 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: reduceMotion ? 0 : 1.1, ease: PANEL_EASE }}
+                className="h-full w-full object-cover object-center saturate-[0.7]"
+                onError={(event) => { event.currentTarget.style.visibility = "hidden"; }}
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,9,16,0.7)_0%,rgba(3,9,16,0.15)_45%,rgba(3,9,16,0.6)_100%)]" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+<AnimatePresence mode="wait" initial={false}>
+  {selectedContinent ? (
+    <motion.aside
+      key={selectedContinent.key}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      variants={{
+        hidden: { opacity: 0, x: reduceMotion ? 0 : -90 },
+        visible: {
+          opacity: 1,
+          x: 0,
+          transition: {
+            duration: reduceMotion ? 0 : 0.85,
+            ease: PANEL_EASE,
+            delayChildren: reduceMotion ? 0 : 0.18,
+            staggerChildren: reduceMotion ? 0 : 0.1,
+          },
+        },
+        exit: {
+          opacity: 0,
+          x: reduceMotion ? 0 : -60,
+          transition: { duration: reduceMotion ? 0 : 0.4, ease: "easeInOut" },
+        },
+      }}
+      
+      className="absolute inset-0 z-20 flex flex-col justify-between overflow-hidden text-left max-[640px]:inset-x-2 max-[640px]:top-2 max-[640px]:bottom-2"
+      aria-live="polite"
+    >
+      {/* Encabezado superior dentro de la tarjeta */}
+      <div className="relative flex items-center justify-between gap-2 p-5 pb-0 max-[640px]:p-3 max-[640px]:pb-0">
+        <motion.h3 
+          variants={contentVariants} 
+          className="font-zalando-sans-expanded text-[clamp(0.85rem,1.2vw,1rem)] font-semibold uppercase tracking-[0.05em] text-white/80"
+        >
+          {selectedContinent.name}
+        </motion.h3>
+        <button
+          className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border-0 bg-black/40 text-white/80 transition-colors hover:bg-black/70 hover:text-white focus:outline-none"
+          type="button"
+          aria-label="Cerrar oficinas"
+          onClick={handleClose}
+        >
+          <X size={16} aria-hidden="true" />
+        </button>
+      </div>
+
+      {/* Bloque inferior con fondo oscuro y borde superior turquesa para el País y Descripción */}
+      <motion.div 
+        variants={contentVariants} 
+        className="mt-auto w-full bg-[linear-gradient(to_top,rgba(11,17,24,0.95)_50%,rgba(11,17,24,0.7)_0%,transparent_100%)] p-6 pt-12  max-[640px]:p-3.5"
+      >
+        <h4 className="mb-2 font-zalando-sans-expanded text-[clamp(1.2rem,1.8vw,1.5rem)] font-semibold leading-tight tracking-[0.02em] text-[#9dd8d6]">
+          {selectedContinent.country}
+        </h4>
+        <p className="font-zalando-sans-semi-expanded text-[0.82rem] leading-[1.65] text-white/80">
+          {selectedContinent.description}
+        </p>
+      </motion.div>
+    </motion.aside>
+  ) : (
+    <motion.div
+      key="office-placeholder"
+      initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.82 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{
+        opacity: 0,
+        scale: reduceMotion ? 1 : 0.82,
+        transition: { duration: reduceMotion ? 0 : 0.4, ease: "easeInOut" },
+      }}
+      transition={{ duration: reduceMotion ? 0 : 0.6, ease: PANEL_EASE }}
+      className="absolute inset-0 flex items-center justify-center p-8"
+    >
+      <img
+        src={headerLogo}
+        alt="Logo"
+        className="opacity-20 h-auto w-full max-w-[150px] object-contain"
+      />
+    </motion.div>
+  )}
+</AnimatePresence>
+        </div>
+        <div ref={mapContainerRef} className="relative min-w-0 overflow-hidden">
+        <Map ref={mapRef} {...INITIAL_VIEW} projection="globe" interactive={false}>
+          <LockMapInteraction />
           {OFFICE_MARKERS.map(([continentKey, city, latitude, longitude]) => (
             <MapMarker
               key={city}
               longitude={longitude}
               latitude={latitude}
-              onClick={() => handleOfficeClick(continentKey, longitude, latitude)}
+              onClick={() => handleOfficeClick(continentKey, city, longitude, latitude)}
             >
               <MarkerContent>
-                <span
-                  className="block h-[15px] w-[15px] rounded-full border-[3px] border-[#071722] bg-[#9dd8d6] shadow-[0_0_0_5px_rgba(157,216,214,0.22),0_5px_14px_rgba(0,0,0,0.38)] transition-transform duration-200 hover:scale-125 hover:bg-white"
+                <motion.button
+                  type="button"
+                  initial={false}
+                  animate={{
+                    scale: selectedContinent?.city === city ? 1.25 : 1,
+                    backgroundColor: selectedContinent?.city === city ? "#ffffff" : "#9dd8d6",
+                  }}
+                  whileHover={reduceMotion ? undefined : { scale: 1.4 }}
+                  whileTap={reduceMotion ? undefined : { scale: 1.1 }}
+                  transition={{ duration: reduceMotion ? 0 : 0.3, ease: PANEL_EASE }}
+                  className="block h-[15px] w-[15px] cursor-pointer rounded-full border-[3px] border-[#071722] shadow-[0_0_0_5px_rgba(157,216,214,0.22),0_5px_14px_rgba(0,0,0,0.38)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                   aria-label={`Oficina de ${city}`}
+                  aria-pressed={selectedContinent?.city === city}
                 />
               </MarkerContent>
             </MapMarker>
           ))}
         </Map>
 
-        <AnimatePresence mode="wait">
-          {selectedContinent && (
-            <motion.aside
-              key={selectedContinent.marker.lng + selectedContinent.marker.lat}
-              initial={{ opacity: 0, y: 18, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 16, scale: 0.98 }}
-              transition={{ duration: 0.24, ease: "easeOut" }}
-              className="pointer-events-auto absolute z-20 w-[min(340px,calc(100%-48px))] border border-[#9dd8d6]/50 bg-black/95 p-6 shadow-[0_18px_50px_rgba(0,0,0,0.28)] max-[640px]:w-auto"
-              style={{
-                left: `${panelPosition.x}px`,
-                top: `${panelPosition.y}px`,
-              }}
-              aria-live="polite"
-            >
-              <button
-                className="absolute right-4 top-4 cursor-pointer border-0 bg-transparent text-white/70 transition-colors hover:text-white"
-                type="button"
-                aria-label="Cerrar oficinas"
-                onClick={() => setSelectedContinent(null)}
-              >
-                <X size={16} aria-hidden="true" />
-              </button>
-              <p className="mb-3 font-zalando-sans-semi-expanded text-[0.72rem] uppercase tracking-[0.16em] text-[#9dd8d6]">{selectedContinent.eyebrow}</p>
-              <h3 className="mb-[22px] font-zalando-sans-expanded font-bold text-[2.25rem] tracking-[-0.06em] text-white">{selectedContinent.name}</h3>
-              <div className="grid gap-4">
-                {selectedContinent.offices.map(([city, country, focus], index) => (
-                  <motion.div
-                    key={city}
-                    initial={{ opacity: 0, x: 12 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.06, duration: 0.2 }}
-                    className="grid grid-cols-[28px_1fr] items-start gap-2.5 border-t border-white/[0.18] pt-3.5"
-                  >
-                    <span className="text-[0.72rem] font-zalando-sans-expanded tracking-[0.1em] text-[#9dd8d6]">0{index + 1}</span>
-                    <div>
-                      <strong className="mb-1 font-zalando-sans-semi-expanded block text-base text-white">{city}</strong>
-                      <span className="block font-zalando-sans-semi-expanded text-[0.78rem] leading-[1.45] text-white/[0.62]">{country} · {focus}</span>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.aside>
-          )}
-        </AnimatePresence>
+        </div>
       </div>
     </section>
   );

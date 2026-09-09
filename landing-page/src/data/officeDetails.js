@@ -1,0 +1,22 @@
+// The key matches the marker city. Edit the country and copy here.
+export const officeDetails = {
+  Lagos: { photo: 'nigeria', country: 'Nigeria', description: 'Our Lagos office leads marketing and communications, connecting our work with communities and partners.' },
+  Nairobi: { photo: 'kenya', country: 'Kenya', description: 'Our Nairobi office develops partnerships and supports new ideas that drive innovation across the region.' },
+  'Ciudad del Cabo': { photo: 'south-africa', country: 'South Africa', description: 'Our Cape Town office coordinates operations and supports the delivery of our regional projects.' },
+  Singapur: { photo: 'singapore', country: 'Singapore', description: 'Our Singapore office brings technology and innovation together to develop new solutions.' },
+  Tokio: { photo: 'japan', country: 'Japan', description: 'Our Tokyo office focuses on research, exploring ideas and technologies that shape our next steps.' },
+  'Nueva Delhi': { photo: 'india', country: 'India', description: 'Our New Delhi office builds community connections and supports opportunities for regional growth.' },
+  Madrid: { photo: 'spain', country: 'Spain', description: 'Our Madrid office coordinates regional operations, bringing teams and projects together.' },
+  Berlin: { photo: 'germany', country: 'Germany', description: 'Our Berlin office advances innovation, turning new ideas into practical possibilities.' },
+  Londres: { photo: 'united-kingdom', country: 'United Kingdom', description: 'Our London office strengthens global relationships and connects our international network.' },
+  'Nueva York': { photo: 'united-states', country: 'United States', description: 'Our New York office focuses on finance, supporting the planning and development of our projects.' },
+  Toronto: { photo: 'canada', country: 'Canada', description: 'Our Toronto office conducts research to develop knowledge and explore emerging technologies.' },
+  'Ciudad de Mexico': { photo: 'mexico', country: 'Mexico', description: 'Our Mexico City office connects local initiatives with our global vision, supporting projects with regional impact.' },
+  'Sao Paulo': { photo: 'brazil', country: 'Brazil', description: 'Our São Paulo office manages operations and helps our teams deliver projects across the region.' },
+  Bogota: { photo: 'colombia', country: 'Colombia', description: 'Our Bogotá office brings communities and partners together to build lasting collaborations.' },
+  'Buenos Aires': { photo: 'argentina', country: 'Argentina', description: 'Our Buenos Aires office supports cultural initiatives and the exchange of ideas across our community.' },
+  Sydney: { photo: 'australia', country: 'Australia', description: 'Our Sydney office develops technology and explores how it can support our shared vision.' },
+  Melbourne: { photo: 'australia', country: 'Australia', description: 'Our Melbourne office focuses on service design, creating thoughtful experiences around people’s needs.' },
+  Auckland: { photo: 'new-zealand', country: 'New Zealand', description: 'Our Auckland office builds alliances and connects partners around shared opportunities.' },
+  'Aurora Station': { photo: 'antarctica', country: 'Antarctica', description: 'Aurora Station supports exploration and research in one of the world’s most remote environments.' },
+};
