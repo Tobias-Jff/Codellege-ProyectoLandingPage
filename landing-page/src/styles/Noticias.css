@@ -82,10 +82,24 @@
 .noticia-card {
   position: relative;
   width: min(100%, 420px);
-  height: 500px;
+  height: 540px;
   margin: 0 auto;
   cursor: pointer;
   perspective: 1200px;
+  display: flex;
+}
+
+.noticia-card-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  padding: 0;
+  justify-content: flex-start;
 }
 
 .noticia-card-inner {
@@ -109,37 +123,58 @@
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   overflow: hidden;
+  padding: 0;
 }
 
 .noticia-meta {
   width: 100%;
   min-height: 18px;
+  padding: 1.25rem 1.25rem 0;
+  box-sizing: border-box;
 }
 
 .noticia-title {
-  min-height: 3.2em;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  min-height: 6.2rem;
+  display: block;
+  overflow: visible;
+  text-wrap: balance;
+  width: 100%;
+  margin: 1.25rem 0 1.25rem;
+  flex: 0 0 auto;
+  padding: 0 1.25rem;
+  box-sizing: border-box;
 }
 
 .noticia-divider {
-  width: 100%;
+  width: calc(100% - 2.5rem);
   min-height: 1px;
   border-top-width: 1px;
   opacity: 0.7;
-  margin-top: 1.25rem;
-  margin-bottom: 1.25rem;
   display: block;
+  box-sizing: border-box;
+  margin: 0 1.25rem;
+  flex: 0 0 auto;
 }
 
 .noticia-image-wrap {
   width: 100%;
-  min-height: 12rem;
+  height: 100%;
+  min-height: 0;
+  flex: 1 1 auto;
   overflow: hidden;
-  border-radius: 0.75rem;
-  margin-top: 0;
+  border-radius: 0;
+  margin: 1.25rem 0 0;
+  display: block;
+  background: #000;
+  position: relative;
+}
+
+.noticia-image-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.08) 100%);
+  pointer-events: none;
 }
 
 .noticia-image-wrap img {
@@ -150,9 +185,15 @@
   object-position: center;
 }
 
+.noticia-card-face::after {
+  content: "";
+  display: block;
+  flex: 0 0 0;
+  min-height: 0;
+}
+
 .read-story-button {
-  margin-top: auto;
-  align-self: flex-start;
+  display: none;
 }
 
 .noticia-card-back {
