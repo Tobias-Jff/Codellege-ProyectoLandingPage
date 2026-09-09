@@ -211,11 +211,13 @@ function Sponsors() {
 
                     {/* Primera copia */}
 
+                    {/* eslint-disable-next-line react-hooks/static-components */}
                     <SponsorGroup copy="first" />
 
 
                     {/* Segunda copia */}
 
+                    {/* eslint-disable-next-line react-hooks/static-components */}
                     <SponsorGroup copy="second" />
 
                 </div>

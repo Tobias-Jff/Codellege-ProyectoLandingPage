@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { ArrowDownRight, ArrowUpRight, ArrowRight, Orbit } from 'lucide-react'
 import heroImage from '../assets/hero_sat.jpg'
 import heroMask from '../assets/hero-mask_sat.png'
-import logo from '../assets/logo/logo-w.png'
 import '../components/Hero.css'
 
 function Hero() {
@@ -39,7 +37,6 @@ function Hero() {
 
   const contentProgress = Math.min(Math.max((scrollProgress - 0.08) / 0.58, 0), 1)
   const contentOffset = 112 - contentProgress * 112
-  const overlayOpacity = Math.min(contentProgress * 1.4, 1)
   const openingOpacity = 1 - Math.min(scrollProgress * 12, 1)
 
   return (
@@ -106,7 +103,7 @@ function Hero() {
               We design the future from the <span className="font-zalando-sans-semiexpanded text-cyan-200">PRESENT.</span>
             </h1>
 
-            <p className="mt-4 font-light max-w-xl text-left text-md font-dm-sans leading-7 text-slate-200/80">
+            <p className="mt-4 font-light max-w-xl leading-normal text-left text-md font-dm-sans text-slate-200/80">
               Strategic technology to turn complex ideas into systems that think, learn, and advance with you.
             </p>
 

@@ -90,7 +90,7 @@ function Noticias() {
                   <article key={imageKey} className="noticia-slide shrink-0 px-1" role="listitem">
                     <div className={`noticia-card ${isFlipped ? 'is-flipped' : ''}`} onClick={() => toggleCard(article.id)}>
                       <div className="noticia-card-inner">
-                        <div className="noticia-card-face flex flex-col rounded-lg border border-white/15 bg-white/[0.06] text-left shadow-2xl">
+                        <div className="noticia-card-face flex flex-col rounded-sm border border-white/15 bg-white/[0.06] text-left shadow-2xl">
                           <div className="noticia-meta flex items-center justify-between gap-3 px-5 text-xs text-white/60">
                             <span className="font-zalando-sans-expanded">{article.date}</span>
                             <span className="font-zalando-sans-expanded uppercase tracking-wider">{article.category}</span>

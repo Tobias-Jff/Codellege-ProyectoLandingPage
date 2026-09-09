@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import icon from "../assets/logo/icon-w.png";
 
+const targetDate = new Date("2026-09-18T20:00:00");
+
 function Header() {
 
     const [visible, setVisible] = useState(true);
@@ -15,8 +17,6 @@ function Header() {
         minutes: 0,
         seconds: 0
     });
-
-    const targetDate = new Date("2026-09-18T20:00:00");
 
     useEffect(() => {
 
@@ -112,7 +112,7 @@ function Header() {
         <>
 
             <header
-                className={`fixed flex px-8 top-0 left-0 w-full z-50 items-center transition-opacity duration-500 ease-in-out ${ visible ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none" }`}
+                className={`fixed flex flex-row px-8 top-0 left-0 w-full z-50 items-center transition-opacity duration-500 ease-in-out ${ visible ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none" }`}
             >
 
                 <div className="absolute -z-10 h-[183px] inset-0 bg-gradient-to-b from-black/75 via-black/55 to-black/0">
@@ -123,7 +123,7 @@ function Header() {
                 </a>
 
                 <nav
-                    className="relative font-audiowide font-black text-slate-300 h-[70px] w-[64rem] px-12 flex items-center justify-between bg-transparent"
+                    className="relative font-audiowide font-black text-slate-300 h-[70px] w-auto px-12 flex items-center justify-between bg-transparent"
                 >
 
                     <ul className="flex items-center gap-4">
@@ -136,7 +136,7 @@ function Header() {
                         </li>
 
                         <li>
-                            <a href="#noticias" className="group text-[12px] uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition">
+                            <a href="#noticias" className="group text-[12px] uppercase tracking-wider py-0.5 hover:text-slate-100 transition">
                                 <span className="relative inline-block after:content-[''] after:absolute after:bg-white after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
                                     News
                                 </span>
@@ -152,17 +152,6 @@ function Header() {
                         </li>
 
                         <li>
-                            <button
-                                onClick={() => setUpcomingOpen(true)}
-                                className="group text-[12px] uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition cursor-pointer"
-                            >
-                                <span className="relative inline-block after:content-[''] after:absolute after:bg-white after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
-                                    Upcoming
-                                </span>
-                            </button>
-                        </li>
-
-                        <li>
                             <a href="#footer" className="group text-[12px] uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition">
                                 <span className="relative inline-block after:content-[''] after:absolute after:bg-white after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
                                     Contact
@@ -172,6 +161,44 @@ function Header() {
                     </ul>
 
                 </nav>
+
+                <button
+                    onClick={() => setUpcomingOpen(true)}
+                    className="group relative ml-auto mt-2 overflow-hidden font-audiowide border-1 border-slate-300/40 rounded-xs text-slate-300 text-[12px] uppercase tracking-wider px-4 py-1 transition-colors duration-500 cursor-pointer"
+                >
+                    <svg
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-0 h-full w-full"
+                    >
+                        <defs>
+                            <mask id="countdown-text-mask" maskUnits="userSpaceOnUse">
+                                <rect width="100%" height="100%" fill="white" />
+                                <text
+                                    x="50%"
+                                    y="48%"
+                                    dy="0.35em"
+                                    textAnchor="middle"
+                                    fill="black"
+                                    fontFamily="Audiowide, sans-serif"
+                                    fontSize="12"
+                                    letterSpacing="0.6"
+                                >
+                                    Upcoming Countdown
+                                </text>
+                            </mask>
+                        </defs>
+                        <rect
+                            width="0"
+                            height="100%"
+                            fill="white"
+                            mask="url(#countdown-text-mask)"
+                            className="transition-[width] duration-500 ease-out group-hover:w-full"
+                        />
+                    </svg>
+                    <span className="relative z-10 inline-block transition-colors duration-500 group-hover:text-transparent">
+                        Upcoming Countdown
+                    </span>
+                </button>
 
             </header>
 

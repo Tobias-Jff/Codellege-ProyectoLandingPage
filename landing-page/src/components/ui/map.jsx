@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/refs, react-hooks/set-state-in-effect, react-refresh/only-export-components */
+
 "use client";;
 import * as MapLibreGL from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
