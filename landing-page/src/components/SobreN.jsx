@@ -1,22 +1,14 @@
-import { useEffect, useRef, useMemo, useState } from "react";
-import { motion, animate, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
+import area01 from "../assets/carrusel/area01.jpg";
+import area02 from "../assets/carrusel/area02.jpg";
+import area03 from "../assets/carrusel/area03.jpg";
+import area04 from "../assets/carrusel/area04.jpg";
 
 import {
-  ArrowUpRight,
-  ShieldCheck,
-  Cpu,
-  Database,
-  Lock,
-  Activity,
-  Network,
-  Workflow,
-  Search,
-  PenTool,
-  Code2,
-  CheckCircle2,
-  Target,
-  
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 /* =========================================================
@@ -31,8 +23,8 @@ const ASSETS = {
   tabs: {
     energy: "/ima/energia.avif",
     robotics: "/ima/rob.avif",
-    biotech:"/ima/biot.avif",
-    humanity:"/ima/humanidad.avif"
+    biotech: "/ima/biot.avif",
+    humanity: "/ima/humanidad.avif",
   },
 };
 
@@ -48,7 +40,7 @@ const tabs = {
 
     title: "Powering a cleaner civilization.",
     description:
-    "366-0 is our renewable energy technology, designed to provide affordable and exceptionally low-impact power. Generated across our plants around the world, it is helping build a cleaner and more accessible energy future.",
+      "366-0 is our renewable energy technology, designed to provide affordable and exceptionally low-impact power. Generated across our plants around the world, it is helping build a cleaner and more accessible energy future.",
     image: ASSETS.tabs.energy,
   },
 
@@ -57,7 +49,8 @@ const tabs = {
     number: "02",
     eyebrow: "Model 3",
     title: "Extending human potential",
-    description:"We create intelligent machines designed to work alongside humanity, automate complex tasks, and expand what people can accomplish.",
+    description:
+      "We create intelligent machines designed to work alongside humanity, automate complex tasks, and expand what people can accomplish.",
     image: ASSETS.tabs.robotics,
   },
 
@@ -67,60 +60,31 @@ const tabs = {
     eyebrow: "X-Gen",
 
     title: "Engineering a healthier future.",
-    description: "We explore the intersection of biology and technology to develop solutions for human health, food production, and the challenges of a growing world.",
+    description:
+      "We explore the intersection of biology and technology to develop solutions for human health, food production, and the challenges of a growing world.",
     image: ASSETS.tabs.biotech,
   },
 
-  humanity:{
+  humanity: {
     label: "HUMANITY",
     number: "04",
     eyebrow: "Hope",
-    title:"Technology in service of everyone.",
-    description:"Our ultimate goal is not technological advancement alone. It is using that advancement to reduce poverty, fight hunger, protect our planet, and improve the quality of human life.",
+    title: "Technology in service of everyone.",
+    description:
+      "Our ultimate goal is not technological advancement alone. It is using that advancement to reduce poverty, fight hunger, protect our planet, and improve the quality of human life.",
     image: ASSETS.tabs.humanity,
-  }
-
+  },
 };
 
+/* =========================================================
+   CAROUSEL DATA
+   ========================================================= */
 
-
-
-const methodology = [
-  {
-    number: "01",
-    title: "Entender",
-    description:
-      "Analizamos la operación, sus dependencias, puntos críticos y escenarios de interrupción.",
-
-    icon: <Search />,
-  },
-
-  {
-    number: "02",
-    title: "Diseñar",
-    description:
-      "Convertimos los requerimientos operativos en una arquitectura preparada para escenarios reales.",
-
-    icon: <PenTool />,
-  },
-
-  {
-    number: "03",
-    title: "Construir",
-    description:
-      "Implementamos los componentes necesarios manteniendo como prioridad la estabilidad del sistema.",
-
-    icon: <Code2 />,
-  },
-
-  {
-    number: "04",
-    title: "Validar",
-    description:
-      "Probamos comportamiento, dependencias y mecanismos de recuperación antes de considerar la solución lista.",
-
-    icon: <CheckCircle2 />,
-  },
+const carrusel = [
+  { id: "01", placeholder: "Área de Innovación 1", image: area01 },
+  { id: "02", placeholder: "Área de Innovación 2", image: area02 },
+  { id: "03", placeholder: "Área de Innovación 3", image: area03 },
+  { id: "04", placeholder: "Área de Innovación 4", image: area04 },
 ];
 
 /* =========================================================
@@ -143,13 +107,21 @@ const fadeUp = {
   },
 };
 
-const stagger = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.1,
-    },
+const slideVariant = {
+  enter: (direction) => ({
+    x: direction > 0 ? 1000 : -1000,
+    opacity: 0,
+  }),
+  center: {
+    zIndex: 1,
+    x: 0,
+    opacity: 1,
   },
+  exit: (direction) => ({
+    zIndex: 0,
+    x: direction < 0 ? 1000 : -1000,
+    opacity: 0,
+  }),
 };
 
 /* =========================================================
@@ -158,14 +130,25 @@ const stagger = {
 
 export default function SobreNosotros() {
   const [tabActiva, setTabActiva] = useState("energy");
+  const [slideActivo, setSlideActivo] = useState(0);
+  const [direction, setDirection] = useState(0);
 
   // estado para mantener la luminosidad del hero superior
   const [heroSelected, setHeroSelected] = useState(false);
 
-  // estado como antes para capacidades
-  const [selectedCap, setSelectedCap] = useState(null);
-
   const tabActual = tabs[tabActiva];
+  const slideActual = carrusel[slideActivo];
+
+  const cambiarSlide = (direccion) => {
+    setDirection(direccion);
+    setSlideActivo((actual) => (actual + direccion + carrusel.length) % carrusel.length);
+  };
+
+  // Auto-carousel: avanza horizontalmente cada 5s
+  useEffect(() => {
+    const intervalo = window.setInterval(() => cambiarSlide(1), 5000);
+    return () => window.clearInterval(intervalo);
+  }, []);
 
   // permitir cerrar la luminosidad con Escape (mejora de accesibilidad)
   useEffect(() => {
@@ -173,6 +156,8 @@ export default function SobreNosotros() {
       if (e.key === "Escape") {
         setHeroSelected(false);
       }
+      if (e.key === "ArrowLeft") cambiarSlide(-1);
+      if (e.key === "ArrowRight") cambiarSlide(1);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -239,13 +224,11 @@ export default function SobreNosotros() {
         />
 
         {/* =====================================================
-        EARTH — OPERACIÓN
-===================================================== */}
+            EARTH — OPERACIÓN
+        ===================================================== */}
 
         <section className="relative w-full h-[115vh] min-h-[600px] overflow-hidden bg-black">
-
           {/* VIDEO */}
-
           <video
             className="absolute inset-0 w-full h-full object-contain"
             src={ASSETS.earth}
@@ -257,101 +240,131 @@ export default function SobreNosotros() {
           />
 
           {/* CONTENIDO */}
-
           <div className="relative z-10 h-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex items-end justify-end pb-16 sm:pb-20 lg:pb-24">
-
             <div className="w-5/8 mb-16">
-
               {/* TÍTULO */}
-
               <h2 className="text-6xl font-syncopate font-black tracking-[-0.055em] leading-[0.95] text-white">
-
                 WE IMAGINE THE GREATEST
-
               </h2>
-
-
             </div>
-
           </div>
-
-
         </section>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 
-        pb-28 pt-10 sm:pb-36 sm:pt-16">
-
-
+        <div
+          className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 
+        pb-28 pt-10 sm:pb-36 sm:pt-16"
+        >
           {/* =====================================================
               04 — MISSION / TABS
           ===================================================== */}
 
           <section aria-labelledby="mision-title" className="mt-0">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-              
               <div className="lg:col-span-5 order-2 lg:order-1">
-                
                 <div className="relative aspect-[4/5] bg-zinc-950 border border-zinc-900 overflow-hidden">
-                  
                   <AnimatePresence mode="wait">
-                    <motion.img key={tabActiva} src={tabActual.image} alt={tabActual.title} initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.98 }} transition={{ duration: 0.45, ease: "easeInOut" }} className="absolute inset-0 w-full h-full object-cover grayscale brightness-[0.45] contrast-125" />
+                    <motion.img
+                      key={tabActiva}
+                      src={tabActual.image}
+                      alt={tabActual.title}
+                      initial={{ opacity: 0, scale: 1.04 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.98 }}
+                      transition={{ duration: 0.45, ease: "easeInOut" }}
+                      className="absolute inset-0 w-full h-full object-cover grayscale brightness-[0.45] contrast-125"
+                    />
                   </AnimatePresence>
 
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
 
                   <div className="absolute bottom-6 left-6">
-                    <span className="font-mono text-[10px] tracking-[0.2em] text-zinc-500">{tabActual.number} / {tabActual.eyebrow}</span>
+                    <span className="font-mono text-[10px] tracking-[0.2em] text-zinc-500">
+                      {tabActual.number} / {tabActual.eyebrow}
+                    </span>
                   </div>
-
                 </div>
-
               </div>
 
               {/* CONTENT */}
               <div className="lg:col-span-7 order-1 lg:order-2">
-                
-                <h2 id="mision-title" className="font-zalando-sans-expanded text-start mt-4 text-3xl sm:text-4xl lg:text-5xl font-black tracking-[-0.04em] leading-tight">
+                <h2
+                  id="mision-title"
+                  className="font-zalando-sans-expanded text-start mt-4 text-3xl sm:text-4xl lg:text-5xl font-black tracking-[-0.04em] leading-tight"
+                >
                   We push technology beyond what is possible.
                 </h2>
 
-                <div role="tablist" aria-label="Información sobre EGCO" className="mt-12 flex border-b border-zinc-900 overflow-x-auto">
+                <div
+                  role="tablist"
+                  aria-label="Información sobre EGCO"
+                  className="mt-12 flex border-b border-zinc-900 overflow-x-auto"
+                >
                   {Object.entries(tabs).map(([key, tab]) => {
                     const active = tabActiva === key;
                     return (
-                      <button key={key} type="button" role="tab" aria-selected={active} aria-controls={`panel-${key}`} onClick={() => setTabActiva(key)} className={`relative shrink-0 px-5 py-4 first:pl-0 font-mono text-[10px] tracking-wider transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black ${active ? "text-white" : "text-zinc-600 hover:text-zinc-300"}`}>
+                      <button
+                        key={key}
+                        type="button"
+                        role="tab"
+                        aria-selected={active}
+                        aria-controls={`panel-${key}`}
+                        onClick={() => setTabActiva(key)}
+                        className={`relative shrink-0 px-5 py-4 first:pl-0 font-mono text-[10px] tracking-wider transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
+                          active ? "text-white" : "text-zinc-600 hover:text-zinc-300"
+                        }`}
+                      >
                         <span className="mr-2 text-zinc-700">{tab.number}</span>
                         {tab.label}
-                        {active && <motion.span layoutId="active-tab" className="absolute bottom-0 left-0 right-0 h-px bg-white" />}
+                        {active && (
+                          <motion.span
+                            layoutId="active-tab"
+                            className="absolute bottom-0 left-0 right-0 h-px bg-white"
+                          />
+                        )}
                       </button>
                     );
-                  })} 
+                  })}
                 </div>
 
                 <div id={`panel-${tabActiva}`} role="tabpanel" className="relative min-h-[270px] pt-9">
                   <AnimatePresence mode="wait">
-                    <motion.div key={tabActiva} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }}>
-                      <span className="font-mono text-[10px] tracking-[0.2em] text-zinc-600">{tabActual.eyebrow}</span>
-                      <h3 className="text-start font-zalando-sans-expanded mt-3 text-2xl sm:text-3xl font-bold tracking-tight max-w-2xl">{tabActual.title}</h3>
-                      <p className="text-start font-zalando-sans mt-5 text-zinc-400 text-sm sm:text-base leading-relaxed max-w-2xl">{tabActual.description}</p>
+                    <motion.div
+                      key={tabActiva}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <span className="font-mono text-[10px] tracking-[0.2em] text-zinc-600">
+                        {tabActual.eyebrow}
+                      </span>
+                      <h3 className="text-start font-zalando-sans-expanded mt-3 text-2xl sm:text-3xl font-bold tracking-tight max-w-2xl">
+                        {tabActual.title}
+                      </h3>
+                      <p className="text-start font-zalando-sans mt-5 text-zinc-400 text-sm sm:text-base leading-relaxed max-w-2xl">
+                        {tabActual.description}
+                      </p>
                     </motion.div>
                   </AnimatePresence>
                 </div>
-              
               </div>
-
             </div>
           </section>
 
-          
-
           {/* =====================================================
-              07 — DIFFERENTIATOR
+              07 — DIFFERENTIATOR (video galaxy)
           ===================================================== */}
 
-          <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeUp} className="relative mt-32 min-h-[520px] overflow-hidden border border-zinc-900 bg-zinc-950/40 sm:mt-40">
+          <motion.section
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={fadeUp}
+            className="relative mt-32 min-h-[520px] overflow-hidden sm:mt-40"
+          >
             <video
               className="absolute inset-0 h-full w-full object-cover"
-              src="/vid/galaxy.mp4"
+              src={ASSETS.galaxy}
               autoPlay
               muted
               loop
@@ -363,21 +376,106 @@ export default function SobreNosotros() {
             <div className="absolute inset-0 bg-black/55" aria-hidden="true" />
 
             <div className="relative z-10 grid h-full grid-cols-1 lg:grid-cols-12">
-              
-
               <div className="lg:col-span-8 p-8 sm:p-10 lg:p-14">
+                <p className="text-start font-zalando-sans-expanded text-2xl sm:text-3xl lg:text-4xl font-bold tracking-[-0.035em] leading-tight">
+                  We don´t develop technology just because we can.
+                </p>
 
-                <p className="text-start font-zalando-sans-expanded text-2xl sm:text-3xl lg:text-4xl font-bold tracking-[-0.035em] leading-tight">We don´t develop technology just because we can.</p>
-                
-                <p className="text-start font-zalando-sans mt-7 text-zinc-400 leading-relaxed max-w-2xl">Every breakthrough has a purpose. At EGCO, we pursue technology that can solve real problems, expand human potential, and create a better future for everyone.</p>
-
+                <p className="text-start font-zalando-sans mt-7 text-zinc-400 leading-relaxed max-w-2xl">
+                  Every breakthrough has a purpose. At EGCO, we pursue technology that can solve
+                  real problems, expand human potential, and create a better future for everyone.
+                </p>
               </div>
-
             </div>
-
           </motion.section>
 
+          {/* =====================================================
+              CAROUSEL SECTION — pegado justo debajo del video galaxy,
+              avanza horizontalmente cada 5s con las imágenes reales.
+          ===================================================== */}
 
+          <section aria-label="Áreas de innovación" className="relative -mt-px">
+            {/* CAROUSEL CONTAINER */}
+            <div className="relative w-full h-96 lg:h-[500px] overflow-hidden">
+              {/* SLIDES */}
+              <AnimatePresence initial={false} custom={direction} mode="wait">
+                <motion.div
+                  key={slideActivo}
+                  custom={direction}
+                  variants={slideVariant}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{
+                    x: { type: "spring", stiffness: 300, damping: 30 },
+                    opacity: { duration: 0.2 },
+                  }}
+                  className="absolute inset-0"
+                >
+                  <img
+                    src={slideActual.image}
+                    alt={slideActual.placeholder}
+                    loading="lazy"
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Degradado inferior para legibilidad de los controles */}
+              <div
+                className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"
+                aria-hidden="true"
+              />
+
+              {/* CONTROLS */}
+              <div className="absolute bottom-6 left-6 sm:left-10 lg:left-14 right-6 sm:right-10 lg:right-14 flex items-center justify-between gap-4">
+                {/* PROGRESS DOTS */}
+                <div className="flex gap-1.5">
+                  {carrusel.map((slide, index) => (
+                    <motion.button
+                      key={slide.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={slideActivo === index}
+                      aria-label={`Mostrar área ${slide.id}`}
+                      onClick={() => {
+                        setDirection(index > slideActivo ? 1 : -1);
+                        setSlideActivo(index);
+                      }}
+                      className="h-0.5 transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white"
+                      animate={{
+                        width: slideActivo === index ? "32px" : "8px",
+                        backgroundColor: slideActivo === index ? "#ffffff" : "#52525b",
+                      }}
+                      whileHover={{
+                        backgroundColor: slideActivo === index ? "#ffffff" : "#71717a",
+                      }}
+                    />
+                  ))}
+                </div>
+
+                {/* NAVIGATION BUTTONS */}
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => cambiarSlide(-1)}
+                    aria-label="Área anterior"
+                    className="grid size-8 place-items-center text-white/70 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  >
+                    <ChevronLeft size={18} aria-hidden="true" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => cambiarSlide(1)}
+                    aria-label="Siguiente área"
+                    className="grid size-8 place-items-center text-white/70 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  >
+                    <ChevronRight size={18} aria-hidden="true" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </section>
     </>
