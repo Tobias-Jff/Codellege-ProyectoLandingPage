@@ -76,17 +76,17 @@ function Noticias() {
                   <div className={`noticia-card ${isFlipped ? 'is-flipped' : ''}`} onClick={() => toggleCard(article.id)}>
                     <div className="noticia-card-inner">
                       <div className="noticia-card-face flex flex-col rounded-lg border border-white/15 bg-white/[0.06] p-5 text-left shadow-2xl">
-                        <div className="flex items-center justify-between gap-3 text-xs text-white/60">
+                        <div className="noticia-meta flex items-center justify-between gap-3 text-xs text-white/60">
                           <span className="font-zalando-sans-expanded">{article.date}</span>
                           <span className="font-zalando-sans-expanded uppercase tracking-wider">{article.category}</span>
                           <span className="font-zalando-sans-expanded text-teal-200">{article.language || 'ES'}</span>
                         </div>
-                        <h3 className="mt-5 font-zalando-sans-semi-expanded text-xl font-bold leading-tight">{article.title}</h3>
-                        <hr className="my-4 border-white/20" />
-                        <div className="h-48 overflow-hidden rounded bg-black/20">
+                        <h3 className="noticia-title mt-5 font-zalando-sans-semi-expanded text-xl font-bold leading-tight">{article.title}</h3>
+                        <hr className="noticia-divider my-4 border-white/20" />
+                        <div className="noticia-image-wrap h-48 overflow-hidden rounded bg-black/20">
                           <img className="h-full w-full object-cover" src={article.image} alt={article.title} loading="lazy" />
                         </div>
-                        <button type="button" onClick={(event) => { event.stopPropagation(); toggleCard(article.id) }} className="mt-4 self-start text-xs uppercase tracking-[0.18em] text-teal-200 transition hover:text-white">Read story +</button>
+                        <button type="button" onClick={(event) => { event.stopPropagation(); toggleCard(article.id) }} className="read-story-button mt-4 self-start text-xs uppercase tracking-[0.18em] text-teal-200 transition hover:text-white">Read story +</button>
                       </div>
                       <div className="noticia-card-face noticia-card-back flex flex-col rounded-lg bg-white p-6 text-left text-slate-950">
                         <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">{article.category} / {article.date}</span>
