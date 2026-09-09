@@ -67,7 +67,7 @@ function Footer() {
         <div className="footer-column">
           <span className="footer-column-title">EXPLORE</span>
           <a href="#inicio" onClick={(event) => handleSmoothScroll(event, 'inicio')}>Home</a>
-          <a href="#noticias">News</a>
+          <a href="#noticias" onClick={(event) => handleSmoothScroll(event, 'noticias')}>News</a>
         </div>
 
         <div className="footer-column">
