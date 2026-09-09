@@ -1,12 +1,20 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
+import area01 from "../assets/carrusel/area01.jpg";
+import area02 from "../assets/carrusel/area02.jpg";
+import area03 from "../assets/carrusel/area03.jpg";
+import area04 from "../assets/carrusel/area04.jpg";
 import area01 from "../assets/carrusel/area01.jpg";
 import area02 from "../assets/carrusel/area02.jpg";
 import area03 from "../assets/carrusel/area03.jpg";
 import area04 from "../assets/carrusel/area04.jpg";
 
 import {
+  ChevronLeft,
+  ChevronRight,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
@@ -25,6 +33,8 @@ const ASSETS = {
     robotics: "/ima/rob.avif",
     biotech: "/ima/biot.avif",
     humanity: "/ima/humanidad.avif",
+    biotech: "/ima/biot.avif",
+    humanity: "/ima/humanidad.avif",
   },
 };
 
@@ -41,6 +51,7 @@ const tabs = {
     title: "Powering a cleaner civilization.",
     description:
       "366-0 is our renewable energy technology, designed to provide affordable and exceptionally low-impact power. Generated across our plants around the world, it is helping build a cleaner and more accessible energy future.",
+      "366-0 is our renewable energy technology, designed to provide affordable and exceptionally low-impact power. Generated across our plants around the world, it is helping build a cleaner and more accessible energy future.",
     image: ASSETS.tabs.energy,
   },
 
@@ -49,6 +60,8 @@ const tabs = {
     number: "02",
     eyebrow: "Model 3",
     title: "Extending human potential",
+    description:
+      "We create intelligent machines designed to work alongside humanity, automate complex tasks, and expand what people can accomplish.",
     description:
       "We create intelligent machines designed to work alongside humanity, automate complex tasks, and expand what people can accomplish.",
     image: ASSETS.tabs.robotics,
@@ -62,13 +75,19 @@ const tabs = {
     title: "Engineering a healthier future.",
     description:
       "We explore the intersection of biology and technology to develop solutions for human health, food production, and the challenges of a growing world.",
+    description:
+      "We explore the intersection of biology and technology to develop solutions for human health, food production, and the challenges of a growing world.",
     image: ASSETS.tabs.biotech,
   },
 
   humanity: {
+  humanity: {
     label: "HUMANITY",
     number: "04",
     eyebrow: "Hope",
+    title: "Technology in service of everyone.",
+    description:
+      "Our ultimate goal is not technological advancement alone. It is using that advancement to reduce poverty, fight hunger, protect our planet, and improve the quality of human life.",
     title: "Technology in service of everyone.",
     description:
       "Our ultimate goal is not technological advancement alone. It is using that advancement to reduce poverty, fight hunger, protect our planet, and improve the quality of human life.",
@@ -188,6 +207,8 @@ export default function SobreNosotros() {
   const [tabActiva, setTabActiva] = useState("energy");
   const [slideActivo, setSlideActivo] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [slideActivo, setSlideActivo] = useState(0);
+  const [direction, setDirection] = useState(0);
 
   // estado para mantener la luminosidad del hero superior
   const [heroSelected, setHeroSelected] = useState(false);
@@ -217,6 +238,8 @@ export default function SobreNosotros() {
       if (e.key === "Escape") {
         setHeroSelected(false);
       }
+      if (e.key === "ArrowLeft") cambiarSlide(-1);
+      if (e.key === "ArrowRight") cambiarSlide(1);
       if (e.key === "ArrowLeft") cambiarSlide(-1);
       if (e.key === "ArrowRight") cambiarSlide(1);
     };
@@ -297,6 +320,8 @@ export default function SobreNosotros() {
         {/* =====================================================
             EARTH — OPERACIÓN
         ===================================================== */}
+            EARTH — OPERACIÓN
+        ===================================================== */}
 
         <section className="relative w-full h-[115vh] min-h-[600px] overflow-hidden bg-black">
           {/* VIDEO */}
@@ -344,11 +369,24 @@ export default function SobreNosotros() {
                       transition={{ duration: 0.45, ease: "easeInOut" }}
                       className="absolute inset-0 w-full h-full object-cover grayscale brightness-[0.45] contrast-125"
                     />
+                    <motion.img
+                      key={tabActiva}
+                      src={tabActual.image}
+                      alt={tabActual.title}
+                      initial={{ opacity: 0, scale: 1.04 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.98 }}
+                      transition={{ duration: 0.45, ease: "easeInOut" }}
+                      className="absolute inset-0 w-full h-full object-cover grayscale brightness-[0.45] contrast-125"
+                    />
                   </AnimatePresence>
 
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
 
                   <div className="absolute bottom-6 left-6">
+                    <span className="font-mono text-[10px] tracking-[0.2em] text-zinc-500">
+                      {tabActual.number} / {tabActual.eyebrow}
+                    </span>
                     <span className="font-mono text-[10px] tracking-[0.2em] text-zinc-500">
                       {tabActual.number} / {tabActual.eyebrow}
                     </span>
@@ -362,9 +400,18 @@ export default function SobreNosotros() {
                   id="mision-title"
                   className="font-zalando-sans-expanded text-start mt-4 text-3xl sm:text-4xl lg:text-5xl font-black tracking-[-0.04em] leading-tight"
                 >
+                <h2
+                  id="mision-title"
+                  className="font-zalando-sans-expanded text-start mt-4 text-3xl sm:text-4xl lg:text-5xl font-black tracking-[-0.04em] leading-tight"
+                >
                   We push technology beyond what is possible.
                 </h2>
 
+                <div
+                  role="tablist"
+                  aria-label="Información sobre EGCO"
+                  className="mt-12 flex border-b border-zinc-900 overflow-x-auto"
+                >
                 <div
                   role="tablist"
                   aria-label="Información sobre EGCO"
@@ -384,8 +431,25 @@ export default function SobreNosotros() {
                           active ? "text-white" : "text-zinc-600 hover:text-zinc-300"
                         }`}
                       >
+                      <button
+                        key={key}
+                        type="button"
+                        role="tab"
+                        aria-selected={active}
+                        aria-controls={`panel-${key}`}
+                        onClick={() => setTabActiva(key)}
+                        className={`relative shrink-0 px-5 py-4 first:pl-0 font-mono text-[10px] tracking-wider transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
+                          active ? "text-white" : "text-zinc-600 hover:text-zinc-300"
+                        }`}
+                      >
                         <span className="mr-2 text-zinc-700">{tab.number}</span>
                         {tab.label}
+                        {active && (
+                          <motion.span
+                            layoutId="active-tab"
+                            className="absolute bottom-0 left-0 right-0 h-px bg-white"
+                          />
+                        )}
                         {active && (
                           <motion.span
                             layoutId="active-tab"
@@ -395,10 +459,27 @@ export default function SobreNosotros() {
                       </button>
                     );
                   })}
+                  })}
                 </div>
 
                 <div id={`panel-${tabActiva}`} role="tabpanel" className="relative min-h-[270px] pt-9">
                   <AnimatePresence mode="wait">
+                    <motion.div
+                      key={tabActiva}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <span className="font-mono text-[10px] tracking-[0.2em] text-zinc-600">
+                        {tabActual.eyebrow}
+                      </span>
+                      <h3 className="text-start font-zalando-sans-expanded mt-3 text-2xl sm:text-3xl font-bold tracking-tight max-w-2xl">
+                        {tabActual.title}
+                      </h3>
+                      <p className="text-start font-zalando-sans mt-5 text-zinc-400 text-sm sm:text-base leading-relaxed max-w-2xl">
+                        {tabActual.description}
+                      </p>
                     <motion.div
                       key={tabActiva}
                       initial={{ opacity: 0, y: 10 }}
@@ -424,6 +505,7 @@ export default function SobreNosotros() {
 
           {/* =====================================================
               07 — DIFFERENTIATOR (video galaxy)
+              07 — DIFFERENTIATOR (video galaxy)
           ===================================================== */}
 
           <motion.section
@@ -433,8 +515,16 @@ export default function SobreNosotros() {
             variants={fadeUp}
             className="relative mt-32 min-h-[520px] overflow-hidden sm:mt-40"
           >
+          <motion.section
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={fadeUp}
+            className="relative mt-32 min-h-[520px] overflow-hidden sm:mt-40"
+          >
             <video
               className="absolute inset-0 h-full w-full object-cover"
+              src={ASSETS.galaxy}
               src={ASSETS.galaxy}
               autoPlay
               muted
@@ -448,6 +538,14 @@ export default function SobreNosotros() {
 
             <div className="relative z-10 grid h-full grid-cols-1 lg:grid-cols-12">
               <div className="lg:col-span-8 p-8 sm:p-10 lg:p-14">
+                <p className="text-start font-zalando-sans-expanded text-2xl sm:text-3xl lg:text-4xl font-bold tracking-[-0.035em] leading-tight">
+                  We don´t develop technology just because we can.
+                </p>
+
+                <p className="text-start font-zalando-sans mt-7 text-zinc-400 leading-relaxed max-w-2xl">
+                  Every breakthrough has a purpose. At EGCO, we pursue technology that can solve
+                  real problems, expand human potential, and create a better future for everyone.
+                </p>
                 <p className="text-start font-zalando-sans-expanded text-2xl sm:text-3xl lg:text-4xl font-bold tracking-[-0.035em] leading-tight">
                   We don´t develop technology just because we can.
                 </p>

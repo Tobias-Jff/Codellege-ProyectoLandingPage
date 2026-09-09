@@ -118,8 +118,8 @@ function Header() {
                 <div className="absolute -z-10 h-[183px] inset-0 bg-gradient-to-b from-black/75 via-black/55 to-black/0">
                 </div>
 
-                <a href="#" className="relative">
-                    <img src={icon} alt="Icon" className="h-[28px] aspect-[1/1.112]" />
+                <a href="#" className="relative mt-1.5">
+                    <img src={icon} alt="Icon" className="h-[30px] aspect-[1/1.112]" />
                 </a>
 
                 <nav
@@ -129,7 +129,7 @@ function Header() {
                     <ul className="flex items-center gap-4">
                         <li>
                             <a href="#inicio" className="group text-[12px] uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition duration-300">
-                                <span className="relative inline-block after:content-[''] after:absolute after:bg-white/70 after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
+                                <span className="relative inline-block after:content-[''] after:absolute after:bg-white after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
                                     Home
                                 </span>
                             </a>
@@ -137,7 +137,7 @@ function Header() {
 
                         <li>
                             <a href="#noticias" className="group text-[12px] uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition">
-                                <span className="relative inline-block after:content-[''] after:absolute after:bg-white/70 after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
+                                <span className="relative inline-block after:content-[''] after:absolute after:bg-white after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
                                     News
                                 </span>
                             </a>
@@ -145,7 +145,7 @@ function Header() {
 
                         <li>
                             <a href="#aboutUs" className="group text-[12px] uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition">
-                                <span className="relative inline-block after:content-[''] after:absolute after:bg-white/70 after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
+                                <span className="relative inline-block after:content-[''] after:absolute after:bg-white after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
                                     Who we are
                                 </span>
                             </a>
@@ -156,7 +156,7 @@ function Header() {
                                 onClick={() => setUpcomingOpen(true)}
                                 className="group text-[12px] uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition cursor-pointer"
                             >
-                                <span className="relative inline-block after:content-[''] after:absolute after:bg-white/70 after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
+                                <span className="relative inline-block after:content-[''] after:absolute after:bg-white after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
                                     Upcoming
                                 </span>
                             </button>
@@ -164,7 +164,7 @@ function Header() {
 
                         <li>
                             <a href="#footer" className="group text-[12px] uppercase tracking-wider px-3 py-0.5 hover:text-slate-100 transition">
-                                <span className="relative inline-block after:content-[''] after:absolute after:bg-white/70 after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
+                                <span className="relative inline-block after:content-[''] after:absolute after:bg-white after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-[120%] after:h-[2px] after:bg-current after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out after:origin-center">
                                     Contact
                                 </span>
                             </a>
@@ -281,7 +281,7 @@ function Header() {
                         <p
                             className="font-zalando-sans-semi-expanded mt-3 text-sm tracking-wider text-white/70"
                         >
-                            SEPTEMBER 18, 2026
+                            SEPTEMBER 7, 2026
                         </p>
 
                     </div>

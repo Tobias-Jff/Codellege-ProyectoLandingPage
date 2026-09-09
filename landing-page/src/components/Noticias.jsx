@@ -1,154 +1,168 @@
-import { useState, useMemo, useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import '../styles/Noticias.css'
 import newsArticles from '../data/newsData'
 
 function Noticias() {
-  const [selectedArticle, setSelectedArticle] = useState(null)
-  const [activeCategory, setActiveCategory] = useState('Todas')
-  const [favorites, setFavorites] = useState([])
-  const [showOnlyFavorites, setShowOnlyFavorites] = useState(false)
-  const detailRef = useRef(null)
+  const [currentIndex, setCurrentIndex] = useState(newsArticles.length)
+  const [flippedCards, setFlippedCards] = useState([])
+  const [visibleCards, setVisibleCards] = useState(3)
+  const [isTransitioning, setIsTransitioning] = useState(true)
+  const [loadedImages, setLoadedImages] = useState({}) // Estado para saber qué imágenes cargaron
+  const carouselArticles = [...newsArticles, ...newsArticles, ...newsArticles]
+
+  const isAnyCardFlipped = flippedCards.length > 0
 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem('news_favorites') || '[]')
-    setFavorites(saved)
+    const updateVisibleCards = () => {
+      const nextVisibleCards = window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3
+      setVisibleCards(nextVisibleCards)
+      setIsTransitioning(false)
+      setCurrentIndex(newsArticles.length)
+      requestAnimationFrame(() => setIsTransitioning(true))
+    }
+
+    updateVisibleCards()
+    window.addEventListener('resize', updateVisibleCards)
+    return () => window.removeEventListener('resize', updateVisibleCards)
   }, [])
 
   useEffect(() => {
-    if (!selectedArticle || !detailRef.current) return
+    if (isAnyCardFlipped) return undefined
 
-    const detailSection = detailRef.current
-    const startPosition = window.scrollY
-    const targetPosition = Math.max(0, startPosition + detailSection.getBoundingClientRect().top - 140)
-    const distance = targetPosition - startPosition
-    const duration = 1400
-    let animationFrame
-    let startTime
+    const autoplay = window.setInterval(() => {
+      setCurrentIndex((current) => current + 1)
+    }, 4000)
 
-    const animateScroll = (currentTime) => {
-      if (!startTime) startTime = currentTime
-      const progress = Math.min((currentTime - startTime) / duration, 1)
-      const easedProgress = progress < 0.5
-        ? 4 * progress ** 3
-        : 1 - ((-2 * progress + 2) ** 3) / 2
+    return () => window.clearInterval(autoplay)
+  }, [visibleCards, isAnyCardFlipped])
 
-      window.scrollTo(0, startPosition + distance * easedProgress)
-      if (progress < 1) animationFrame = requestAnimationFrame(animateScroll)
-    }
-
-    animationFrame = requestAnimationFrame(animateScroll)
-    return () => cancelAnimationFrame(animationFrame)
-  }, [selectedArticle])
-
-  const toggleFavorite = (e, articleId) => {
-    e.stopPropagation()
-    let updated
-    if (favorites.includes(articleId)) {
-      updated = favorites.filter((id) => id !== articleId)
-    } else {
-      updated = [...favorites, articleId]
-    }
-    setFavorites(updated)
-    localStorage.setItem('news_favorites', JSON.stringify(updated))
+  const toggleCard = (articleId) => {
+    setFlippedCards((current) => current.includes(articleId)
+      ? current.filter((id) => id !== articleId)
+      : [...current, articleId])
   }
 
-  const categories = useMemo(() => {
-    const unique = Array.from(new Set(newsArticles.map((item) => item.category)))
-    return ['Todas', ...unique]
-  }, [])
+  const handleImageLoad = (key) => {
+    setLoadedImages((prev) => ({ ...prev, [key]: true }))
+  }
 
-  const filteredArticles = useMemo(() => {
-    return newsArticles.filter((article) => {
-      const matchesCategory = activeCategory === 'Todas' || article.category === activeCategory
-      const matchesFav = showOnlyFavorites ? favorites.includes(article.id) : true
-      return matchesCategory && matchesFav
+  const goToPrevious = () => {
+    setCurrentIndex((current) => {
+      const previous = current - 1
+      return previous <= 0 ? newsArticles.length : previous
     })
-  }, [activeCategory, showOnlyFavorites, favorites])
-
-  const handleSelectArticle = (article) => {
-    setSelectedArticle(article)
   }
 
-  /* Lógica para rastrear el movimiento del cursor sobre las tarjetas */
-  const handleMouseMove = (e) => {
-    const card = e.currentTarget
-    const rect = card.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-
-    const centerX = rect.width / 2
-    const centerY = rect.height / 2
-
-    const rotateX = ((y - centerY) / centerY) * -10
-    const rotateY = ((x - centerX) / centerX) * 10
-
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`
-    card.style.setProperty('--mouse-x', `${x}px`)
-    card.style.setProperty('--mouse-y', `${y}px`)
+  const goToNext = () => {
+    setCurrentIndex((current) => {
+      const next = current + 1
+      if (next >= newsArticles.length * 2) {
+        return newsArticles.length
+      }
+      return next
+    })
   }
 
-  const handleMouseLeave = (e) => {
-    const card = e.currentTarget
-    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)'
+  const handleTrackTransitionEnd = () => {
+    if (currentIndex < newsArticles.length * 2) return
+
+    setIsTransitioning(false)
+    setCurrentIndex(newsArticles.length)
+    requestAnimationFrame(() => setIsTransitioning(true))
   }
 
   return (
-    <main className="noticias-page">
+    <main className="noticias-page mx-auto w-full max-w-6xl px-5 py-20 text-white">
       <section id="noticias" className="noticias-section" aria-labelledby="news-heading">
-        <header className="noticias-header">
-          <div className="noticias-header-title mb-2 font-zalando-sans-expanded font-bold">
-            <h2 id="news-heading">NEWS</h2>
+        
+        {/* CARRUSEL DE NOTICIAS */}
+        <div className="noticias-carousel-wrap relative" role="region" aria-label="News carousel">
+          <button type="button" onClick={goToPrevious} aria-label="Previous news" className="noticias-carousel-control isolate absolute left-1 top-1/2 z-10 -translate-y-1/2 rounded-full border-0 bg-transparent text-2xl leading-none before:blur-2xl transition"><span className="relative z-10">&#8249;</span></button>
+          
+          <div className="noticias-carousel min-w-0 overflow-hidden">
+            <div className="noticias-track flex" onTransitionEnd={handleTrackTransitionEnd} style={{ '--visible-cards': visibleCards, transition: isTransitioning ? undefined : 'none', transform: `translateX(-${currentIndex * (100 / visibleCards)}%)` }}>
+              {carouselArticles.map((article, articleIndex) => {
+                const isFlipped = flippedCards.includes(article.id)
+                const imageKey = `${article.id}-${articleIndex}`
+                const isImageLoaded = loadedImages[imageKey]
+
+                return (
+                  <article key={imageKey} className="noticia-slide shrink-0 px-1" role="listitem">
+                    <div className={`noticia-card ${isFlipped ? 'is-flipped' : ''}`} onClick={() => toggleCard(article.id)}>
+                      <div className="noticia-card-inner">
+                        <div className="noticia-card-face flex flex-col rounded-lg border border-white/15 bg-white/[0.06] text-left shadow-2xl">
+                          <div className="noticia-meta flex items-center justify-between gap-3 px-5 text-xs text-white/60">
+                            <span className="font-zalando-sans-expanded">{article.date}</span>
+                            <span className="font-zalando-sans-expanded uppercase tracking-wider">{article.category}</span>
+                            <span className="font-zalando-sans-expanded text-teal-200">{article.language || 'ES'}</span>
+                          </div>
+                          <h3 className="noticia-title mt-5 px-5 font-zalando-sans-semi-expanded text-xl font-bold leading-tight">{article.title}</h3>
+                          <hr className="noticia-divider mx-5 my-4 border-white/20" />
+                          <div className="noticia-image-wrap relative overflow-hidden bg-black/20">
+                            
+                            {/* SPINNER DE CARGA */}
+                            {!isImageLoaded && (
+                              <div className="image-loader-container">
+                                <div className="image-spinner" />
+                              </div>
+                            )}
+
+                            <img
+                              className={`h-full w-full object-cover transition-opacity duration-300 ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                              src={article.image}
+                              alt={article.title}
+                              loading="lazy"
+                              onLoad={() => handleImageLoad(imageKey)}
+                            />
+                          </div>
+                        </div>
+                        <div className="noticia-card-face noticia-card-back flex flex-col rounded-lg bg-white text-left text-slate-950">
+                          <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">{article.category} / {article.date}</span>
+                          <h3 className="mt-3 text-xl font-bold leading-tight">{article.title}</h3>
+                          <p className="mt-4 text-sm leading-relaxed text-slate-700">{article.summary}</p>
+                          <ul className="mt-4 space-y-2 text-sm text-slate-700">
+                            {(article.details?.keyPoints || []).slice(0, 3).map((point) => <li key={point} className="border-l-2 border-teal-500 pl-3">{point}</li>)}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                )
+              })}
+            </div>
           </div>
-        </header>
 
-        {filteredArticles.length === 0 ? (
-          <p className="no-results">There is no news available in this category.</p>
-        ) : (
-          <div className="noticias-grid" role="list">
-            {filteredArticles.map((article) => {
-              const isSelected = selectedArticle && selectedArticle.id === article.id
-              const isFav = favorites.includes(article.id)
+          <button type="button" onClick={goToNext} aria-label="Next news" className="noticias-carousel-control isolate absolute right-1 top-1/2 z-10 -translate-y-1/2 rounded-full border-0 bg-transparent text-2xl leading-none before:blur-2xl transition"><span className="relative z-10">&#8250;</span></button>
+        </div>
 
-              return (
-                <article 
-                  key={article.id} 
-                  className={`noticia-card ${isSelected ? 'is-selected' : ''}`}
-                  role="listitem"
-                  onClick={() => handleSelectArticle(article)}
-                  onMouseMove={handleMouseMove}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <div className="noticia-card-glow" />
-                  
-                  <div className="noticia-meta">
-                    <span className="noticia-date font-zalando-sans-expanded">{article.date}</span>
-                    <span className="noticia-category font-zalando-sans-expanded">{article.category}</span>
-                    <span className="noticia-language font-zalando-sans-expanded" aria-label={`Edicion ${article.language || 'ES'}`}>
-                      {article.language || 'ES'}
-                    </span>
-
-                  </div>
-
-                  <div className="noticia-title-link font-zalando-sans-semi-expanded font-bold">
-                    <h3>{article.title}</h3>
-                  </div>
-
-                  <hr className="mb-4 border-white/50" />
-
-                  <div className="noticia-image-wrap">
-                    <img src={article.image} alt={article.title} loading="lazy" />
-                  </div>
-                </article>
-              )
-            })}
+        {/* PIE DE SECCIÓN */}
+        <footer className="noticias-footer mt-8 border-t border-white/15 pt-6 flex flex-col gap-4">
+          <div className="w-full flex items-center justify-between">
+            <div className="noticias-header-title font-zalando-sans-expanded font-bold text-left">
+              <h2 id="news-heading" className="text-2xl tracking-wider uppercase m-0">NEWS</h2>
+            </div>
+            
+            <div className="noticias-indicators flex items-center justify-center gap-2 mx-auto" aria-label="News position">
+              {newsArticles.map((article, articleIndex) => {
+                const isActive = articleIndex === ((currentIndex - newsArticles.length) % newsArticles.length + newsArticles.length) % newsArticles.length;
+                
+                return (
+                  <button
+                    key={article.id}
+                    type="button"
+                    onClick={() => setCurrentIndex(newsArticles.length + articleIndex)}
+                    aria-label={`Go to news ${articleIndex + 1}`}
+                    className={`noticias-indicator relative h-2.5 rounded-full overflow-hidden transition-all ${isActive ? 'is-active' : ''}`}
+                  >
+                    {isActive && <span className="noticias-progress-bar" style={{ animationPlayState: isAnyCardFlipped ? 'paused' : 'running' }} />}
+                  </button>
+                );
+              })}
+            </div>
           </div>
-        )}
+        </footer>
+
       </section>
-
-        <>
-     
-        </>
-
     </main>
   )
 }
