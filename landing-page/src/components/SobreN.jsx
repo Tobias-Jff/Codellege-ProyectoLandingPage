@@ -278,7 +278,6 @@ export default function SobreNosotros() {
           overflow-hidden
           bg-black
           text-white
-          border-b border-zinc-900
           selection:bg-white
           selection:text-black
           py-20
@@ -440,11 +439,11 @@ export default function SobreNosotros() {
 
             <div className="relative z-10 grid h-full grid-cols-1 lg:grid-cols-12">
               <div className="lg:col-span-8 p-8 sm:p-10 lg:p-14">
-                <p className="text-start font-zalando-sans-expanded text-2xl sm:text-3xl lg:text-4xl font-bold tracking-[-0.035em] leading-tight">
+                <p className="text-start font-zalando-sans-expanded uppercase text-2xl sm:text-3xl lg:text-4xl font-black tracking-[-0.035em] leading-tight">
                   We don´t develop technology just because we can.
                 </p>
 
-                <p className="text-start font-zalando-sans mt-7 text-zinc-400 leading-relaxed max-w-2xl">
+                <p className="text-start font-dm-sans mt-4 text-slate-200/80 leading-relaxed max-w-2xl">
                   Every breakthrough has a purpose. At EGCO, we pursue technology that can solve
                   real problems, expand human potential, and create a better future for everyone.
                 </p>
@@ -510,14 +509,14 @@ export default function SobreNosotros() {
                       text-left
                     "
                   >
-                    <span className="font-mono text-[10px] tracking-[0.2em] text-zinc-300">
+                    <span className="font-mono ml-[2px] text-[10px] tracking-[0.2em] text-zinc-200">
                       {slideActual.category}
                     </span>
 
                     <h3
                       className="
-                        mt-3
-                        font-syncopate
+                        mt-2
+                        font-zalando-sans-expanded
                         font-black
                         text-3xl
                         sm:text-5xl
@@ -525,7 +524,7 @@ export default function SobreNosotros() {
                         tracking-[-0.03em]
                         leading-[0.95]
                         text-white
-                        mb-6
+                        mb-4
                         whitespace-normal
                         sm:whitespace-nowrap
                       "
@@ -536,9 +535,8 @@ export default function SobreNosotros() {
                     <p
                       className="
                         text-base
-                        sm:text-lg
-                        lg:text-xl
-                        text-zinc-200
+                        font-dm-sans
+                        text-slate-200/80
                         leading-relaxed
                         max-w-xl
                       "

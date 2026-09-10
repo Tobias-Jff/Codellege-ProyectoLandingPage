@@ -100,10 +100,10 @@ function Hero() {
             </div>*/}
 
             <h1 id="hero-heading" className="font-zalando-sans-expanded uppercase max-w-6xl text-left text-7xl font-black leading-[0.94] tracking-[-0.06em] text-white">
-              We design the future from the <span className="font-zalando-sans-semiexpanded text-cyan-200">PRESENT.</span>
+              We design the future from the <span className="font-syncopate -ml-[2.5px] hero-secondary-highlighted-text text-white/15">PRESENT.</span>
             </h1>
 
-            <p className="mt-4 font-light max-w-xl leading-normal text-left text-md font-dm-sans text-slate-200/80">
+            <p className="mt-2 max-w-xl leading-normal text-left text-md font-dm-sans text-slate-200/80">
               Strategic technology to turn complex ideas into systems that think, learn, and advance with you.
             </p>
 

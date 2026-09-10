@@ -72,7 +72,7 @@ function Noticias() {
   }
 
   return (
-    <main className="noticias-page mx-auto w-full max-w-6xl px-5 pb-20 pt-0 text-white">
+    <main className="noticias-page bg-black/50 mx-auto w-full px-5 pb-20 pt-0 text-white">
       <section id="noticias" className="noticias-section" aria-labelledby="news-heading">
         
         {/* CARRUSEL DE NOTICIAS */}
@@ -87,7 +87,7 @@ function Noticias() {
                 const isImageLoaded = loadedImages[imageKey]
 
                 return (
-                  <article key={imageKey} className="noticia-slide shrink-0 px-1" role="listitem">
+                  <article key={imageKey} className="noticia-slide shrink-0 px-1 pt-24" role="listitem">
                     <div className={`noticia-card ${isFlipped ? 'is-flipped' : ''}`} onClick={() => toggleCard(article.id)}>
                       <div className="noticia-card-inner">
                         <div className="noticia-card-face flex flex-col rounded-sm border border-white/15 bg-white/[0.06] text-left shadow-2xl">

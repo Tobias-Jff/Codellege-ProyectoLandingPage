@@ -4,3 +4,9 @@
   -ms-text-stroke: 5px #ffffff;
 
 }
+
+.hero-secondary-highlighted-text {
+  -webkit-text-stroke: 3px #ffffff;
+  -moz-text-stroke: 3px #ffffff;
+  -ms-text-stroke: 3px #ffffff;
+}

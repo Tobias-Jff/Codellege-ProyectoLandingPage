@@ -212,7 +212,7 @@ function Header() {
                 />
 
                 <div
-                    className={`absolute right-0 top-0 h-full w-full md:w-[600px] bg-[var(--bg)] text-white px-10 md:px-16 flex flex-col justify-center transition-transform duration-700 ease-out ${ upcomingOpen ? "translate-x-0" : "translate-x-full" }`}
+                    className={`absolute right-0 top-0 h-full w-full md:w-[600px] bg-black/75 text-white px-10 md:px-16 flex flex-col justify-center transition-transform duration-700 ease-out ${ upcomingOpen ? "translate-x-0" : "translate-x-full" }`}
                 >
 
                     <button
@@ -308,7 +308,7 @@ function Header() {
                         <p
                             className="font-zalando-sans-semi-expanded mt-3 text-sm tracking-wider text-white/70"
                         >
-                            SEPTEMBER 7, 2026
+                            SEPTEMBER 19, 2026
                         </p>
 
                     </div>

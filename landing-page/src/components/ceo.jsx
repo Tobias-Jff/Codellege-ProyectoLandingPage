@@ -22,7 +22,7 @@ function Ceo() {
 
                     <hr className="border-gray-700 mb-4"></hr>
                     
-                    <p className="font-zalando-sans text-gray-400 text-sm mb-32 font-extralight leading-relaxed max-w-xl">
+                    <p className="font-dm-sans text-slate-200/80 text-sm font-light ml-8 mt-4 mb-24 leading-relaxed max-w-xl">
                         The man behind our company’s vision and strategy, Leonardo, the owner and founder of this organization, 
                         is a passionate and dedicated leader committed to innovation and growth. With an impressive career in the 
                         business world, he has guided our team toward success through his strategic approach and his ability to 

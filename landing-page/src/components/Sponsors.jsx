@@ -33,7 +33,7 @@ function Sponsors() {
         },
     ];
 
-
+    
     // Renderizamos una copia de los sponsors
     const SponsorGroup = ({ copy }) => (
 
