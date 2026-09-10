@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import area01 from "../assets/carrusel/area01.jpg";
@@ -41,7 +41,7 @@ const tabs = {
     title: "Powering a cleaner civilization.",
     description:
       "366-0 is our renewable energy technology, designed to provide affordable and exceptionally low-impact power. Generated across our plants around the world, it is helping build a cleaner and more accessible energy future.",
-    image: ASSETS.tabs.energy
+    image: ASSETS.tabs.energy,
   },
 
   robotics: {
@@ -73,12 +73,11 @@ const tabs = {
     description:
       "Our ultimate goal is not technological advancement alone. It is using that advancement to reduce poverty, fight hunger, protect our planet, and improve the quality of human life.",
     image: ASSETS.tabs.humanity,
-  }};
+  },
+};
 
 /* =========================================================
    CAROUSEL DATA — VITRINA DE PROYECTOS / LOGROS REALES
-   Cada slide es un proyecto o invento concreto: categoría,
-   métrica de impacto (prueba social), título y descripción.
    ========================================================= */
 
 const carrusel = [
@@ -88,19 +87,19 @@ const carrusel = [
     category: "ENERGY",
     metric: "50",
     metricUnit: "MW",
-    title: "Planta Solar — Sonora",
+    title: "Solar Plant — Sonora",
     description:
-      "Nuestra primera instalación de energía renovable, hoy suministrando electricidad limpia a más de 30,000 hogares.",
+      "Our first renewable energy installation, now powering more than 30,000 homes with clean electricity.",
   },
   {
     id: "02",
     image: area02,
     category: "ROBOTICS",
     metric: "15",
-    metricUnit: "plantas",
-    title: "Línea de Ensamblaje Autónoma",
+    metricUnit: "plants",
+    title: "Autonomous Assembly Line",
     description:
-      "Sistema de automatización industrial desplegado en 15 plantas, reduciendo tiempos de producción en un 40%.",
+      "Industrial automation system deployed across 15 plants, cutting production time by 40%.",
   },
   {
     id: "03",
@@ -108,9 +107,9 @@ const carrusel = [
     category: "BIOTECH",
     metric: "200",
     metricUnit: "%",
-    title: "Bioreactor de Nueva Generación",
+    title: "Next-Gen Bioreactor",
     description:
-      "Cultivo celular optimizado que incrementó la producción de proteínas terapéuticas en más del doble.",
+      "Optimized cell culture technology that more than doubled the production of therapeutic proteins.",
   },
   {
     id: "04",
@@ -118,27 +117,31 @@ const carrusel = [
     category: "HUMANITY",
     metric: "40,000",
     metricUnit: "+",
-    title: "Programa de Agua Potable",
+    title: "Clean Water Program",
     description:
-      "Acceso a agua limpia para más de 40,000 personas en comunidades rurales a través de tecnología de filtrado propia.",
+      "Bringing clean water access to over 40,000 people in rural communities through our own filtration technology.",
   },
 ];
 
-// Tiempo por slide: 7 segundos
-const AUTOPLAY_MS = 7000;
+// Tiempo por slide (ms). Es la ÚNICA fuente de verdad para la
+// duración: tanto la barra de progreso como el cambio automático
+// de imagen se calculan a partir de este mismo valor con rAF,
+// por lo que nunca pueden desincronizarse.
+const AUTOPLAY_MS = 5000;
 
-// Transiciones más rápidas y fluidas: sin tiempo muerto
+// Transición horizontal fluida y sin tiempo muerto: al no usar
+// mode="wait" en el AnimatePresence del slide, la imagen entrante
+// se superpone con la saliente, evitando el destello negro.
 const SLIDE_TRANSITION = {
   x: {
-    duration: 0.5,
-    ease: [0.16, 1, 0.3, 1],
+    duration: 0.4,
+    ease: [0.4, 0, 0.2, 1],
   },
   opacity: {
-    duration: 0.4,
+    duration: 0.35,
     ease: "easeInOut",
   },
 };
-
 
 /* =========================================================
    ANIMATION
@@ -195,6 +198,9 @@ export default function SobreNosotros() {
   // pasa el mouse encima (estándar UX: no competir con la lectura)
   const [showcasePaused, setShowcasePaused] = useState(false);
 
+  // progreso real (0–100) de la barra, calculado cuadro a cuadro
+  const [progress, setProgress] = useState(0);
+
   const tabActual = tabs[tabActiva];
   const slideActual = carrusel[slideActivo];
 
@@ -203,12 +209,42 @@ export default function SobreNosotros() {
     setSlideActivo((actual) => (actual + direccion + carrusel.length) % carrusel.length);
   };
 
-  // Auto-carousel: avanza horizontalmente cada AUTOPLAY_MS, salvo pausa por hover
+  // Reinicia el conteo cada vez que cambia el slide (automático o manual)
+  const elapsedRef = useRef(0);
+  useEffect(() => {
+    elapsedRef.current = 0;
+  
+  }, [slideActivo]);
+
+  // Motor único: un requestAnimationFrame calcula el % transcurrido.
+  // Cuando llega a 100%, en ESE MISMO instante dispara el cambio de
+  // slide — por eso la imagen nunca puede desincronizarse de la línea.
+  // Al pausar (hover), se cancela el frame y el % queda congelado tal
+  // cual iba; al reanudar, continúa desde ahí (no reinicia el conteo).
   useEffect(() => {
     if (showcasePaused) return undefined;
-    const intervalo = window.setInterval(() => cambiarSlide(1), AUTOPLAY_MS);
-    return () => window.clearInterval(intervalo);
-  }, [showcasePaused]);
+
+    let rafId;
+    let last = performance.now();
+
+    const tick = (now) => {
+      elapsedRef.current += now - last;
+      last = now;
+
+      const pct = Math.min((elapsedRef.current / AUTOPLAY_MS) * 100, 100);
+      setProgress(pct);
+
+      if (pct >= 100) {
+        cambiarSlide(1);
+        return; // el efecto se reinicia solo al cambiar slideActivo
+      }
+
+      rafId = requestAnimationFrame(tick);
+    };
+
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
+  }, [showcasePaused, slideActivo]);
 
   // permitir cerrar la luminosidad con Escape (mejora de accesibilidad)
   useEffect(() => {
@@ -283,15 +319,6 @@ export default function SobreNosotros() {
             blur-[140px]
           "
         />
-
- {/* VITRINA DE PROYECTOS */}
-        <div 
-          id="main-showcase"
-          className="relative w-full max-w-6xl mx-auto px-6"
-          onMouseEnter={() => setShowcasePaused(true)}
-          onMouseLeave={() => setShowcasePaused(false)}
-        ></div>
-
 
         {/* =====================================================
             EARTH — OPERACIÓN
@@ -467,17 +494,18 @@ export default function SobreNosotros() {
         ===================================================== */}
 
         <section
+          id="main-showcase"
           aria-label="Proyectos y logros de la compañía"
           className="relative -mt-px w-screen left-1/2 -translate-x-1/2"
         >
-
           <div
             className="relative w-full h-[420px] sm:h-[520px] lg:h-[680px] overflow-hidden"
             onMouseEnter={() => setShowcasePaused(true)}
             onMouseLeave={() => setShowcasePaused(false)}
           >
-            {/* SLIDES */}
-            <AnimatePresence initial={false} custom={direction} mode="wait">
+            {/* SLIDES — sin mode="wait": la imagen entrante se
+                superpone a la saliente, sin destello negro */}
+            <AnimatePresence initial={false} custom={direction}>
               <motion.div
                 key={slideActivo}
                 custom={direction}
@@ -494,82 +522,77 @@ export default function SobreNosotros() {
                   loading="lazy"
                   className="w-full h-full object-cover"
                 />
-                {/* Degradado arriba y abajo: legibilidad del título
-                    superior y del texto del proyecto inferior */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/10 to-black/90" />
+
+                {/* Difuminado general: da profundidad a toda la imagen */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/40" />
+
+                {/* Difuminado reforzado en la mitad inferior, donde
+                    vive el texto del proyecto — legible sin importar
+                    qué tan clara sea la foto */}
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/95 via-black/60 to-transparent" />
 
                 {/* CONTENIDO DIRECTAMENTE EN LA IMAGEN */}
                 <div className="absolute inset-0 z-10 pointer-events-none">
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={slideActivo}
-                      initial={{ opacity: 0, x: -20, y: 10 }}
-                      animate={{ opacity: 1, x: 0, y: 0 }}
-                      exit={{ opacity: 0, x: -10, y: -5 }}
-                      transition={{
-                        duration: 0.5,
-                        delay: 0.1,
-                        ease: [0.16, 1, 0.3, 1],
-                      }}
+                  <div
+                    className="
+                      absolute
+                      left-6
+                      sm:left-10
+                      lg:left-16
+                      bottom-24
+                      sm:bottom-28
+                      lg:bottom-32
+                      max-w-2xl
+                      text-left
+                    "
+                  >
+                    <span className="font-mono text-[10px] tracking-[0.2em] text-zinc-300">
+                      {slideActual.category}
+                    </span>
+
+                    <h3
                       className="
-                        absolute
-                        left-6
-                        sm:left-10
-                        lg:left-16
-                        bottom-24
-                        sm:bottom-28
-                        lg:bottom-32
-                        max-w-2xl
-                        text-left
+                        mt-3
+                        font-syncopate
+                        font-black
+                        text-3xl
+                        sm:text-5xl
+                        lg:text-6xl
+                        tracking-[-0.03em]
+                        leading-[0.95]
+                        text-white
+                        mb-6
+                        whitespace-normal
+                        sm:whitespace-nowrap
                       "
                     >
-                      <h3
-                        className="
-                          font-zalando-sans-expanded
-                          text-4xl
-                          sm:text-5xl
-                          lg:text-6xl
-                          font-bold
-                          tracking-tight
-                          text-white
-                          leading-tight
-                          mb-6
-                        "
-                      >
-                        {slideActual.title}
-                      </h3>
+                      {slideActual.title}
+                    </h3>
 
-                      <p
-                        className="
-                          text-sm
-                          sm:text-base
-                          lg:text-lg
-                          text-zinc-200
-                          leading-relaxed
-                          max-w-xl
-                        "
-                      >
-                        {slideActual.description}
-                      </p>
-                    </motion.div>
-                  </AnimatePresence>
+                    <p
+                      className="
+                        text-base
+                        sm:text-lg
+                        lg:text-xl
+                        text-zinc-200
+                        leading-relaxed
+                        max-w-xl
+                      "
+                    >
+                      {slideActual.description}
+                    </p>
+                  </div>
                 </div>
-
               </motion.div>
             </AnimatePresence>
 
-            {/* NAVEGACIÓN — barra de progreso + índice de proyectos */}
+            {/* NAVEGACIÓN — barra de progreso (sincronizada con rAF)
+                + índice de proyectos */}
             <div className="absolute bottom-6 left-6 sm:left-10 lg:left-16 right-6 sm:right-10 lg:right-16 z-20">
               <div className="relative h-px w-full bg-zinc-700/50">
-                <motion.div
-                  key={slideActivo}
+                <div
                   className="absolute top-0 left-0 h-px bg-white"
-                  initial={{ width: "0%" }}
-                  animate={{ width: "100%" }}
-                  transition={{
-                    duration: AUTOPLAY_MS / 1000,
-                    ease: "linear",
-                  }}
+                  style={{ width: `${progress}%` }}
                 />
               </div>
 
