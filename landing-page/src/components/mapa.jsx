@@ -205,12 +205,13 @@ function Mapa() {
         </button>
       </div>
 
-      {/* Bloque inferior con fondo oscuro y borde superior turquesa para el País y Descripción */}
+      {/* Degradado oscuro para integrar el país y la descripción con la imagen. */}
       <motion.div 
         variants={contentVariants} 
-        className="mt-auto w-full bg-[linear-gradient(to_top,rgba(11,17,24,0.95)_50%,rgba(11,17,24,0.7)_0%,transparent_100%)] p-6 pt-12  max-[640px]:p-3.5"
+        className="mt-auto w-full p-6 pt-16 max-[640px]:px-3.5 max-[640px]:pb-3.5"
+        style={{ backgroundImage: "linear-gradient(to bottom, rgba(11,17,24,0) 0%, rgba(11,17,24,0.8) 35%, rgba(11,17,24,0.97) 70%, #0b1118 100%)" }}
       >
-        <h4 className="mb-2 font-zalando-sans-expanded text-[clamp(1.2rem,1.8vw,1.5rem)] font-semibold leading-tight tracking-[0.02em] text-[#9dd8d6]">
+        <h4 className="mb-2 font-zalando-sans-expanded text-[clamp(1.2rem,1.8vw,1.5rem)] font-semibold leading-tight tracking-[0.02em] text-[#ffffff]">
           {selectedContinent.country}
         </h4>
         <p className="font-zalando-sans-semi-expanded text-[0.82rem] leading-[1.65] text-white/80">
