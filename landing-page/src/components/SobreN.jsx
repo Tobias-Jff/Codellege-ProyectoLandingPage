@@ -127,7 +127,7 @@ const carrusel = [
 // duración: tanto la barra de progreso como el cambio automático
 // de imagen se calculan a partir de este mismo valor con rAF,
 // por lo que nunca pueden desincronizarse.
-const AUTOPLAY_MS = 5000;
+const AUTOPLAY_MS = 8000;
 
 // Transición horizontal fluida y sin tiempo muerto: al no usar
 // mode="wait" en el AnimatePresence del slide, la imagen entrante
@@ -194,9 +194,6 @@ export default function SobreNosotros() {
   // estado para mantener la luminosidad del hero superior
   const [heroSelected, setHeroSelected] = useState(false);
 
-  // pausa el autoplay del carrusel de proyectos cuando el usuario
-  // pasa el mouse encima (estándar UX: no competir con la lectura)
-  const [showcasePaused, setShowcasePaused] = useState(false);
 
   // progreso real (0–100) de la barra, calculado cuadro a cuadro
   const [progress, setProgress] = useState(0);
@@ -216,35 +213,34 @@ export default function SobreNosotros() {
   
   }, [slideActivo]);
 
-  // Motor único: un requestAnimationFrame calcula el % transcurrido.
-  // Cuando llega a 100%, en ESE MISMO instante dispara el cambio de
-  // slide — por eso la imagen nunca puede desincronizarse de la línea.
-  // Al pausar (hover), se cancela el frame y el % queda congelado tal
-  // cual iba; al reanudar, continúa desde ahí (no reinicia el conteo).
+ 
   useEffect(() => {
-    if (showcasePaused) return undefined;
+  let rafId;
+  let last = performance.now();
 
-    let rafId;
-    let last = performance.now();
+  const tick = (now) => {
+    elapsedRef.current += now - last;
+    last = now;
 
-    const tick = (now) => {
-      elapsedRef.current += now - last;
-      last = now;
+    const pct = Math.min(
+      (elapsedRef.current / AUTOPLAY_MS) * 100,
+      100
+    );
 
-      const pct = Math.min((elapsedRef.current / AUTOPLAY_MS) * 100, 100);
-      setProgress(pct);
+    setProgress(pct);
 
-      if (pct >= 100) {
-        cambiarSlide(1);
-        return; // el efecto se reinicia solo al cambiar slideActivo
-      }
-
-      rafId = requestAnimationFrame(tick);
-    };
+    if (pct >= 100) {
+      cambiarSlide(1);
+      return;
+    }
 
     rafId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafId);
-  }, [showcasePaused, slideActivo]);
+  };
+
+  rafId = requestAnimationFrame(tick);
+
+  return () => cancelAnimationFrame(rafId);
+}, [slideActivo]);
 
   // permitir cerrar la luminosidad con Escape (mejora de accesibilidad)
   useEffect(() => {
@@ -288,43 +284,13 @@ export default function SobreNosotros() {
           py-20
         "
       >
-        {/* =====================================================
-            BACKGROUND
-        ===================================================== */}
-
-        <div
-          aria-hidden="true"
-          className="
-            pointer-events-none
-            absolute
-            inset-0
-            opacity-[0.035]
-            bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)]
-            bg-[size:5rem_5rem]
-          "
-        />
-
-        <div
-          aria-hidden="true"
-          className="
-            pointer-events-none
-            absolute
-            top-0
-            left-1/2
-            -translate-x-1/2
-            w-[800px]
-            h-[500px]
-            rounded-full
-            bg-white/[0.025]
-            blur-[140px]
-          "
-        />
+      
 
         {/* =====================================================
             EARTH — OPERACIÓN
         ===================================================== */}
 
-        <section className="relative w-full h-[115vh] min-h-[600px] overflow-hidden bg-black">
+        <section className="relative w-full h-[30vh] min-h-[600px] overflow-hidden bg-black">
           {/* VIDEO */}
           <video
             className="absolute inset-0 w-full h-full object-contain"
@@ -349,13 +315,13 @@ export default function SobreNosotros() {
 
         <div
           className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 
-        pt-10 sm:pt-16"
+        pt-0"
         >
           {/* =====================================================
               04 — MISSION / TABS
           ===================================================== */}
 
-          <section aria-labelledby="mision-title" className="mt-0">
+          <section aria-labelledby="mision-title" className="mt-20">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
               <div className="lg:col-span-5 order-2 lg:order-1">
                 <div className="relative aspect-[4/5] bg-zinc-950 border border-zinc-900 overflow-hidden">
@@ -449,7 +415,7 @@ export default function SobreNosotros() {
           </section>
 
           {/* =====================================================
-              07 — DIFFERENTIATOR (video galaxy)
+              07 — DIFFERENTIATOR (video ciudad)
           ===================================================== */}
 
           <motion.section
@@ -457,7 +423,7 @@ export default function SobreNosotros() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             variants={fadeUp}
-            className="relative mt-32 min-h-[520px] overflow-hidden sm:mt-40"
+            className="relative left-1/2 w-screen -translate-x-1/2 mt-12 min-h-[620px] overflow-hidden"
           >
             <video
               className="absolute inset-0 h-full w-full object-cover"
@@ -470,7 +436,7 @@ export default function SobreNosotros() {
               aria-hidden="true"
             />
 
-            <div className="absolute inset-0 bg-black/55" aria-hidden="true" />
+            <div className="absolute inset-0 bg-black/35" aria-hidden="true" />
 
             <div className="relative z-10 grid h-full grid-cols-1 lg:grid-cols-12">
               <div className="lg:col-span-8 p-8 sm:p-10 lg:p-14">
@@ -499,9 +465,7 @@ export default function SobreNosotros() {
           className="relative -mt-px w-screen left-1/2 -translate-x-1/2"
         >
           <div
-            className="relative w-full h-[420px] sm:h-[520px] lg:h-[680px] overflow-hidden"
-            onMouseEnter={() => setShowcasePaused(true)}
-            onMouseLeave={() => setShowcasePaused(false)}
+            className="relative w-full h-[480px] sm:h-[580px] lg:h-[750px] overflow-hidden"
           >
             {/* SLIDES — sin mode="wait": la imagen entrante se
                 superpone a la saliente, sin destello negro */}
@@ -588,35 +552,7 @@ export default function SobreNosotros() {
 
             {/* NAVEGACIÓN — barra de progreso (sincronizada con rAF)
                 + índice de proyectos */}
-            <div className="absolute bottom-6 left-6 sm:left-10 lg:left-16 right-6 sm:right-10 lg:right-16 z-20">
-              <div className="relative h-px w-full bg-zinc-700/50">
-                <div
-                  className="absolute top-0 left-0 h-px bg-white"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
 
-              <div className="mt-4 flex items-center justify-between">
-                {carrusel.map((slide, index) => (
-                  <button
-                    key={slide.id}
-                    type="button"
-                    role="tab"
-                    aria-selected={slideActivo === index}
-                    aria-label={`Ver proyecto ${slide.title}`}
-                    onClick={() => {
-                      setDirection(index > slideActivo ? 1 : -1);
-                      setSlideActivo(index);
-                    }}
-                    className={`font-mono text-xs sm:text-sm tracking-wider transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white ${
-                      slideActivo === index ? "text-white" : "text-zinc-600 hover:text-zinc-400"
-                    }`}
-                  >
-                    {slide.id}
-                  </button>
-                ))}
-              </div>
-            </div>
 
             {/* FLECHA IZQUIERDA */}
             <button

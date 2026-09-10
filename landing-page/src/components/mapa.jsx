@@ -118,10 +118,20 @@ function Mapa() {
 
   return (
     <section className="relative overflow-hidden bg-black px-8 pb-24 pt-[88px] text-slate-100 before:pointer-events-none before:absolute before:inset-0 before:content-[''] before:bg-[before:opacity-[0.035] max-[640px]:px-[18px] max-[640px]:pb-16 max-[640px]:pt-[58px]">
-      <div className="relative z-10 mx-auto mb-7 max-w-[1400px]">
-        <h2 className="font-syncopate mb-3.5 text-[clamp(2rem,4vw,4.5rem)] font-black uppercase leading-[0.98] tracking-[-0.055em] text-white">Global Presence</h2> 
-
+      
+      <div className="relative z-10 mx-auto mb-10 max-w-[1400px]">
+        <h2 className="uppercase leading-[0.84]">
+          <span className="block font-zalando-sans-expanded text-[clamp(3rem,6vw,6.5rem)] font-black tracking-[-0.065em] text-white">
+            Across
+          </span>
+          
+          <span className="block font-zalando-sans-expanded text-[clamp(3rem,6vw,6.5rem)] font-black tracking-[-0.065em] text-white">
+          The World
+          </span>
+        </h2>
+        
       </div>
+
       <div style={{ gridTemplateColumns: "min(340px, 65%) minmax(0, 1fr)" }} className="relative z-10 mx-auto grid h-[min(600px,65vw)] min-h-[420px] max-w-[1400px] overflow-hidden border border-[#9dd8d6]/[0.34] bg-transparent max-[640px]:h-[620px] max-[640px]:min-h-0">
 
         <div className="relative min-w-0 overflow-hidden border-r border-[#9dd8d6]/50 bg-black/95">
@@ -241,21 +251,36 @@ function Mapa() {
               onClick={() => handleOfficeClick(continentKey, city, longitude, latitude)}
             >
               <MarkerContent>
-                <motion.button
-                  type="button"
-                  initial={false}
-                  animate={{
-                    scale: selectedContinent?.city === city ? 1.25 : 1,
-                    backgroundColor: selectedContinent?.city === city ? "#ffffff" : "#9dd8d6",
-                  }}
-                  whileHover={reduceMotion ? undefined : { scale: 1.4 }}
-                  whileTap={reduceMotion ? undefined : { scale: 1.1 }}
-                  transition={{ duration: reduceMotion ? 0 : 0.3, ease: PANEL_EASE }}
-                  className="block h-[15px] w-[15px] cursor-pointer rounded-full border-[3px] border-[#071722] shadow-[0_0_0_5px_rgba(157,216,214,0.22),0_5px_14px_rgba(0,0,0,0.38)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-                  aria-label={`Oficina de ${city}`}
-                  aria-pressed={selectedContinent?.city === city}
-                />
-              </MarkerContent>
+  <motion.button
+    type="button"
+    initial={false}
+    animate={{
+      scale: selectedContinent?.city === city ? 1.25 : 1,
+      backgroundColor: "#ffffff",
+      boxShadow:
+        selectedContinent?.city === city
+          ? "0 0 0 6px rgba(255,255,255,0.28), 0 5px 14px rgba(0,0,0,0.45)"
+          : "0 0 0 4px rgba(255,255,255,0.15), 0 5px 14px rgba(0,0,0,0.38)",
+    }}
+    whileHover={
+      reduceMotion
+        ? undefined
+        : {
+            scale: 1.4,
+            boxShadow:
+              "0 0 0 7px rgba(255,255,255,0.25), 0 5px 14px rgba(0,0,0,0.45)",
+          }
+    }
+    whileTap={reduceMotion ? undefined : { scale: 1.1 }}
+    transition={{
+      duration: reduceMotion ? 0 : 0.3,
+      ease: PANEL_EASE,
+    }}
+    className="block h-[15px] w-[15px] cursor-pointer rounded-full border-[3px] border-[#071722] bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+    aria-label={`Oficina de ${city}`}
+    aria-pressed={selectedContinent?.city === city}
+  />
+</MarkerContent>
             </MapMarker>
           ))}
         </Map>
