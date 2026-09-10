@@ -132,9 +132,9 @@ function Mapa() {
         
       </div>
 
-      <div style={{ gridTemplateColumns: "min(340px, 65%) minmax(0, 1fr)" }} className="relative z-10 mx-auto grid h-[min(600px,65vw)] min-h-[420px] max-w-[1400px] overflow-hidden border border-[#9dd8d6]/[0.34] bg-transparent max-[640px]:h-[620px] max-[640px]:min-h-0">
+      <div style={{ gridTemplateColumns: "min(340px, 65%) minmax(0, 1fr)" }} className="relative z-10 mx-auto grid h-[min(600px,65vw)] min-h-[420px] max-w-[1400px] overflow-hidden border border-[#9dd8d6]/[0.14] bg-transparent max-[640px]:h-[620px] max-[640px]:min-h-0">
 
-        <div className="relative min-w-0 overflow-hidden border-r border-[#9dd8d6]/50 bg-black/95">
+        <div className="relative min-w-0 overflow-hidden border-r border-[#9dd8d6]/20 bg-black/95">
         <AnimatePresence initial={false}>
           {selectedContinent && (
             <motion.div

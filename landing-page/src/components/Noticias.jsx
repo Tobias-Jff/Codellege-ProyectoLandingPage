@@ -94,7 +94,6 @@ function Noticias() {
                           <div className="noticia-meta flex items-center justify-between gap-3 px-5 text-xs text-white/60">
                             <span className="font-zalando-sans-expanded">{article.date}</span>
                             <span className="font-zalando-sans-expanded uppercase tracking-wider">{article.category}</span>
-                            <span className="font-zalando-sans-expanded text-teal-200">{article.language || 'ES'}</span>
                           </div>
                           <h3 className="noticia-title mt-5 px-5 font-zalando-sans-semi-expanded text-xl font-bold leading-tight">{article.title}</h3>
                           <hr className="noticia-divider mx-5 my-4 border-white/20" />
