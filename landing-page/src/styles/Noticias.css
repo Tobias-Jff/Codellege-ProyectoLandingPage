@@ -1,6 +1,6 @@
 /* Tailwind complements these custom rules for the 3D flip and carousel controls. */
 .noticias-page {
-  margin-top: 120px;
+  margin-top: 0;
   box-sizing: border-box;
 }
 
@@ -260,7 +260,7 @@
 
 @media (max-width: 640px) {
   .noticias-page {
-    margin-top: 80px;
+    margin-top: 0;
   }
 
   .noticias-carousel-wrap {

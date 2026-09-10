@@ -72,7 +72,7 @@ function Noticias() {
   }
 
   return (
-    <main className="noticias-page mx-auto w-full max-w-6xl px-5 py-20 text-white">
+    <main className="noticias-page mx-auto w-full max-w-6xl px-5 pb-20 pt-0 text-white">
       <section id="noticias" className="noticias-section" aria-labelledby="news-heading">
         
         {/* CARRUSEL DE NOTICIAS */}
